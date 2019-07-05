@@ -2,4 +2,5 @@
     <string name="app_name">chatup</string>
     <string name="login_email">Login With Email</string>
     <string name="login_google">Login with Google</string>
+    <string name="welcome">Welcome to ChatUp</string>
 </resources>
