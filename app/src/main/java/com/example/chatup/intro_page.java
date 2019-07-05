@@ -14,6 +14,7 @@ public class intro_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_page);
+        getSupportActionBar().hide();
         intro_button=(Button)findViewById(R.id.IntroButton);
         intro_button.setOnClickListener(new View.OnClickListener() {
             @Override
