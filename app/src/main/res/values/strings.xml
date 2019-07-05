@@ -3,4 +3,5 @@
     <string name="login_email">Login With Email</string>
     <string name="login_google">Login with Google</string>
     <string name="welcome">Welcome to ChatUp</string>
+    <string name="welcome_desc">ChatUp helps you to ...(to be done later) </string>
 </resources>
