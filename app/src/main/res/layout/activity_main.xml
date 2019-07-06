@@ -9,25 +9,44 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="279dp"
-        android:layout_height="487dp"
+        android:layout_width="288dp"
+        android:layout_height="189dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="130dp"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_marginTop="350dp"
+        android:background="@drawable/grey_rectangle_border"
+        android:orientation="vertical"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="20dp"
-            android:textSize="@dimen/medium_text"/>
+            android:gravity="center"
+            android:text="@string/login"
+            android:textSize="@dimen/medium_text" />
 
+
+        <TextView
+            android:id="@+id/GoogleLogin"
+            android:layout_width="223dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_google"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/login_google"
+            android:textColor="#3d3d3d"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="94dp"
+            tools:layout_editor_absoluteY="431dp" />
 
 
     </LinearLayout>
+
+
 
 
 
