@@ -6,111 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/tint_blue"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_width="279dp"
+        android:layout_height="487dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="130dp"
+        android:background="@color/white"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="98dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
             android:layout_gravity="center"
-            android:layout_margin="40dp"
-            android:layout_marginStart="133dp"
-            android:layout_marginLeft="133dp"
-            android:layout_marginTop="84dp"
-            android:layout_marginEnd="144dp"
-            android:layout_marginRight="144dp"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/medium_text"/>
+
+
+
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="356dp"
-        android:layout_height="179dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:orientation="vertical"
-        android:padding="20dp">
 
-
-        <LinearLayout
-            android:layout_width="315dp"
-            android:layout_height="59dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:paddingLeft="3dp"
-                app:layout_constraintEnd_toStartOf="@+id/GoogleLogin"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="428dp" />
-
-            <TextView
-                android:id="@+id/GoogleLogin"
-                android:layout_width="223dp"
-                android:layout_height="41dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/login_google"
-                android:clickable="true"
-                android:textColor="#3d3d3d"
-                android:textSize="20dp"
-                android:focusable="true"
-                tools:layout_editor_absoluteX="94dp"
-                tools:layout_editor_absoluteY="431dp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="317dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="47dp"
-                android:layout_height="44dp"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:paddingLeft="3dp"
-                android:paddingTop="1dp"
-                app:layout_constraintEnd_toStartOf="@+id/EmailLogin"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="428dp" />
-
-
-            <TextView
-                android:id="@+id/EmailLogin"
-                android:layout_width="223dp"
-                android:layout_height="41dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/login_email"
-                android:textColor="#3d3d3d"
-                android:textSize="20dp"
-                android:clickable="true"
-                android:focusable="true"
-                tools:layout_editor_absoluteX="94dp"
-                tools:layout_editor_absoluteY="431dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-</LinearLayout>
+   </LinearLayout>
