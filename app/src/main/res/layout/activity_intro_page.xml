@@ -8,6 +8,20 @@
     android:orientation="vertical"
     android:background="@color/tint_blue">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:layout_width="255dp"
+        android:layout_height="145dp"
+        android:text="@string/welcome_desc"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"/>
+
 
 
 </LinearLayout>
