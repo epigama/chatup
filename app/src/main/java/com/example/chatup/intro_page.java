@@ -22,5 +22,6 @@ public class intro_page extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
+
     }
 }
