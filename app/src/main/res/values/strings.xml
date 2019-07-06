@@ -4,4 +4,5 @@
     <string name="login_google">Login with Google</string>
     <string name="welcome">Welcome to ChatUp</string>
     <string name="welcome_desc">Because we are here to make life easier</string>
+    <string name="click_to_continue">Click to continue</string>
 </resources>
