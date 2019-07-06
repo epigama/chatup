@@ -5,51 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".intro_page"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/tint_blue">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="345sp"
-        android:background="@color/background"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="@string/welcome"
-
-            android:textColor="@color/white"
-            android:textSize="35sp" />
-
-        <TextView
-            android:layout_width="272dp"
-            android:layout_height="124dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/welcome_desc"
-            android:textColor="@color/white"
-            android:textSize="@dimen/medium_text" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-
-        <Button
-            android:layout_width="178dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="250sp"
-            android:id="@+id/IntroButton"
-            android:background="@drawable/rounded_button"
-            android:gravity="center"
-            android:text="Click to Continue"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
 </LinearLayout>
