@@ -14,13 +14,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class profile extends AppCompatActivity {
+    private EditText user_first_name, password, confirm_password, user_last_name;
+     private  Button profile_button;
+    private ProgressBar progressBar;
     Uri pickedImgUri ;
     public static int REQUESTCODE=01;
     public static int PReqCode = 1 ;
@@ -33,6 +39,11 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        user_first_name=(EditText)findViewById(R.id.UserName);
+        user_last_name=(EditText)findViewById(R.id.LastName);
+        password=(EditText)findViewById(R.id.Password);
+        confirm_password=(EditText)findViewById(R.id.ConfirmPassword);
+        profile_button=(Button)findViewById(R.id.ProfileButton);
         user_photo=(ImageView)findViewById(R.id.UserPhoto);
         user_photo.setOnClickListener(new View.OnClickListener() {
             @Override
