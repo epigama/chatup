@@ -29,6 +29,7 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_via_email);
+        getSupportActionBar().hide();
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         signin = findViewById(R.id.login_using_email);
