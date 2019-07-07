@@ -1,5 +1,6 @@
 package com.example.chatup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,10 +21,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class profile extends AppCompatActivity {
+    private FirebaseAuth firebase_auth;
     private EditText user_first_name, password, confirm_password, user_last_name;
      private  Button profile_button;
     private ProgressBar progressBar;
@@ -39,6 +52,7 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        firebase_auth=FirebaseAuth.getInstance();
         user_first_name=(EditText)findViewById(R.id.UserName);
         user_last_name=(EditText)findViewById(R.id.LastName);
         password=(EditText)findViewById(R.id.Password);
@@ -57,8 +71,99 @@ public class profile extends AppCompatActivity {
             }
         });
         getSupportActionBar().hide();
-        if (!checkPermission())
+      /**  if (!checkPermission())
             requestPermission();
+       **/
+      profile_button.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+              profile_button.setVisibility(View.INVISIBLE);
+              final String user_name=user_first_name.getText().toString();
+              final String last_name=user_last_name.getText().toString();
+              final String pass=password.getText().toString();
+              final String confirm_pass=confirm_password.getText().toString();
+              if(user_name.isEmpty() || last_name.isEmpty() ){
+                  ShowErrorMessage("Please verify all the details");
+                  profile_button.setVisibility(View.VISIBLE);
+              }
+              else{
+                  CreateUserAccount(user_name,last_name,pass);
+              }
+
+
+
+
+
+
+
+
+
+
+          }
+      });
+
+
+
+    }
+
+    public void CreateUserAccount(String email_id, final String last_name, String password){
+       firebase_auth.createUserWithEmailAndPassword(email_id,password)
+               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                   @Override
+                   public void onComplete(@NonNull Task<AuthResult> task) {
+                      if(task.isSuccessful()){
+                          Toast.makeText(getApplicationContext(),"Succesfully Created",Toast.LENGTH_SHORT).show();
+                          ShowErrorMessage("Account Successfully Created");
+                          UpdateUserInfo(last_name,pickedImgUri,firebase_auth.getCurrentUser());
+                      }
+                      else{
+                          Toast.makeText(getApplicationContext(),"Error in creating account",Toast.LENGTH_SHORT).show();
+                          profile_button.setVisibility(View.VISIBLE);
+                          ShowErrorMessage("Account Creation Failed " +task.getException().getMessage());
+
+                       }
+                   }
+               });
+
+
+
+    }
+    public void UpdateUserInfo(final String name, final Uri user_image, final FirebaseUser fire_base_user){
+        StorageReference storage_reference= FirebaseStorage.getInstance().getReference().child("user_photo");
+        final StorageReference image_file_path=storage_reference.child(user_image.getLastPathSegment());
+        image_file_path.putFile(user_image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+               image_file_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                   @Override
+                   public void onSuccess(Uri uri) {
+                       UserProfileChangeRequest profile_update=new UserProfileChangeRequest.Builder()
+                               .setDisplayName(name)
+                               .setPhotoUri(user_image)
+                               .build();
+                       fire_base_user.updateProfile(profile_update)
+                               .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                       if(task.isSuccessful()){
+                                           ShowErrorMessage("Register Complete");
+                                           UpdateUI();
+                                       }
+                                   }
+                               });
+                   }
+               });
+            }
+        });
+    }
+
+    public void UpdateUI(){
+        startActivity(new Intent(this,intro_page.class));
+        finish();
+    }
+    public void ShowErrorMessage(String verify_all_fields){
+        Toast.makeText(this, "Please check again", Toast.LENGTH_SHORT).show();
 
     }
     private void OpenGallery() {
