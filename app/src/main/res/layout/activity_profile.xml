@@ -104,6 +104,7 @@
             android:layout_marginEnd="129dp"
             android:background="@drawable/rounded_button"
             android:text="@string/click_to_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ConfirmPassword" />
