@@ -8,4 +8,6 @@
     <string name="login">Please Login!</string>
     <string name="login_page_intro">Please SignIn to become a part of US</string>
     <string name="permission_request">Please give permission after sign in</string>
+    <string name="user_profile">User Profile Information</string>
+    <string name="enter_name">Enter your name</string>
 </resources>
