@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,16 +26,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="255dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="77dp"
-        android:layout_marginEnd="67dp"
         android:background="@drawable/grey_rectangle_border"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="34dp">
 
 
         <TextView
@@ -55,7 +52,22 @@
             tools:layout_editor_absoluteY="431dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="300dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:id="@+id/SignInManually"
+            android:text="@string/click_to_signin_manually"
+            android:textSize="@dimen/small_medium_text" />
+    </LinearLayout>
 
 
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </LinearLayout>
