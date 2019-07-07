@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 
             Toast.makeText(this, "Signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, Chat.class));
+            startActivity(new Intent(this, profile.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.

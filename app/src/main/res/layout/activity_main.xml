@@ -64,10 +64,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/click_to_signin_manually"
+            android:text="@string/register_profile"
             android:textColor="@color/white"
             android:textSize="18dp"
-         >
+        />
 
         <Button
             android:id="@+id/LoginWithEmail"
@@ -76,7 +76,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/register_profile"
+           android:text="@string/click_to_signin_manually"
             android:textColor="@color/white"
             android:textSize="18dp"
             />
@@ -86,5 +86,4 @@
 
 
 
-
-   </LinearLayout>
+</LinearLayout>
