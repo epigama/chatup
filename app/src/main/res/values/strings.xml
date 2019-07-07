@@ -6,8 +6,11 @@
     <string name="welcome_desc">Because we are here to make life easier</string>
     <string name="click_to_continue">Click to continue</string>
     <string name="login">Please Login!</string>
-    <string name="login_page_intro">Please SignIn to become a part of US</string>
+    <string name="login_page_intro">Sign In </string>
     <string name="permission_request">Please give permission after sign in</string>
     <string name="user_profile">User Profile Information</string>
-    <string name="enter_name">Enter your name</string>
+    <string name="enter_first_name">Enter your first name</string>
+    <string name="enter_last_name">Enter your last name</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_confirm_password">Confirm Password</string>
 </resources>
