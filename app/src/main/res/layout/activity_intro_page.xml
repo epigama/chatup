@@ -12,7 +12,7 @@
         android:layout_height="145dp"
         android:layout_marginStart="51dp"
         android:layout_marginTop="125dp"
-        android:fontFamily="@fonts/comfortaa"
+        android:fontFamily="@font/font_family"
         android:text="@string/welcome_desc"
         android:textColor="@color/olive_green"
         android:textSize="30dp"
@@ -41,8 +41,20 @@
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/IntroButton"/>
 
-
-
+    <TextView
+        android:id="@+id/AppName"
+        android:layout_width="138dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="225dp"
+        android:fontFamily="@font/font_family"
+        android:text="@string/app_name_title"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

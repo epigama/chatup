@@ -13,24 +13,30 @@
         android:layout_height="wrap_content"
         android:text="@string/user_profile"
         android:textSize="@dimen/medium_text"
+        android:fontFamily="@font/font_family"
         android:textColor="@color/olive_green"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="138dp"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="398dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/userphoto"
             android:id="@+id/UserPhoto"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            android:layout_width="208dp"
+            android:layout_height="201dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="93dp"
+            android:layout_marginEnd="97dp"
+            android:src="@drawable/userphoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,8 +50,8 @@
             android:layout_marginStart="75dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="94dp"
-            android:drawableLeft="@drawable/ic_person"
             android:background="@drawable/rounded_background_white"
+            android:drawableLeft="@drawable/ic_person"
             android:hint="@string/enter_first_name"
             android:textSize="@dimen/small_medium_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +114,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/ConfirmPassword"
+            android:elevation="30dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
