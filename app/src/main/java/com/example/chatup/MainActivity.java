@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),profile.class));
             }
         });
-        sign_in_manually = findViewById(R.id.loginwithemail);
+        sign_in_manually = findViewById(R.id.LoginWithEmail);
         sign_in_manually.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
