@@ -68,10 +68,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/PermissionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/PermissionText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/permission_request"
+            android:background="@drawable/rounded_button"
+            android:textSize="23dp"
+            android:paddingTop="15dp"
+            android:paddingRight="2dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 
