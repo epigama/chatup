@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         register_manually =(Button)findViewById(R.id.SignInManually);
         register_manually.setOnClickListener(new View.OnClickListener() {
             @Override
