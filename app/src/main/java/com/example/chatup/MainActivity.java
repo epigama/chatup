@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
+    Button sign_in_manually;
     GoogleSignInClient mSignInClient;
     private String TAG  = this.getClass().getSimpleName();
 
@@ -26,10 +28,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sign_in_manually=(Button)findViewById(R.id.SignInManually);
+        sign_in_manually.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),profile.class));
+            }
+        });
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null){
             Toast.makeText(this, "Already signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, profile.class));
+            startActivity(new Intent(this,Chat.class));
         }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -72,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 
             Toast.makeText(this, "Signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, profile.class));
+            startActivity(new Intent(this, Chat.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
