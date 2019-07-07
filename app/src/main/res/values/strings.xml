@@ -15,4 +15,5 @@
     <string name="enter_password">Enter Password</string>
     <string name="enter_confirm_password">Confirm Password</string>
     <string name="click_to_signin_manually">Click to manually enter email and password</string>
+    <string name="login_via_email">Login via Email</string>
 </resources>
