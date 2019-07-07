@@ -152,14 +152,9 @@ public class profile extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         PReqCode);
             }
-
         }
         else
             OpenGallery();
 
     }
-
-
-
-
 }
