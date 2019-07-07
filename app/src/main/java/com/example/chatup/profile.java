@@ -46,7 +46,7 @@ public class profile extends AppCompatActivity {
     ImageView user_photo;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private AlertDialog PermissionAccessDialog;
-    String TAG="";
+    String TAG=""; //yahan se dekhlo kya?abhhey firebase ka profile code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +90,8 @@ public class profile extends AppCompatActivity {
               else{
                   CreateUserAccount(user_name,last_name,pass);
               }
-
-
-
-
-
-
-
-
-
-
           }
       });
-
-
-
     }
 
     public void CreateUserAccount(String email_id, final String last_name, String password){
@@ -121,6 +108,7 @@ public class profile extends AppCompatActivity {
                           Toast.makeText(getApplicationContext(),"Error in creating account",Toast.LENGTH_SHORT).show();
                           profile_button.setVisibility(View.VISIBLE);
                           ShowErrorMessage("Account Creation Failed " +task.getException().getMessage());
+                          Log.e(TAG, "onComplete: " + task.getException());
 
                        }
                    }
@@ -148,7 +136,7 @@ public class profile extends AppCompatActivity {
                                    public void onComplete(@NonNull Task<Void> task) {
                                        if(task.isSuccessful()){
                                            ShowErrorMessage("Register Complete");
-                                           UpdateUI();
+                                          // UpdateUI();
                                        }
                                    }
                                });

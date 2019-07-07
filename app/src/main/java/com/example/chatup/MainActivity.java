@@ -17,6 +17,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
+    Button register_manually;
     Button sign_in_manually;
     GoogleSignInClient mSignInClient;
     private String TAG  = this.getClass().getSimpleName();
@@ -28,11 +29,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sign_in_manually=(Button)findViewById(R.id.SignInManually);
-        sign_in_manually.setOnClickListener(new View.OnClickListener() {
+        register_manually =(Button)findViewById(R.id.SignInManually);
+        register_manually.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),profile.class));
+            }
+        });
+        sign_in_manually = findViewById(R.id.loginwithemail);
+        sign_in_manually.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginPage.class));
             }
         });
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
