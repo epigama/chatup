@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="255dp"
         android:layout_height="68dp"
         android:layout_marginStart="66dp"
@@ -55,24 +56,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="61dp"
+        android:layout_marginTop="292dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/PermissionText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="339dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="9dp"
             android:text="@string/permission_request"
-            android:background="@drawable/rounded_button"
-            android:textSize="23dp"
-            android:paddingTop="15dp"
-            android:paddingRight="2dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_gravity="center"/>
+            android:textColor="@color/pink"
+            android:textSize="22dp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="9dp"
+            android:src="@drawable/ic_double_arrow" />
     </LinearLayout>
 
 

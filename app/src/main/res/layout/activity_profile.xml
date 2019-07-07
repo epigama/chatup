@@ -43,7 +43,7 @@
             android:layout_marginStart="75dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="94dp"
-            android:drawableLeft="@drawable/ic_person_add_black_24dp"
+            android:drawableLeft="@drawable/ic_person"
             android:background="@drawable/rounded_background_white"
             android:hint="@string/enter_first_name"
             android:textSize="@dimen/small_medium_text"
@@ -59,6 +59,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="94dp"
             android:background="@drawable/rounded_background_white"
+            android:drawableLeft="@drawable/ic_person"
             android:hint="@string/enter_last_name"
             android:textSize="@dimen/small_medium_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +74,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="94dp"
             android:background="@drawable/rounded_background_white"
+            android:drawableLeft="@drawable/ic_password"
             android:hint="@string/enter_password"
             android:textSize="@dimen/small_medium_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +91,7 @@
             android:background="@drawable/rounded_background_white"
             android:hint="@string/enter_confirm_password"
             android:textSize="@dimen/small_medium_text"
+            android:drawableLeft="@drawable/ic_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Password" />
@@ -104,9 +107,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ConfirmPassword" />
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
