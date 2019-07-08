@@ -18,4 +18,8 @@
     <string name="click_to_signin_manually">Click to Enter email and password</string>
     <string name="register_profile">Register your profile</string>
     <string name="login_via_email">Login via Email</string>
+    <string name="enter_phone">Enter phone number</string>
+    <string name="verification_code">Get Verification Code</string>
+    <string name="get_verfication_code">Enter code received</string>
+    <string name="sign_in">Sign In</string>
 </resources>

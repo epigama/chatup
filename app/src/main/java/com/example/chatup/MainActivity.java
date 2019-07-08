@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button signin;
+    Button otpSignIn;
 
     public static final int RC_SIGN_IN=1;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         signin = findViewById(R.id.login_using_email);
+        otpSignIn = findViewById(R.id.login_using_phone);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +58,16 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null){
             Toast.makeText(this, "Already signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,Chat.class));
+          //  startActivity(new Intent(this,PhoneAuthentication.class));
+
         }
+
+        otpSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, PhoneAuthentication.class));
+            }
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -99,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 
             Toast.makeText(this, "Signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, profile.class));
+            //startActivity(new Intent(this, PhoneAuthentication.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(MainActivity.this, "Sign is success", Toast.LENGTH_SHORT).show();
+              //              startActivity(new Intent(MainActivity.this,PhoneAuthentication.class));
                             FirebaseUser user = mAuth.getCurrentUser();
                             //TODO 2 updateUI(user);
                         } else {

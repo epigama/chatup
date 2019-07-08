@@ -89,7 +89,17 @@
             android:textSize="20dp"
             tools:layout_editor_absoluteX="94dp"
             tools:layout_editor_absoluteY="431dp" />
+
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/login_using_phone"
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="Phone number please!!"
+        android:gravity="center"
+        android:textColor="@color/white" />
 
 </LinearLayout>
