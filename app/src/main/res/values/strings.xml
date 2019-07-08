@@ -9,9 +9,9 @@
     <string name="login">Please Login!</string>
     <string name="login_page_intro">Sign In </string>
     <string name="permission_request">Please give permission after sign in</string>
-    <string name="user_profile">User Profile Information</string>
-    <string name="enter_first_name">Enter your email id</string>
-    <string name="enter_last_name">Enter your last name</string>
+    <string name="user_profile">User Profile </string>
+    <string name="enter_first_name">Email id</string>
+    <string name="enter_last_name">Name</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_confirm_password">Confirm Password</string>
     <string name="click_to_signin_manually">Click to Enter email and password</string>
