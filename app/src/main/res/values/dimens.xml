@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_text">4dp</dimen>
     <dimen name="small_text">10dp</dimen>
     <dimen name="small_medium_text">20dp</dimen>
     <dimen name="medium_text">25dp</dimen>
