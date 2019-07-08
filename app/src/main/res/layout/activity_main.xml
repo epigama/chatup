@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_background_white"
             android:drawableLeft="@drawable/ic_person"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/padding_text"
             android:hint="@string/login_email" />
 
         <EditText
@@ -51,7 +51,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/rounded_background_white"
             android:drawableLeft="@drawable/ic_password"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/padding_text"
             android:hint="@string/enter_password"
             android:inputType="textPassword" />
 
@@ -65,6 +65,14 @@
             android:background="@drawable/rounded_button"
             android:text="@string/login"
             android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textSize="@dimen/small_medium_text"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/GoogleLogin"
