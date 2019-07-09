@@ -23,26 +23,11 @@
     <ImageView
         android:layout_width="426dp"
         android:layout_height="286dp"
-        android:layout_marginStart="147dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginBottom="110dp"
         android:src="@drawable/ic_chat_bubble_outline_black_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/IntroButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:layout_width="206dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/rounded_button"
-        android:drawableRight="@drawable/ic_right_arrow"
-        android:text="@string/click_to_continue"
-        android:fontFamily="@font/font_family"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/IntroButton"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/AppName"
