@@ -98,8 +98,9 @@
         android:layout_width="253dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
-        android:text="Phone number please!!"
         android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Phone number please!!"
         android:textColor="@color/white" />
 
 </LinearLayout>
