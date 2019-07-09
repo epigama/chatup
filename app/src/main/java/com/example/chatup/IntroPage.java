@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class intro_page extends AppCompatActivity {
+public class IntroPage extends AppCompatActivity {
     Button intro_button;
 
     @Override

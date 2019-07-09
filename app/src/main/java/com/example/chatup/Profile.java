@@ -35,7 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     private FirebaseAuth firebase_auth;
     private EditText user_first_name, password, confirm_password, user_last_name;
      private  Button profile_button;
@@ -46,7 +46,7 @@ public class profile extends AppCompatActivity {
     ImageView user_photo;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private AlertDialog PermissionAccessDialog;
-    String TAG=""; //yahan se dekhlo kya?abhhey firebase ka profile code
+    String TAG=""; //yahan se dekhlo kya?abhhey firebase ka Profile code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +147,7 @@ public class profile extends AppCompatActivity {
     }
 
     public void UpdateUI(){
-        startActivity(new Intent(this,intro_page.class));
+        startActivity(new Intent(this, IntroPage.class));
         finish();
     }
     public void ShowErrorMessage(String verify_all_fields){
