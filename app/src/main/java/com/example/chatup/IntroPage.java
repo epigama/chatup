@@ -24,7 +24,5 @@ public class IntroPage extends AppCompatActivity {
             }
         },splash_screen_timer);
         getSupportActionBar().hide();
-
-
     }
 }
