@@ -16,9 +16,9 @@
         <activity android:name=".PhoneAuthentication"></activity>
         <activity android:name=".Chat" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".profile" />
+        <activity android:name=".Profile" />
         <activity android:name=".LoginPage" />
-        <activity android:name=".intro_page">
+        <activity android:name=".IntroPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
