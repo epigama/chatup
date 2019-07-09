@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class IntroPage extends AppCompatActivity {
-    public static final int splash_screen_timer=4000;
+    public static final int splash_screen_timer=2000;
     Button intro_button;
 
     @Override
