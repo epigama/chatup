@@ -24,13 +24,7 @@ public class IntroPage extends AppCompatActivity {
             }
         },splash_screen_timer);
         getSupportActionBar().hide();
-        intro_button=(Button)findViewById(R.id.IntroButton);
-        intro_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            }
-        });
+
 
     }
 }
