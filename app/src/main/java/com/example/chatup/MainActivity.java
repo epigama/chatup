@@ -73,15 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mSignInClient = GoogleSignIn.getClient(this, gso);
-
-        TextView googleSignIn = findViewById(R.id.GoogleLogin);
-        googleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInWithGoogle();
-            }
-        });
-
     }
 
     private void signInWithGoogle() {

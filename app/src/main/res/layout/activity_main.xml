@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/tint_blue"
-    android:orientation="vertical">
+    android:background="@color/blackNew"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -15,11 +15,12 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="147dp"
         android:layout_marginEnd="54dp"
+        android:fontFamily="@font/font_family"
         android:gravity="center"
         android:text="@string/login_page_intro"
-        android:fontFamily="@font/font_family"
         android:textSize="@dimen/medium_large_text"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +28,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="314dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="77dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -38,6 +39,7 @@
             android:layout_width="303dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:background="@drawable/rounded_background_white"
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="@dimen/padding_text"
@@ -49,58 +51,42 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
+            android:layout_weight="1"
             android:background="@drawable/rounded_background_white"
             android:drawableLeft="@drawable/ic_password"
             android:drawablePadding="@dimen/padding_text"
             android:hint="@string/enter_password"
             android:inputType="textPassword" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="34dp">
 
         <Button
             android:id="@+id/login_using_email"
             android:layout_width="253dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:background="@drawable/rounded_button"
             android:text="@string/login"
             android:textColor="@color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <Button
+            android:id="@+id/login_using_phone"
+            android:layout_width="253dp"
             android:layout_height="wrap_content"
-            android:text="@string/or"
-            android:textSize="@dimen/small_medium_text"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/GoogleLogin"
-            android:layout_width="223dp"
-            android:layout_height="41dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:drawableLeft="@drawable/ic_google"
-            android:focusable="true"
+            android:background="@drawable/rounded_button"
             android:gravity="center"
-            android:text="@string/login_google"
-            android:textColor="#3d3d3d"
-            android:textSize="20dp"
-            tools:layout_editor_absoluteX="94dp"
-            tools:layout_editor_absoluteY="431dp" />
-
+            android:text="Phone number please!!"
+            android:textColor="@color/white" />
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/login_using_phone"
-        android:layout_width="253dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Phone number please!!"
-        android:textColor="@color/white" />
 
 </LinearLayout>

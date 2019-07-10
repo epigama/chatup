@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,79 +23,98 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class PhoneAuthentication extends AppCompatActivity {
+import es.dmoral.toasty.Toasty;
+import in.aabhasjindal.otptextview.OTPListener;
+import in.aabhasjindal.otptextview.OtpTextView;
 
-    EditText editTextPhone, editTextCode;
-    Button signInButton;
-
+public class OtpAuth extends AppCompatActivity {
+    private OtpTextView otpTextView;
+    private TextView otpSentToText;
+    private String codeSent;
+    private String TAG = this.getClass().getSimpleName();
     FirebaseAuth mAuth;
-
-    String codeSent;
-    public String TAG = this.getClass().getSimpleName();
-    private String phoneNum;
+    String phoneNum = "";
+    Button verifyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_authentication);
+        setContentView(R.layout.activity_otp_auth);
 
         mAuth = FirebaseAuth.getInstance();
+
+        verifyBtn = findViewById(R.id.verify_and_proceed);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-
         getSupportActionBar().hide();
 
-//        editTextCode = findViewById(R.id.editTextCode);
-        editTextPhone = findViewById(R.id.editTextPhone);
-//
-        signInButton = findViewById(R.id.sign_in_btn);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendVerificationCode();
-                Intent intent = new Intent(PhoneAuthentication.this, OtpAuth.class);
-                intent.putExtra("phone", phoneNum);
-                startActivity(intent);
-            }
-        });
-//
-//
-//
-//        findViewById(R.id.buttonSignIn).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                verifySignInCode();
-//            }
-//        });
-    }
+        otpTextView = findViewById(R.id.otp_view);
+        otpSentToText = findViewById(R.id.otpSentToText);
 
-    private void sendVerificationCode() {
-
-        phoneNum = "+91" + editTextPhone.getText().toString();
-
-        if (phoneNum.isEmpty()) {
-            editTextPhone.setError("Phone number is required");
-            editTextPhone.requestFocus();
-            return;
+        try {
+            Intent intent = getIntent();
+            phoneNum = intent.getStringExtra("phone");
+            otpSentToText.append(" " + phoneNum);
         }
+        catch (Exception e){
 
-        if (phoneNum.length() < 10) {
-            editTextPhone.setError("Please enter a valid phone");
-            editTextPhone.requestFocus();
-            return;
         }
-
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNum,        // Phone number to verify
                 20,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
-                mCallbacks);        // OnVerificationStateChangedCallbacks
+                mCallbacks);
+
+        otpTextView.requestFocusOTP();
+        otpTextView.setOtpListener(new OTPListener() {
+            @Override
+            public void onInteractionListener() {
+
+            }
+
+            @Override
+            public void onOTPComplete(String otp) {
+                Toasty.success(OtpAuth.this, "The OTP is " + otp, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        verifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifySignInCode(otpTextView.getOTP());
+            }
+        });
+
+
     }
 
+    private void verifySignInCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSent, code);
+        signInWithPhoneAuthCredential(credential);
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            //here you can open new activity
+                            Toast.makeText(getApplicationContext(),
+                                    "Successfull", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Unsuccessful", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+    }
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -127,6 +146,4 @@ public class PhoneAuthentication extends AppCompatActivity {
             codeSent = s;
         }
     };
-
-
 }

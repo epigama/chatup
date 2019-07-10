@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PhoneAuthentication"
-    android:orientation="vertical"
-    android:background="@color/tint_blue">
+    android:layout_marginStart="51dp"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <TextView
+        android:layout_width="255dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="125dp"
+        android:fontFamily="@font/font_family"
+        android:text="Take control of your Notifications"
+        android:textColor="@color/blue"
+        android:textSize="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Get Started"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:orientation="vertical"
-        android:padding="15dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="80dp"
+        android:digits="0123456789+"
+        android:hint="Enter Phone Number"
+        android:id="@+id/editTextPhone"
+        android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="378dp"
-            android:layout_height="41dp"
-            android:background="@drawable/rounded_background_white"
-            android:ems="10"
-            android:hint="@string/enter_phone"/>
-
-        <Button
-            android:id="@+id/buttonGetVerificationCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/verification_code"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/editTextCode"
-            android:layout_width="378dp"
-            android:layout_height="41dp"
-            android:background="@drawable/rounded_background_white"
-            android:digits="0123456789"
-            android:hint="@string/get_verfication_code"
-            android:layout_marginTop="20dp"/>
-
-        <Button
-            android:id="@+id/buttonSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in"
-            android:background="@drawable/rounded_button"
-            android:layout_marginTop="10dp"/>
-    </LinearLayout>
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_background"
+        android:elevation="30dp"
+        android:text="Send OTP"
+        android:id="@+id/sign_in_btn"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

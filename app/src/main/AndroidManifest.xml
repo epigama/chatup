@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhoneAuthentication"></activity>
+        <activity android:name=".OtpAuth"></activity>
+        <activity android:name=".PhoneAuthentication" />
         <activity android:name=".Chat" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Profile" />
