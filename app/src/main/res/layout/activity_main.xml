@@ -75,7 +75,7 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:text="@string/login"
-            android:textColor="@color/blue" />
+            android:textColor="@color/white" />
 
 
         <Button
@@ -87,7 +87,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/small_text"
             android:text="Phone number please!!"
-            android:textColor="@color/blue" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>
