@@ -1,5 +1,6 @@
 package com.example.chatup;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -71,4 +72,21 @@ public class Chat extends AppCompatActivity {
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent,REQUESCODE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null ) {
+
+            // the user has successfully picked an image
+            // we need to save its reference to a Uri variable
+            pickedImgUri = data.getData() ;
+            user_image_view.setImageURI(pickedImgUri);
+
+
+        }
+    }
+
 }
