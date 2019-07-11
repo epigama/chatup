@@ -6,5 +6,6 @@
     <dimen name="small_medium_text">20dp</dimen>
     <dimen name="medium_text">25dp</dimen>
     <dimen name="medium_large_text">35dp</dimen>
+    <dimen name="medium_large_text_1">40dp</dimen>
     <dimen name="large_text">50dp</dimen>
 </resources>

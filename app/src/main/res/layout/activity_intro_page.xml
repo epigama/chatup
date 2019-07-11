@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IntroPage"
-    android:background="@color/blackNew">
+    android:background="@color/white">
 
     <TextView
         android:layout_width="255dp"
@@ -14,7 +14,7 @@
         android:layout_marginTop="125dp"
         android:fontFamily="@font/font_family"
         android:text="@string/welcome_desc"
-        android:textColor="@color/red"
+        android:textColor="@color/blue"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_marginEnd="225dp"
         android:fontFamily="@font/font_family"
         android:text="@string/app_name_title"
-        android:textColor="@color/red"
+        android:textColor="@color/blue"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
