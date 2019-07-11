@@ -23,4 +23,5 @@
     <string name="verification_code">Get Verification Code</string>
     <string name="get_verfication_code">Enter code received</string>
     <string name="sign_in">Sign In</string>
+    <string name="request_phone_number">Phone number please!!</string>
 </resources>
