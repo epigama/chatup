@@ -75,7 +75,7 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:text="@string/login"
-            android:textColor="@color/white" />
+            android:textColor="@color/blue" />
 
 
         <Button
