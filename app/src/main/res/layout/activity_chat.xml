@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/medium_large_text"
-            android:background="@drawable/rounded_background_white"
+            android:background="@drawable/rounded_background_blue"
             android:text="@string/save_continue" />
 
     </LinearLayout>
