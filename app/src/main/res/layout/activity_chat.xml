@@ -27,21 +27,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="150dp">
 
         <EditText
             android:layout_width="197dp"
             android:layout_height="match_parent"
             android:hint="@string/name"
             android:drawablePadding="@dimen/padding_text"
-            android:drawableLeft="@drawable/ic_person"
+            android:drawableStart="@drawable/ic_person"
             />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_pencil"
+            android:drawableStart="@drawable/ic_pencil"
             android:drawablePadding="@dimen/padding_text"
             android:hint="@string/app_bio" />
     </LinearLayout>
