@@ -52,9 +52,11 @@
             android:textColorHint="@color/blue" />
 
 
+
         <Button
             android:layout_width="201dp"
             android:layout_height="wrap_content"
+            android:id="@+id/SaveDetails"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/medium_large_text"
             android:background="@drawable/rounded_background_blue"
