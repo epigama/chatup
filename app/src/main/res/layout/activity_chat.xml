@@ -37,11 +37,13 @@
             android:drawableStart="@drawable/ic_person_white"
             android:drawablePadding="@dimen/padding_text"
             android:hint="@string/name"
+            android:id="@+id/UserName"
             android:textColorHint="@color/blue" />
 
         <EditText
             android:layout_width="270dp"
             android:layout_height="wrap_content"
+            android:id="@+id/UserBio"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:drawableStart="@drawable/ic_pencil_white"
