@@ -31,7 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class Chat extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
     ImageView user_image_view;
     static int PReqCode = 1 ;
     static int REQUESCODE = 1 ;
@@ -47,7 +47,7 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_profile_page);
         //Hidden status bar
         getSupportActionBar().hide();
 
@@ -94,9 +94,9 @@ public class Chat extends AppCompatActivity {
             }
         });
     }
+
+
     private void checkAndRequestForPermission() {
-
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
