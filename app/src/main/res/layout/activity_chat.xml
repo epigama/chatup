@@ -32,8 +32,17 @@
         <EditText
             android:layout_width="197dp"
             android:layout_height="match_parent"
-            android:hint="Name"
+            android:hint="@string/name"
             android:drawablePadding="@dimen/padding_text"
-            android:drawableLeft="@drawable/ic_person"/>
+            android:drawableLeft="@drawable/ic_person"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_pencil"
+            android:drawablePadding="@dimen/padding_text"
+            android:hint="@string/app_bio" />
     </LinearLayout>
 </LinearLayout>
