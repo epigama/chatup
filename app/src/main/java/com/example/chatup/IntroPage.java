@@ -2,7 +2,6 @@ package com.example.chatup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +19,7 @@ public class IntroPage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this,Chat.class);
+                Intent intent = new Intent(IntroPage.this, ProfilePage.class);
                 startActivity(intent);
             }
         },splash_screen_timer);
