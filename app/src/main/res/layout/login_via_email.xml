@@ -22,7 +22,7 @@
         android:layout_height="45dp"
         android:background="@drawable/rounded_background_white"
         android:hint="@string/login_email"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_person_black"
         android:drawablePadding="5dp"/>
 
     <EditText
