@@ -25,5 +25,6 @@
     <string name="sign_in">Sign In</string>
     <string name="name">Name</string>
     <string name="app_bio">Bio</string>
+    <string name="contine">Continue</string>
     <string name="request_phone_number">Phone number please!!</string>
 </resources>
