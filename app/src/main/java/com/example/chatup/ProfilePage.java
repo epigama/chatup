@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,16 +30,20 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class ProfilePage extends AppCompatActivity {
-    ImageView user_image_view;
-    static int PReqCode = 1 ;
-    static int REQUESCODE = 1 ;
-    Uri pickedImgUri ;
-    EditText user_name, user_bio;
-    ProgressBar progressBar;
-    Button save_details;
-    public FirebaseAuth mAuth;
+    //TAG
     String TAG="";
 
+    //DECLARING THE VARIABLES
+    static int PReqCode = 1 ;
+    static int REQUESCODE = 1 ;
+    EditText user_name, user_bio;
+    Button save_details;
+    ImageView user_image_view;
+    Uri pickedImgUri ;
+
+
+    //FIREBASE AUTHENTICATION VARIABLES
+    public FirebaseAuth mAuth;
 
 
     @Override
@@ -50,12 +53,11 @@ public class ProfilePage extends AppCompatActivity {
         //Hidden status bar
         getSupportActionBar().hide();
 
-        //
+        //INITIALISING THE VARIABLES TO THE XML IDs
         mAuth=FirebaseAuth.getInstance();
         user_image_view=(ImageView)findViewById(R.id.UserImage);
         user_name=(EditText)findViewById(R.id.UserName);
         user_bio=(EditText)findViewById(R.id.UserBio);
-        // progressBar=(ProgressBar)findViewById(R.id.ProgressBar);
         save_details=(Button)findViewById(R.id.SaveDetails);
 
         save_details.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,7 @@ public class ProfilePage extends AppCompatActivity {
                 if(enter_name.isEmpty() || enter_bio.isEmpty()){
                     ShowMessage("Please check your details");
                     save_details.setVisibility(View.VISIBLE);
-                  //  progressBar.setVisibility(View.INVISIBLE);
+
                 }
                 else{
                     CreateUserAccount(enter_name,enter_bio);
@@ -168,7 +170,7 @@ public class ProfilePage extends AppCompatActivity {
                             // account creation failed
                             ShowMessage("account creation failed" + task.getException().getMessage());
                             save_details.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.INVISIBLE);
+
 
                         }
                     }
@@ -232,37 +234,18 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
     }
+
     private void updateUI() {
 
         Intent homeActivity = new Intent(getApplicationContext(),IntroPage.class);
         startActivity(homeActivity);
         finish();
-
-
     }
-   /** private void createNewUser(UserProfileChangeRequest userFromRegistration) {
-        String username = "username";
-        String email = userFromRegistration.getEmail();
-        String userId = userFromRegistration.getUid();
 
-        User user = new User(username, email);
-
-        mDatabase.child("users").child(userId).setValue(user);
-    }
-    **/
 
    private void addUserNameToUser(FirebaseUser user) {
        String username = "";
-
-
-
        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                .setDisplayName(username)
               // .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
@@ -278,6 +261,5 @@ public class ProfilePage extends AppCompatActivity {
                    }
                });
    }
-
 }
 
