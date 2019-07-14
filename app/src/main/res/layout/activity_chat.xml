@@ -5,19 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Chat"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="211dp"
         android:orientation="vertical"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="80dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/UserImage"
             android:layout_width="208dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@color/blue"/>
+            android:src="@drawable/user_photo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp">
+
+        <EditText
+            android:layout_width="197dp"
+            android:layout_height="match_parent"
+            android:hint="Name"
+            android:drawablePadding="@dimen/padding_text"
+            android:drawableLeft="@drawable/ic_person"/>
     </LinearLayout>
 </LinearLayout>
