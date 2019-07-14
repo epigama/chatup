@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Chat"
     android:orientation="vertical"
-    android:background="@drawable/profile_background">
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -29,7 +29,6 @@
         android:layout_marginTop="@dimen/margintop_small"
         android:orientation="vertical">
 
-
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
             android:drawableStart="@drawable/ic_person_white"
             android:drawablePadding="@dimen/padding_text"
             android:hint="@string/name"
-            android:textColorHint="@color/white"/>
+            android:textColorHint="@color/blue"/>
 
         <EditText
             android:layout_width="250dp"
@@ -48,18 +47,16 @@
             android:drawableStart="@drawable/ic_pencil_white"
             android:drawablePadding="@dimen/padding_text"
             android:hint="@string/app_bio"
-            android:textColorHint="@color/white"
-            />
+            android:textColorHint="@color/blue" />
 
 
         <Button
-            android:layout_width="126dp"
+            android:layout_width="201dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/medium_large_text"
             android:background="@drawable/rounded_background_white"
-            android:text="@string/contine" />
-
+            android:text="@string/save_continue" />
 
     </LinearLayout>
 
