@@ -139,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //TODO updateUI(currentUser);
     }
-
-
 }
 
 
