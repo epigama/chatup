@@ -19,17 +19,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPage extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    EditText email;
-    EditText password;
-    Button signin;
-
     private String TAG = this.getClass().getSimpleName();
+    EditText email, password;
+    Button signin;
+    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_via_email);
         getSupportActionBar().hide();
+
+        //intialising the variables to the xml ids
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         signin = findViewById(R.id.login_using_email);
@@ -41,12 +42,10 @@ public class LoginPage extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Btn clicked", Toast.LENGTH_SHORT).show();
             }
         });
-// ...
-// Initialize Firebase Auth
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
     }
-
+    //SignInWithEmail OPTION
     private void signInWithEmail(){
         mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -65,8 +64,6 @@ public class LoginPage extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             //TODO 3 updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
@@ -77,6 +74,4 @@ public class LoginPage extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //TODO updateUI(currentUser);
     }
-
-
 }
