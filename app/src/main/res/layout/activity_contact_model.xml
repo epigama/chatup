@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/framelayoutparent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_idea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        cardview:cardBackgroundColor="@color/blue"
+        cardview:cardCornerRadius="8dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:cardElevation="200dp"
+        cardview:contentPadding="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/image_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#e3f2fd"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
