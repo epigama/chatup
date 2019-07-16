@@ -22,16 +22,29 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.github.aabhasr1:OtpView:1.0.6'
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
     implementation 'com.github.stfalcon:smsverifycatcher:0.3.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.mikepenz:fastadapter:3.3.1'
     testImplementation 'junit:junit:4.12'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.github.tamir7.contacts:contacts:1.1.7'
+    implementation 'com.mikepenz:fastadapter-extensions:3.3.1'
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation 'com.jakewharton:butterknife:10.1.0'
 }
