@@ -147,43 +147,28 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public void CreateUserAccount(final String name, String bio){
-        mAuth.createUserWithEmailAndPassword(name,bio)
+        mAuth.createUserWithEmailAndPassword(name,bio)//kuch mila?
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             // user account created successfully
                             ShowMessage("Account created");
                             // after we created user account we need to update his profile picture and name
                             updateUserInfo(name,pickedImgUri,mAuth.getCurrentUser());
-
-
-
                         }
                         else
                         {
-
-                            addUserNameToUser(task.getResult().getUser());
+//                            Log.d(TAG, "onComplete: " + task.getResult().getUser());
+                            //addUserNameToUser(task.getResult().getUser());
                             //createNewUser(task.getResult().getUser());
 
                             // account creation failed
                             ShowMessage("account creation failed" + task.getException().getMessage());
                             save_details.setVisibility(View.VISIBLE);
-
-
                         }
                     }
                 });
-
-
-
-
-
-
-
-
-
     }
     private void updateUserInfo(final String name, Uri pickedImgUri, final FirebaseUser currentUser) {
 
@@ -238,7 +223,7 @@ public class ProfilePage extends AppCompatActivity {
 
     private void updateUI() {
 
-        Intent homeActivity = new Intent(getApplicationContext(),IntroPage.class);
+        Intent homeActivity = new Intent(getApplicationContext(),Chat.class);
         startActivity(homeActivity);
         finish();
     }
