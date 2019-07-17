@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.chatup.Fragments.Calls;
 import com.example.chatup.Fragments.Chats;
 import com.google.android.material.tabs.TabLayout;
 
