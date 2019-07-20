@@ -14,8 +14,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_idea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        cardview:cardBackgroundColor="@color/blue"
+        android:layout_height="75dp"
+        android:background="@drawable/rounded_background_blue"
         cardview:cardCornerRadius="8dp"
         xmlns:tools="http://schemas.android.com/tools"
         tools:cardElevation="200dp"
@@ -25,7 +25,7 @@
         <LinearLayout
             android:id="@+id/image_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -38,13 +38,13 @@
                 <TextView
                     android:id="@+id/text_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:gravity="center_vertical"
+                    android:paddingTop="3dp"
                     android:paddingBottom="20dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#e3f2fd"
-                    android:textStyle="bold" />
+                    android:textColor="@color/blue"
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
