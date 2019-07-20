@@ -28,6 +28,7 @@
     <string name="check_details">Please check your details</string>
     <string name="save_continue">Save and Continue</string>
     <string name="settings">Settings</string>
+    <string name="user_name">Username</string>
     <string name="request_phone_number">Phone number please!!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
