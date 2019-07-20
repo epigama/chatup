@@ -69,8 +69,17 @@ public class Contacts extends AppCompatActivity {
         contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
 
         handleAddContacts();
+       fastAdapter.withOnClickListener(new OnClickListener<ContactModel>() {
+           @Override
+           public boolean onClick( View v, IAdapter<ContactModel> adapter, ContactModel item, int position) {
 
-    } //haha okay re
+               startActivity(new Intent(getApplicationContext(),Invite.class));
+               return false;
+           }
+       });
+
+
+    }
 
 
     @Override
@@ -104,8 +113,7 @@ public class Contacts extends AppCompatActivity {
     public void applicationdidenterbackground() {
         if (!isWindowFocused) {
             isAppWentToBg = true;
-            Toast.makeText(getApplicationContext(),
-                    "App is Going to Background", Toast.LENGTH_SHORT).show();
+
         }
 
     }
@@ -167,41 +175,5 @@ public class Contacts extends AppCompatActivity {
             }
         }
     }
-//this method is not called at all
-    /**
-     public void showDialog(String name, String phoneNum){
-     LayoutInflater layoutInflater = MainActivity.this.getLayoutInflater();
-     final View content = layoutInflater.inflate(R.layout.about_contact, null, false);
-
-     TextView aboutName = content.findViewById(R.id.name_about);
-     TextView aboutNumber = content.findViewById(R.id.number_about);
-
-     aboutName.setText(name);
-     aboutNumber.setText(phoneNum);
-
-     AlertDialog.Builder builder = new AlertDialog.Builder(this)
-     .setView(content);
-     AlertDialog dialog = builder.create();
-     // get the center for the clipping circle
-
-     //final View view = dialog.getWindow().getDecorView();
-
-     /**view.post(new Runnable() {
-    @Override public void run() {
-    final int centerX = view.getWidth() / 2;
-    final int centerY = view.getHeight() / 2;
-    // TODO Get startRadius from FAB
-    // TODO Also translate animate FAB to center of screen?
-    float startRadius = 20;
-    float endRadius = view.getHeight();
-    Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, startRadius, endRadius);
-    animator.setDuration(500);
-    animator.start();
-    }
-    });
-
-     dialog.show();
-     }
-     **/
 
 }
