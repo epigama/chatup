@@ -1,47 +1,56 @@
-//package com.example.chatup;
-//
-//import android.os.Bundle;
-//
-//import com.example.chatup.Fragments.UserFragment;
-//import com.google.android.material.bottomnavigation.BottomNavigationView;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.annotation.NonNull;
-//import androidx.fragment.app.Fragment;
-//
-//import android.view.MenuItem;
-//import android.widget.TextView;
-//
-//public class UsersAndChatsActivity extends AppCompatActivity {
-//    private TextView mTextMessage;
-//    private Fragment selectedFragment;
-//
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_users:
-//                    selectedFragment = new UserFragment();
-//                    getSupportFragmentManager().beginTransaction().replace(R.layout.)
-//                    mTextMessage.setText("Users");
-//                    return true;
-//                case R.id.navigation_chats:
-//                    mTextMessage.setText("Chats");
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_users_and_chats);
-//        BottomNavigationView navView = findViewById(R.id.nav_view);
-//        mTextMessage = findViewById(R.id.message);
-//        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//    }
-//
-//}
+package com.example.chatup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
+
+import java.util.List;
+
+public class UsersAndChatsActivity extends AppCompatActivity {
+
+    private String TAG = this.getClass().getSimpleName();
+
+    private RecyclerView recyclerView;
+    private List<ChatModel> chatList;
+    private FastAdapter<ChatModel> fastAdapter;
+    private ItemAdapter<ChatModel> itemAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_users_and_chats);
+
+        ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Chat");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+        toolbar.setElevation(0);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("Chat");
+
+        recyclerView = findViewById(R.id.recycler);
+        itemAdapter = new ItemAdapter<>();
+        fastAdapter = FastAdapter.with(itemAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(fastAdapter);
+
+        ChatModel model = new ChatModel("Regina", "How do you do?", "12:30");
+        ChatModel model1 = new ChatModel("Senorita", "How's the weather like?", "12:32");
+        itemAdapter.add(model);
+        itemAdapter.add(model1);
+        fastAdapter.notifyAdapterDataSetChanged();
+    }
+}
