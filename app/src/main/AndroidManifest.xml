@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,10 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".UsersAndChatsActivity"
-            android:label="@string/title_activity_users_and_chats"></activity>
-        <activity android:name=".ContactModel" />
+        <activity android:name=".Invite"></activity>
         <activity android:name=".Contacts" />
         <activity android:name=".Chat" />
         <activity android:name=".OtpAuth" />

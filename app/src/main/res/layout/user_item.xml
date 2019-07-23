@@ -21,4 +21,15 @@
         android:text="username"
         android:textSize="18sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name"
+        android:id="@+id/UserName"
+        android:layout_toRightOf="@id/profile_image"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginLeft="12dp"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/small_medium_text"/>
+
 </RelativeLayout>
