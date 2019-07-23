@@ -119,7 +119,8 @@ public class OtpAuth extends AppCompatActivity {
                             //here you can open new activity
                             Toast.makeText(getApplicationContext(),
                                     "Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), ProfilePage.class));
+                            Log.d(TAG, "onComplete: " + mAuth.getUid());
+                            startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", mAuth.getUid()));
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(getApplicationContext(),
@@ -135,7 +136,8 @@ public class OtpAuth extends AppCompatActivity {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
             Log.d(TAG, "onVerificationCompleted: " + "OTP verification success");
-            startActivity(new Intent(getApplicationContext(), ProfilePage.class));
+            Log.d(TAG, "onVerificationCompleted: userid: " + mAuth.getUid());
+            startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", mAuth.getUid()));
         }
 
         @Override

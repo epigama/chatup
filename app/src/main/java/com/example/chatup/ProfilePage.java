@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,10 +43,14 @@ public class ProfilePage extends AppCompatActivity {
     Button save_details;
     ImageView user_image_view;
     Uri pickedImgUri ;
+    String uid;
 
 
     //FIREBASE AUTHENTICATION VARIABLES
     public FirebaseAuth mAuth;
+
+    //Firebase Realtime Db vars
+    DatabaseReference parentReference;
 
 
     @Override
@@ -52,6 +59,10 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         //Hidden status bar
         getSupportActionBar().hide();
+
+        uid = getIntent().getStringExtra("uid");
+
+        parentReference = FirebaseDatabase.getInstance().getReference("users");
 
         //INITIALISING THE VARIABLES TO THE XML IDs
         mAuth=FirebaseAuth.getInstance();
@@ -63,7 +74,7 @@ public class ProfilePage extends AppCompatActivity {
         save_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save_details.setVisibility(View.INVISIBLE);
+//                save_details.setVisibility(View.INVISIBLE);
             //    progressBar.setVisibility(View.INVISIBLE);
                 String enter_name=user_name.getText().toString();
                 String enter_bio=user_bio.getText().toString();
@@ -74,6 +85,7 @@ public class ProfilePage extends AppCompatActivity {
                 }
                 else{
                     CreateUserAccount(enter_name,enter_bio);
+                    //startActivity(new Intent(ProfilePage.this, UsersAndChatsActivity.class));
                 }
 
             }
@@ -147,28 +159,35 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public void CreateUserAccount(final String name, String bio){
-        mAuth.createUserWithEmailAndPassword(name,bio)//kuch mila?
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // user account created successfully
-                            ShowMessage("Account created");
-                            // after we created user account we need to update his profile picture and name
-                            updateUserInfo(name,pickedImgUri,mAuth.getCurrentUser());
-                        }
-                        else
-                        {
-//                            Log.d(TAG, "onComplete: " + task.getResult().getUser());
-                            //addUserNameToUser(task.getResult().getUser());
-                            //createNewUser(task.getResult().getUser());
+//        mAuth.createUserWithEmailAndPassword(name,bio)//kuch mila?
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // user account created successfully
+//                            ShowMessage("Account created");
+//                            // after we created user account we need to update his profile picture and name
+//                            updateUserInfo(name,pickedImgUri,mAuth.getCurrentUser());
+//                        }
+//                        else
+//                        {
+////                            Log.d(TAG, "onComplete: " + task.getResult().getUser());
+//                            //addUserNameToUser(task.getResult().getUser());
+//                            //createNewUser(task.getResult().getUser());
+//
+//                            // account creation failed
+//                            ShowMessage("account creation failed" + task.getException().getMessage());
+//                            save_details.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                });
 
-                            // account creation failed
-                            ShowMessage("account creation failed" + task.getException().getMessage());
-                            save_details.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+            BioModel model = new BioModel(name, bio);
+            parentReference.child(uid).setValue(model);
+
+
+
+
     }
     private void updateUserInfo(final String name, Uri pickedImgUri, final FirebaseUser currentUser) {
 
