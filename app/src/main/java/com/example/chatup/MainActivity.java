@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
         });
         mAuth = FirebaseAuth.getInstance();
 
-        //OTP VERIFICATION
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
-            Toast.makeText(this, "Already signed in", Toast.LENGTH_SHORT).show();
-          //  startActivity(new Intent(this,PhoneAuthentication.class));
-
-        }
         otpSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

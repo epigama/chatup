@@ -43,6 +43,14 @@ public class PhoneAuthentication extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        if(mAuth.getCurrentUser() != null){
+            //Already signed in
+            Toast.makeText(this, "Signed in already", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate: " + "Signed in already");
+            Intent intent = new Intent(this, UsersAndChatsActivity.class);
+            startActivity(intent);
+        }
+
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
