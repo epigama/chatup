@@ -30,11 +30,9 @@ public class PhoneAuthentication extends AppCompatActivity {
     String codeSent;
     private String phoneNum;
 
+
     //FRIEBASE AUTHENTICATION VARIABLE
     FirebaseAuth mAuth;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
