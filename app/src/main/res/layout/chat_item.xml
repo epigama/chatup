@@ -12,13 +12,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="3dp"
             android:layout_weight="1"
             android:src="@drawable/girl"
             app:civ_border_color="#FF000000"
@@ -27,8 +28,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="5"
             android:orientation="vertical">
 
@@ -36,19 +37,19 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="Christina"
-                android:textSize="22dp" />
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:text="You: Cool. There are..."
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="22dp" />
+                android:textSize="15dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
@@ -58,10 +59,10 @@
             android:layout_gravity="end|top"
             android:layout_marginTop="20dp"
             android:layout_weight="2"
-            android:textColor="@color/black"
             android:text="17:40"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="12dp"
+             />
 
     </LinearLayout>
 </FrameLayout>
