@@ -34,6 +34,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_users_and_chats" />
+
         <com.ismaeldivita.chipnavigation.ChipNavigationBar
             android:id="@+id/bottom_menu"
             android:layout_width="match_parent"
@@ -41,8 +42,8 @@
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:elevation="16dp"
-            app:cnb_addBottomInset="true"
             android:gravity="center"
+            app:cnb_addBottomInset="true"
             app:cnb_menuResource="@menu/bottom_nav_bar"
             app:cnb_orientationMode="horizontal" />
 
