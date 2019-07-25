@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -18,7 +17,7 @@ public class IntroPage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this, PhoneAuthentication.class);
+                Intent intent = new Intent(IntroPage.this,UsersAndChatsActivity.class);
                 startActivity(intent);
             }
         }, splash_screen_timer);
