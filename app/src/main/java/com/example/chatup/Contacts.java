@@ -62,10 +62,6 @@ public class Contacts extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(fastAdapter);
 
-        //itemAdapter.add(new ContactModel("hahaha", "8252385823"));
-        //fastAdapter.notifyDataSetChanged();
-
-        //Populate a list with ContactModel objects
         contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
 
         handleAddContacts();
