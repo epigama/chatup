@@ -9,13 +9,14 @@
     android:layout_marginRight="5dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
+    android:background="@drawable/blue_rectangle_border"
     >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_idea"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="@drawable/rounded_background_blue"
+        android:background="@drawable/blue_rectangle_border"
         cardview:cardCornerRadius="8dp"
         xmlns:tools="http://schemas.android.com/tools"
         tools:cardElevation="200dp"
@@ -24,29 +25,42 @@
 
         <LinearLayout
             android:id="@+id/image_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="375dp"
+            android:layout_height="51dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
                 android:padding="10dp"
                 android:paddingBottom="20dp">
 
                 <TextView
                     android:id="@+id/text_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_width="211dp"
+                    android:layout_height="47dp"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center_vertical"
                     android:paddingTop="3dp"
                     android:paddingBottom="20dp"
                     android:textColor="@color/blue"
-                    android:textSize="15dp" />
+                    android:textSize="20dp" />
+
+
+                <Button
+                    android:layout_width="78dp"
+                    android:layout_height="27dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/rounded_background_blue"
+                    android:text="@string/invite"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
 
             </LinearLayout>
+
 
         </LinearLayout>
 
