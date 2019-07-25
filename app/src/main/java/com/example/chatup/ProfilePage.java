@@ -59,10 +59,15 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         //Hidden status bar
         getSupportActionBar().hide();
+        try {
+            uid = getIntent().getStringExtra("uid");
+        }
+        catch(Exception e){
+            Log.d(TAG, " uid get intent" +e);
+        }
+      //  Log.d(TAG, "uid "  +uid) ;
 
-        uid = getIntent().getStringExtra("uid");
-
-        parentReference = FirebaseDatabase.getInstance().getReference("users");
+        parentReference = FirebaseDatabase.getInstance().getReference("users"); //i am googling onmy end
 
         //INITIALISING THE VARIABLES TO THE XML IDs
         mAuth=FirebaseAuth.getInstance();
@@ -90,6 +95,7 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
+
 
 
 
@@ -183,7 +189,12 @@ public class ProfilePage extends AppCompatActivity {
 //                });
 
             BioModel model = new BioModel(name, bio);
-            parentReference.child(uid).setValue(model);
+            try {
+                parentReference.child(uid).setValue(model);
+            }
+            catch (NullPointerException e){
+                Log.d(TAG, " null pointer"  +e);
+            }
 
 
 
