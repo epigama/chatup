@@ -5,10 +5,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -17,6 +21,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import java.util.List;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
+
 
     private String TAG = this.getClass().getSimpleName();
 
@@ -33,13 +38,15 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Chat");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
+        toolbar.setTitle("ChatUp");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
+
         toolbar.setBackgroundColor(getResources().getColor(R.color.white));
         toolbar.setElevation(0);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setTitle("ChatUp");
+
 
         recyclerView = findViewById(R.id.recycler);
         itemAdapter = new ItemAdapter<>();
@@ -52,5 +59,29 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         itemAdapter.add(model);
         itemAdapter.add(model1);
         fastAdapter.notifyAdapterDataSetChanged();
+
+        navigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                switch (i) {
+                    case R.id.home:
+                        Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.activity:
+                        Toast.makeText(UsersAndChatsActivity.this, "Activity selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.favorites:
+                        Toast.makeText(UsersAndChatsActivity.this, "Favorites selected", Toast.LENGTH_SHORT).show();
+                       startActivity(new Intent(UsersAndChatsActivity.this,Contacts.class));
+                        break;
+                    case R.id.profile:
+                        Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
+                        break;
+                }
+            }
+        });
+
+
     }
 }
