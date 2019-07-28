@@ -47,6 +47,10 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     testImplementation 'junit:junit:4.12'
+    implementation "com.github.stfalcon:chatkit:0.3.3"
+    implementation 'com.firebase:firebase-client-android:2.5.2'
+    implementation 'com.android.volley:volley:1.1.0'
+
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.jakewharton:butterknife:10.1.0'
