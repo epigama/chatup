@@ -3,6 +3,7 @@
     <dimen name="padding_text">5dp</dimen>
     <dimen name="very_small_text">5dp</dimen>
     <dimen name="small_text">10dp</dimen>
+    <dimen name="small_medium_text1">15dp</dimen>
     <dimen name="small_medium_text">20dp</dimen>
     <dimen name="medium_text">25dp</dimen>
     <dimen name="medium_large_text">35dp</dimen>
