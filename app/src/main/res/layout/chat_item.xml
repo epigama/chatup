@@ -4,9 +4,10 @@
     android:id="@+id/framelayoutparent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +21,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginTop="3dp"
-            android:layout_weight="1"
+            android:layout_gravity="start|top"
             android:src="@drawable/girl"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
@@ -28,9 +29,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="5"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -38,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Christina"
+                android:fontFamily="@font/raleway"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
@@ -48,7 +50,9 @@
                 android:layout_marginTop="8dp"
                 android:text="You: Cool. There are..."
                 android:textColor="@color/black"
+                android:fontFamily="@font/raleway"
                 android:textSize="15dp"
+                android:layout_weight="1"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -58,9 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|top"
             android:layout_marginTop="20dp"
-            android:layout_weight="2"
             android:text="17:40"
+            android:layout_marginRight="15dp"
             android:textColor="@color/black"
+            android:textStyle="italic"
             android:textSize="12dp"
              />
 

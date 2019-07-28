@@ -1,7 +1,5 @@
 package com.example.chatup;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -20,30 +22,60 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.stfalcon.smsverifycatcher.OnSmsCatchListener;
 import com.stfalcon.smsverifycatcher.SmsVerifyCatcher;
+
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import in.aabhasjindal.otptextview.OTPListener;
 import in.aabhasjindal.otptextview.OtpTextView;
 
 public class OtpAuth extends AppCompatActivity {
 
+    String phoneNum = "";
+    Button verifyBtn;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    //FIREBASE AUTH
+    FirebaseAuth mAuth;
+    SmsVerifyCatcher smsVerifyCatcher;
     //TAG
     private String TAG = this.getClass().getSimpleName();
-
     //DECLARING THE VARIABLES
     private OtpTextView otpTextView;
     private TextView otpSentToText;
     private String codeSent;
-    String phoneNum = "";
-    Button verifyBtn;
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-    //FIREBASE AUTH
-    FirebaseAuth mAuth;
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            Log.d(TAG, "onVerificationCompleted: " + "OTP verification success");
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                Log.d(TAG, "onVerificationCompleted: userid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", FirebaseAuth.getInstance().getCurrentUser().getUid()));
+            }
+        }
 
-    SmsVerifyCatcher smsVerifyCatcher;
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+            Toast.makeText(getApplicationContext(), "OTP verification failed", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "onVerificationFailed", e);
 
+            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                Log.d(TAG, "onVerificationFailed: " + "Invalid request");
+                // ...
+            } else if (e instanceof FirebaseTooManyRequestsException) {
+                // The SMS quota for the project has been exceeded
+                Log.d(TAG, "onVerificationFailed: " + "SMS Quota over");
+            }
+        }
 
+        @Override
+        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            Log.d(TAG, "onCodeSent: " + "OTP = " + s);
+            codeSent = s;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +84,43 @@ public class OtpAuth extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         verifyBtn = findViewById(R.id.verify_and_proceed);
 
+
+        //OTP VERIFICATION CODE
+        otpTextView = findViewById(R.id.otp_view);
+        otpSentToText = findViewById(R.id.otpSentToText);
+
+
+        try {
+            Intent intent = getIntent();
+            phoneNum = intent.getStringExtra("phone");
+            otpSentToText.append(" " + phoneNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNum,        // Phone number to verify
+                20,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks);
+
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
         getSupportActionBar().hide();
 
 
-        //OTP VERIFICATION CODE
-        otpTextView = findViewById(R.id.otp_view);
-        otpSentToText = findViewById(R.id.otpSentToText);
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    Log.d(TAG, "onAuthStateChanged: " + firebaseAuth.getCurrentUser().getUid());
+                }
+            }
+        };
 
-        try {
-            Intent intent = getIntent();
-            phoneNum = intent.getStringExtra("phone");
-            otpSentToText.append(" " + phoneNum);
-        }
-        catch (Exception e){ }
+
 
         smsVerifyCatcher = new SmsVerifyCatcher(this, new OnSmsCatchListener<String>() {
             @Override
@@ -79,21 +132,15 @@ public class OtpAuth extends AppCompatActivity {
         });
 
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNum,        // Phone number to verify
-                20,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
-                mCallbacks);
-
         otpTextView.requestFocusOTP();
         otpTextView.setOtpListener(new OTPListener() {
             @Override
-            public void onInteractionListener() { }
+            public void onInteractionListener() {
+            }
 
             @Override
             public void onOTPComplete(String otp) {
-             //   Toasty.success(OtpAuth.this, "The OTP is " + otp, Toast.LENGTH_SHORT).show();
+                //   Toasty.success(OtpAuth.this, "The OTP is " + otp, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -119,48 +166,30 @@ public class OtpAuth extends AppCompatActivity {
                             //here you can open new activity
                             Toast.makeText(getApplicationContext(),
                                     "Successfull", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onComplete: " + mAuth.getUid());
-                            startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", mAuth.getUid()));
+                            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                                Log.d(TAG, "onComplete: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", FirebaseAuth.getInstance().getCurrentUser().getUid()));
+                            }
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(getApplicationContext(),
                                         "Unsuccessful", Toast.LENGTH_SHORT).show();
+                            }
+                            if(task.getException() instanceof FirebaseTooManyRequestsException){
+                                Toast.makeText(getApplicationContext(),
+                                        "Too many requests", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                 });
     }
 
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
 
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-            Log.d(TAG, "onVerificationCompleted: " + "OTP verification success");
-            Log.d(TAG, "onVerificationCompleted: userid: " + mAuth.getUid());
-            startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", mAuth.getUid()));
-        }
-
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(getApplicationContext(), "OTP verification failed", Toast.LENGTH_SHORT).show();
-            Log.w(TAG, "onVerificationFailed", e);
-
-            if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                Log.d(TAG, "onVerificationFailed: " + "Invalid request");
-                // ...
-            } else if (e instanceof FirebaseTooManyRequestsException) {
-                // The SMS quota for the project has been exceeded
-                Log.d(TAG, "onVerificationFailed: " + "SMS Quota over");
-            }
-        }
-
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            Log.d(TAG, "onCodeSent: " + "OTP = " + s);
-            codeSent = s;
-        }
-    };
+    }
 
     private String parseCode(String message) {
         Pattern p = Pattern.compile("(|^)\\d{6}");
@@ -171,4 +200,6 @@ public class OtpAuth extends AppCompatActivity {
         }
         return code;
     }
+
+
 }
