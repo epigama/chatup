@@ -147,7 +147,7 @@ public class OtpAuth extends AppCompatActivity {
         verifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verifySignInCode(otpTextView.getOTP());
+                verifySignInCode(otpTextView.getOTP()); //yehi na haan
             }
         });
     }

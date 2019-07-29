@@ -30,6 +30,8 @@
     <string name="settings">Settings</string>
     <string name="user_name">Username</string>
     <string name="request_phone_number">Phone number please!!</string>
+    <string name="invite">Invite</string>
+    <string name="no_users_found">No users found!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
