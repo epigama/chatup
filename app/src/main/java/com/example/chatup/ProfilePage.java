@@ -90,7 +90,7 @@ public class ProfilePage extends AppCompatActivity {
                 }
                 else{
                     CreateUserAccount(enter_name,enter_bio);
-                    startActivity(new Intent(ProfilePage.this, UsersAndChatsActivity.class));
+                    startActivity(new Intent(ProfilePage.this, Chats.class));
                 }
 
             }

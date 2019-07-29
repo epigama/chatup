@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
-        android:textColor="#CFD8DC"
+        android:textColor="#3d3d3d"
         android:hint="Write here"
         android:id="@+id/messageArea"
         android:maxHeight="80dp"
