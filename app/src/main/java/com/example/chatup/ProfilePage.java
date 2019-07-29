@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.chatup.Adapters.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -83,6 +85,9 @@ public class ProfilePage extends AppCompatActivity {
             //    progressBar.setVisibility(View.INVISIBLE);
                 String enter_name=user_name.getText().toString();
                 String enter_bio=user_bio.getText().toString();
+                UserDetails.setUsername(enter_name);
+
+
                 if(enter_name.isEmpty() || enter_bio.isEmpty()){
                     ShowMessage("Please check your details");
                     save_details.setVisibility(View.VISIBLE);
@@ -165,7 +170,7 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public void CreateUserAccount(final String name, String bio){
-//        mAuth.createUserWithEmailAndPassword(name,bio)//kuch mila?
+//        mDatabase.createUserWithEmailAndPassword(name,bio)//kuch mila?
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 //                    @Override
 //                    public void onComplete(@NonNull Task<AuthResult> task) {
@@ -173,7 +178,7 @@ public class ProfilePage extends AppCompatActivity {
 //                            // user account created successfully
 //                            ShowMessage("Account created");
 //                            // after we created user account we need to update his profile picture and name
-//                            updateUserInfo(name,pickedImgUri,mAuth.getCurrentUser());
+//                            updateUserInfo(name,pickedImgUri,mDatabase.getCurrentUser());
 //                        }
 //                        else
 //                        {
@@ -253,7 +258,7 @@ public class ProfilePage extends AppCompatActivity {
 
     private void updateUI() {
 
-        Intent homeActivity = new Intent(getApplicationContext(),Chat.class);
+        Intent homeActivity = new Intent(getApplicationContext(),Chats.class);
         startActivity(homeActivity);
         finish();
     }

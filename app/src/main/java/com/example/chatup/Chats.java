@@ -10,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,12 +30,15 @@ public class Chats extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-    Firebase reference1, reference2;
+    DatabaseReference reference1, reference2;
+    FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
+
+        mDatabase = FirebaseDatabase.getInstance();
 
         layout = findViewById(R.id.layout1);
         layout_2 = findViewById(R.id.layout2);
@@ -40,9 +46,8 @@ public class Chats extends AppCompatActivity {
         messageArea = findViewById(R.id.messageArea);
         scrollView = findViewById(R.id.scrollView);
 
-        Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://chatup-89e49.firebaseio.com/messages/" + com.example.chatup.UserDetails.username + "_" + com.example.chatup.UserDetails.chatWith);
-        reference2 = new Firebase("https://chatup-89e49.firebaseio.com/messages/" + com.example.chatup.UserDetails.chatWith + "_" + com.example.chatup.UserDetails.username);
+        reference1 = mDatabase.getReference(String.format("messages/%s_%s", "Jashaswee", "user2")); //so I replaced this thing
+        reference2 = mDatabase.getReference(String.format("messages/%s_%s", "user2", "Jashaswee"));//and this
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +66,10 @@ public class Chats extends AppCompatActivity {
         });
 
         reference1.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Map map = dataSnapshot.getValue(Map.class);
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
@@ -91,7 +97,7 @@ public class Chats extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

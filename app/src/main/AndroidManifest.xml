@@ -20,7 +20,6 @@
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
         <activity android:name=".Contacts" />
-        <activity android:name=".Chat" />
         <activity android:name=".OtpAuth" />
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".ProfilePage" />

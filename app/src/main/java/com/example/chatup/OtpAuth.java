@@ -168,6 +168,7 @@ public class OtpAuth extends AppCompatActivity {
                                     "Successfull", Toast.LENGTH_SHORT).show();
                             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                                 Log.d(TAG, "onComplete: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                UserDetails.setUID(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 startActivity(new Intent(getApplicationContext(), ProfilePage.class).putExtra("uid", FirebaseAuth.getInstance().getCurrentUser().getUid()));
                             }
                         } else {
