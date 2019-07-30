@@ -45,7 +45,7 @@ public class PhoneAuthentication extends AppCompatActivity {
             //Already signed in
             Toast.makeText(this, "Signed in already", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onCreate: " + "Signed in already");
-            Intent intent = new Intent(this, Chats.class);
+            Intent intent = new Intent(this, Users.class);
             startActivity(intent);
         }
 

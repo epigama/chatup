@@ -39,7 +39,7 @@ public class Users extends AppCompatActivity {
         pd.setMessage("Loading...");
         pd.show();
 
-        String url = "https://chatapp-60323.firebaseio.com/users.json";
+        String url = "https://chatapp-8c9fb.firebaseio.com/users.json";
 
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
@@ -59,7 +59,7 @@ public class Users extends AppCompatActivity {
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                com.example.chatup.UserDetails.chatWith = al.get(position);
+                UserDetails.chatWith = al.get(position);
                 startActivity(new Intent(Users.this,Chats.class));
             }
         });

@@ -46,8 +46,8 @@ public class Chats extends AppCompatActivity {
         messageArea = findViewById(R.id.messageArea);
         scrollView = findViewById(R.id.scrollView);
 
-        reference1 = mDatabase.getReference(String.format("messages/%s_%s", "Jashaswee", "user2")); //so I replaced this thing
-        reference2 = mDatabase.getReference(String.format("messages/%s_%s", "user2", "Jashaswee"));//and this
+        reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getUsername(), UserDetails.getChatWith()));
+        reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getUsername()));
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -77,6 +77,8 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                     case R.id.profile:
                         Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
                         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
+                        Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);
+                        startActivity(intent);
                         break;
                 }
             }

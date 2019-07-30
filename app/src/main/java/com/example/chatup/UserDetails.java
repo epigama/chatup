@@ -1,9 +1,18 @@
-
-
 package com.example.chatup;
 
 public class UserDetails {
     public static String username = "";
+    public static String bio = "";
+    public static String chatWith = "";
+    public static String UID = "";
+
+    public static String getBio() {
+        return bio;
+    }
+
+    public static void setBio(String bio) {
+        UserDetails.bio = bio;
+    }
 
     public static String getUsername() {
         return username;
@@ -29,7 +38,5 @@ public class UserDetails {
         UserDetails.UID = UID;
     }
 
-    public static String chatWith = "";
-    public static String UID = "";
 
 }
