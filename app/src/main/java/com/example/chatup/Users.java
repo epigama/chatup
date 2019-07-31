@@ -39,7 +39,7 @@ public class Users extends AppCompatActivity {
         pd.setMessage("Loading...");
         pd.show();
 
-        String url = "https://chatapp-8c9fb.firebaseio.com/users.json";
+        String url = "https://chaton-343f1.firebaseio.com/users.json"; //shit i didnt change ...kill me :(
 
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
