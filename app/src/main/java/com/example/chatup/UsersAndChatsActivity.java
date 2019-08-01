@@ -67,11 +67,12 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.activity:
+                        startActivity(new Intent(UsersAndChatsActivity.this,Users.class));
                         Toast.makeText(UsersAndChatsActivity.this, "Activity selected", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.favorites:
-                        Toast.makeText(UsersAndChatsActivity.this, "Favorites selected", Toast.LENGTH_SHORT).show();
-                       startActivity(new Intent(UsersAndChatsActivity.this,Contacts.class));
+                        Toast.makeText(UsersAndChatsActivity.this, "Contacts selected", Toast.LENGTH_SHORT).show();
+                       startActivity(new Intent(UsersAndChatsActivity.this,ContactList.class));
                         break;
                     case R.id.profile:
                         Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
