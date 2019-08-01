@@ -40,4 +40,16 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="action_refresh">refresh</string>
+    <string name="none_paired">None Paired</string>
+    <string name="scanning">Scanning</string>
+    <string name="select_device">Select Device</string>
+    <string name="none_found">None Found</string>
+    <string name="not_connected">Not Connected</string>
+    <string name="title_connected_to">Connected to</string>
+    <string name="title_connecting">Connecting</string>
+    <string name="title_not_connected">Connected</string>
+    <string name="bt_not_enabled_leaving">BT not enabled</string>
+    <string name="secure_connect">Secure Connect</string>
+    <string name="insecure_connect">Insert Connect</string>
+    <string name="discoverable">Discoverable</string>
 </resources>

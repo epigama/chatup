@@ -34,6 +34,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_and_chats);
+        getSupportActionBar().hide();
 
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
 
@@ -55,9 +56,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         recyclerView.setAdapter(fastAdapter);
 
         ChatModel model = new ChatModel("Regina", "How do you do?", "12:30");
-        ChatModel model1 = new ChatModel("Senorita", "How's the weather like?", "12:32");
-        itemAdapter.add(model);
-        itemAdapter.add(model1);
+            itemAdapter.add(model);
         fastAdapter.notifyAdapterDataSetChanged();
 
         navigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
