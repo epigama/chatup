@@ -79,6 +79,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                       //  startActivity(new Intent(UsersAndChatsActivity.this, ContactList.class));
                         break;
                     case R.id.profile:
+                        startActivity(new Intent(UsersAndChatsActivity.this,Chats.class));
                         Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
                         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
                     //    Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);

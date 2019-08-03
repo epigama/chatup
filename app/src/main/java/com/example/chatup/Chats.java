@@ -106,17 +106,17 @@ public class Chats extends AppCompatActivity {
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(Chats.this);
         textView.setText(message);
-        textView.setTextColor(getColor(R.color.colorPrimary));
+        textView.setTextColor(getColor(R.color.white));
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp2.weight = 7.0f;
 
         if(type == 1) {
-            lp2.gravity = Gravity.LEFT;
-            textView.setBackgroundResource(R.drawable.bubble_in);
+            lp2.gravity = Gravity.RIGHT;
+            textView.setBackgroundResource(R.drawable.rounded_background_blue);
         }
         else{
-            lp2.gravity = Gravity.RIGHT;
-            textView.setBackgroundResource(R.drawable.bubble_in);
+            lp2.gravity = Gravity.LEFT;
+            textView.setBackgroundResource(R.drawable.rounded_background_blue);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
