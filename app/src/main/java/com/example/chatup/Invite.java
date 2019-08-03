@@ -39,6 +39,8 @@ public class Invite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
+        getSupportActionBar().hide();
+
         invite_folks = findViewById(R.id.invite_folks);
         invite_folks.setOnClickListener(new View.OnClickListener() {
             @Override

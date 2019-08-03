@@ -16,16 +16,18 @@
         android:text="@string/invitation"
         android:textSize="@dimen/medium_text"
         android:fontFamily="@font/font_family"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
         android:layout_marginBottom="@dimen/small_medium_text"/>
 
     <Button
         android:id="@+id/invite_folks"
-        android:layout_width="162dp"
-        android:layout_height="53dp"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_rectangle_border"
         android:gravity="center"
         android:text="Invite your folks"
-        android:background="@drawable/rounded_background_blue"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         tools:layout_editor_absoluteX="134dp"
         tools:layout_editor_absoluteY="341dp" />
 </LinearLayout>
