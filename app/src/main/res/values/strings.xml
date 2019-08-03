@@ -52,4 +52,8 @@
     <string name="secure_connect">Secure Connect</string>
     <string name="insecure_connect">Insert Connect</string>
     <string name="discoverable">Discoverable</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other devices</string>
+    <string name="sample_show_log">Show Log</string>
+    <string name="send">Send</string>
 </resources>

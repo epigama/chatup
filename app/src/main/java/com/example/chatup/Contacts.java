@@ -2,12 +2,15 @@ package com.example.chatup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +28,15 @@ import com.mikepenz.fastadapter.listeners.OnClickListener;
 
 import java.util.List;
 
+import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_CONTACTS;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.github.tamir7.contacts.Contact.*;
 import static com.github.tamir7.contacts.Contacts.getQuery;
 
 public class Contacts extends AppCompatActivity {
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     private static String TAG = MainActivity.class.getSimpleName();
     private Context context = Contacts.this;
@@ -53,6 +61,10 @@ public class Contacts extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+        if (!checkPermission())
+            requestPermission();
+        getSupportActionBar().hide();
+
 
         com.github.tamir7.contacts.Contacts.initialize(this);
         recyclerView = findViewById(R.id.recycler);
@@ -74,6 +86,19 @@ public class Contacts extends AppCompatActivity {
            }
        });
 
+
+    }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_CONTACTS);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_CONTACTS);
+
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    //request for permission
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS, WRITE_CONTACTS}, PERMISSION_REQUEST_CODE);
 
     }
 
@@ -170,6 +195,20 @@ public class Contacts extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //check for storage permission
+        if (!checkPermission()) {
+            Log.i(TAG, "Permission not granted ");
+            requestPermission();
+        }
+        else
+            Log.i(TAG, "permission granted ");
+
+
     }
 
 }

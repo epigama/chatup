@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContactList"></activity>
+        <activity android:name=".Contact"></activity>
         <activity android:name=".Users" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
@@ -28,6 +28,7 @@
         <activity android:name=".ProfilePage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginPage" />
+        <activity android:name=".DeviceListActivity" />
         <activity android:name=".IntroPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
