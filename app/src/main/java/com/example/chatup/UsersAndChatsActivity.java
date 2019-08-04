@@ -61,7 +61,8 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int i) {
                 switch (i) {
-                    case R.id.hom
+                    case R.id.home
+                    //did the pushing for you
 
                         Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         //Bluetooth
