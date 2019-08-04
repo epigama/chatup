@@ -54,6 +54,7 @@
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/blue_rectangle_border"
                     android:text="@string/invite"
+                    android:id="@+id/button_invite"
                     android:textColor="@color/blue"
                     android:textSize="12dp" />
             </LinearLayout>

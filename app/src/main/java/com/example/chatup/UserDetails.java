@@ -5,6 +5,15 @@ public class UserDetails {
     public static String bio = "";
     public static String chatWith = "";
     public static String UID = "";
+    public static String phoneNum = "";
+
+    public static String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public static void setPhoneNum(String phoneNum) {
+        UserDetails.phoneNum = phoneNum;
+    }
 
     public static String getBio() {
         return bio;

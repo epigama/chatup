@@ -182,6 +182,7 @@ public class ProfilePage extends AppCompatActivity {
         try {
             parentReference.child(userName).child("name").setValue(userName);
             parentReference.child(userName).child("bio").setValue(userBio);
+            parentReference.child(userName).child("phone").setValue(UserDetails.getPhoneNum());
         } catch (NullPointerException e) {
             Log.d(TAG, " null pointer" + e);
         }
