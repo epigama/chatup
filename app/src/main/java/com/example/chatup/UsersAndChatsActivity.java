@@ -61,10 +61,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int i) {
                 switch (i) {
-                    case R.id.home:
-                        Fragment selectedFragment = new BluetoothChatFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
-                                selectedFragment).commit();
+                    case R.id.hom
 
                         Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         //Bluetooth
