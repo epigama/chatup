@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class Contacts extends AppCompatActivity {
     List<ContactModel> cardList;
     FastAdapter<ContactModel> fastAdapter;
     ItemAdapter<ContactModel> itemAdapter;
+    Map<String, String> userAndPhoneMap;
 
     List<Contact> contacts;
 
@@ -71,7 +73,8 @@ public class Contacts extends AppCompatActivity {
 
     ProgressDialog pd;
 
-    ArrayList<String> al;
+    ArrayList<String> phoneList;
+    ArrayList<String> userList;
     FirebaseDatabase mDatabase;
 
     String url = "https://chaton-343f1.firebaseio.com/users.json";
@@ -86,7 +89,8 @@ public class Contacts extends AppCompatActivity {
             requestPermission();
         getSupportActionBar().hide();
 
-        al = new ArrayList<>();
+        phoneList = new ArrayList<>();
+        userList = new ArrayList<>();
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -112,11 +116,27 @@ public class Contacts extends AppCompatActivity {
                 View view = getLayoutInflater().inflate(R.layout.activity_contact_model, null);
                 Button invite = view.findViewById(R.id.button_invite);
 
-                for(String phone : al){
-                    if(phone.equals(phoneNum)){
-                        invite.setVisibility(View.INVISIBLE);
-                    }
+                int index = -1;
+                String username = "";
+                if(phoneList.contains(phoneNum)){
+                    index = phoneList.lastIndexOf(phoneNum);
                 }
+                if(index != -1){
+                    username = userList.get(index);
+                    Log.d(TAG, "onClick: " + "Username = " + username);
+                }
+                else{
+                    Log.d(TAG, "onClick: " + "Negative index");
+                }
+
+                if (username != "") {
+                    //open up chat window
+                    Toast.makeText(Contacts.this, username, Toast.LENGTH_SHORT).show();
+                    UserDetails.setChatWith(username);
+                    Intent intent = new Intent(Contacts.this, UsersAndChatsActivity.class);
+                    startActivity(intent);
+                }
+
                 return false;
             }
         });
@@ -276,10 +296,11 @@ public class Contacts extends AppCompatActivity {
             JSONObject obj = new JSONObject(s);
             Iterator i = obj.keys();
             String key = "";
+             String phone = "";
             while(i.hasNext()){
                 key = i.next().toString();
-
                 if(!key.equals(com.example.chatup.UserDetails.username)) {
+                    String tempKey = key;
                     //key is our username node
                     //so now we use mDatabase to access our node
                     DatabaseReference userReference;
@@ -289,7 +310,13 @@ public class Contacts extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                            String phoneNumDb = map.get("phone").toString();
-                           al.add(phoneNumDb);
+
+                           // this will add things to userlist and phonelist
+                           phoneList.add(phoneNumDb);
+                           userList.add(tempKey);
+
+                       //    userAndPhoneMap.put("user", tempKey);
+                         //  userAndPhoneMap.put("phone", phoneNumDb);
 
                            try{
                                if(phoneNum.equals(phoneNumDb)){
