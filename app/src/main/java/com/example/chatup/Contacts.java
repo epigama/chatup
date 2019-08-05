@@ -67,8 +67,6 @@ public class Contacts extends AppCompatActivity {
 
     public static boolean isWindowFocused = false;
 
-    public static boolean isMenuOpened = false;
-
     public static boolean isBackPressed = false;
 
     ProgressDialog pd;
@@ -98,6 +96,10 @@ public class Contacts extends AppCompatActivity {
         pd.setMessage("Loading...");
         pd.show();
 
+        View view = getLayoutInflater().inflate(R.layout.activity_contact_model, null);
+        Button invite = view.findViewById(R.id.button_invite);
+        invite.setVisibility(View.GONE);
+
 
         com.github.tamir7.contacts.Contacts.initialize(this);
         recyclerView = findViewById(R.id.recycler);
@@ -111,30 +113,31 @@ public class Contacts extends AppCompatActivity {
             @Override
             public boolean onClick(@Nullable View v, IAdapter<ContactModel> adapter, ContactModel item, int position) {
                 String phoneNum = item.getNumber();
-                //we need to check if phonenum is in db
+                Log.d(TAG, "onClick: " + " clicked");
 
-                View view = getLayoutInflater().inflate(R.layout.activity_contact_model, null);
-                Button invite = view.findViewById(R.id.button_invite);
+                Toast.makeText(Contacts.this, "Clicked position " + position, Toast.LENGTH_SHORT).show();
 
                 int index = -1;
                 String username = "";
-                if(phoneList.contains(phoneNum)){
-                    index = phoneList.lastIndexOf(phoneNum);
+                String phone = "";
+                for(int i = 0; i < phoneList.size(); i ++){
+                    phone = phoneList.get(i);
+                    if(phone.equals(phoneNum))
+                        index = i;
+                    username = phoneList.get(i);
+                    Log.d(TAG, "onClick: " + "username = " + username);
+                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
                 }
-                if(index != -1){
-                    username = userList.get(index);
-                    Log.d(TAG, "onClick: " + "Username = " + username);
-                }
-                else{
-                    Log.d(TAG, "onClick: " + "Negative index");
-                }
-
                 if (username != "") {
                     //open up chat window
                     Toast.makeText(Contacts.this, username, Toast.LENGTH_SHORT).show();
                     UserDetails.setChatWith(username);
-                    Intent intent = new Intent(Contacts.this, UsersAndChatsActivity.class);
+                    Intent intent = new Intent(Contacts.this,Chats.class);
                     startActivity(intent);
+                }
+                else{
+                    UserDetails.setChatWith("");
+                    Toast.makeText(Contacts.this, "Blank username", Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -158,14 +161,6 @@ public class Contacts extends AppCompatActivity {
 
         RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
         rQueue.add(request);
-       fastAdapter.withOnClickListener(new OnClickListener<ContactModel>() {
-           @Override
-           public boolean onClick( View v, IAdapter<ContactModel> adapter, ContactModel item, int position) {
-
-               startActivity(new Intent(getApplicationContext(),Invite.class));
-               return false;
-           }
-       });
 
 
     }
@@ -218,7 +213,7 @@ public class Contacts extends AppCompatActivity {
 
         }
 
-    } //maiin dekhlu thoda?haan
+    }
 
     @Override
     public void onBackPressed() {
@@ -279,8 +274,6 @@ public class Contacts extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        //check for storage permission
         if (!checkPermission()) {
             Log.i(TAG, "Permission not granted ");
             requestPermission();
@@ -311,16 +304,13 @@ public class Contacts extends AppCompatActivity {
                             Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                            String phoneNumDb = map.get("phone").toString();
 
-                           // this will add things to userlist and phonelist
+
                            phoneList.add(phoneNumDb);
                            userList.add(tempKey);
 
-                       //    userAndPhoneMap.put("user", tempKey);
-                         //  userAndPhoneMap.put("phone", phoneNumDb);
-
                            try{
                                if(phoneNum.equals(phoneNumDb)){
-                                   //to phir eurekaaa
+
                                    Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
                                }
                            }
@@ -331,20 +321,13 @@ public class Contacts extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
                         }
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-
-
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
                     });
                 }
-
-                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         pd.dismiss();
     }
 
