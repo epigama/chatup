@@ -72,4 +72,20 @@
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/font_family"
+            android:gravity="center"
+            android:text="@string/invite"
+            android:textSize="15dp"
+            android:drawableLeft="@drawable/ic_person_black"/>
+    </FrameLayout>
 </LinearLayout>
