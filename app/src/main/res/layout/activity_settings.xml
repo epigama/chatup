@@ -101,4 +101,25 @@
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/ic_help_outline"
         android:drawablePadding="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_notifications"
+        android:drawablePadding="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textSize="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_feedback"
+        android:drawablePadding="10dp"/>
 </LinearLayout>
