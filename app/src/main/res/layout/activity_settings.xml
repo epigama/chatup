@@ -81,11 +81,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:fontFamily="@font/font_family"
             android:gravity="center"
+            android:id="@+id/Settings_Invite"
             android:text="@string/invite"
             android:textSize="18dp"
+            android:clickable="true"
             android:drawableLeft="@drawable/ic_people_black_24dp"
             android:drawablePadding="10dp"/>
 
@@ -97,8 +99,10 @@
         android:layout_height="wrap_content"
         android:text="FAQ"
         android:textSize="18dp"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/Settings_Faq"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:drawableLeft="@drawable/ic_help_outline"
         android:drawablePadding="10dp"/>
 
@@ -108,17 +112,21 @@
         android:layout_height="wrap_content"
         android:text="Notifications"
         android:textSize="18dp"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/Settings_Notifications"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/ic_notifications"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:clickable="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
         android:textSize="18dp"
-        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:id="@+id/Settings_Feedback"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/ic_feedback"
         android:drawablePadding="10dp"/>

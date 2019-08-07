@@ -12,12 +12,21 @@ public class Settings extends AppCompatActivity {
     TextView edit_profile;
     TextView userName;
     TextView bio;
+    TextView invite;
+    TextView notifications;
+    TextView faq;
+    TextView feedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setTitle("Settings");
+        invite=findViewById(R.id.Settings_Invite);
+        notifications=findViewById(R.id.Settings_Notifications);
+        faq=findViewById(R.id.Settings_Faq);
+        feedback=findViewById(R.id.Settings_Feedback);
+
 
         userName = findViewById(R.id.Settings_Name);
         bio = findViewById(R.id.Settings_Bio);
