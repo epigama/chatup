@@ -10,5 +10,6 @@ public class FAQ extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
+        getSupportActionBar().setTitle("FAQ");
     }
 }

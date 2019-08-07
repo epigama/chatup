@@ -59,4 +59,9 @@
     <string name="send">Send</string>
     <string name="faq_open_settings">How to open Settings?</string>
     <string name="faq_open_settings_desc">Click on the menu bar in Chats or Users page and in the option click Settings.</string>
+    <string name="faq_change_profile">How to change profie?</string>
+    <string name="faq_change_profile_desc">Go to \"Edit Profile\" options in Settings and edit your profile </string>
+    <string name="faq_contact">How to report or send feedback?</string>
+    <string name="faq_contact_desc">Open settings. In the feedback option pose your views</string>
+
 </resources>
