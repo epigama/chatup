@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;//it's on x should have worked na yes wait
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -62,8 +62,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-
-
+                        startActivity(new Intent(UsersAndChatsActivity.this, Users.class));
                         Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         //Bluetooth
                         break;

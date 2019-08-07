@@ -41,7 +41,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,33 +50,22 @@ import static android.Manifest.permission.WRITE_CONTACTS;
 
 public class Contacts extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
-
+    public static boolean isAppWentToBg = false;
+    public static boolean isWindowFocused = false;
+    public static boolean isBackPressed = false;
     private static String TAG = MainActivity.class.getSimpleName();
-    private Context context = Contacts.this;
-
     RecyclerView recyclerView;
     List<ContactModel> cardList;
     FastAdapter<ContactModel> fastAdapter;
     ItemAdapter<ContactModel> itemAdapter;
     Map<String, String> userAndPhoneMap;
-
     List<Contact> contacts;
-
-    public static boolean isAppWentToBg = false;
-
-    public static boolean isWindowFocused = false;
-
-    public static boolean isBackPressed = false;
-
     ProgressDialog pd;
-
     ArrayList<String> phoneList;
     ArrayList<String> userList;
     FirebaseDatabase mDatabase;
-
     String url = "https://chaton-343f1.firebaseio.com/users.json";
-
-
+    private Context context = Contacts.this;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,28 +102,32 @@ public class Contacts extends AppCompatActivity {
             public boolean onClick(@Nullable View v, IAdapter<ContactModel> adapter, ContactModel item, int position) {
                 String phoneNum = item.getNumber();
                 Log.d(TAG, "onClick: " + " clicked");
+                Log.d(TAG, "onClick: " + phoneNum);
 
                 Toast.makeText(Contacts.this, "Clicked position " + position, Toast.LENGTH_SHORT).show();
 
                 int index = -1;
                 String username = "";
                 String phone = "";
-                for(int i = 0; i < phoneList.size(); i ++){
-                    phone = phoneList.get(i);
-                    if(phone.equals(phoneNum))
-                        index = i;
-                    username = phoneList.get(i);
-                    Log.d(TAG, "onClick: " + "username = " + username);
-                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
+//                for(int i = 0; i < phoneList.size(); i ++){
+//                    phone = phoneList.get(i);
+//                    if(phone.equals(item.getNumber()))
+//                        index = i;
+//                    username = userList.get(i);
+//                    Log.d(TAG, "onClick: " + "username = " + username);
+//                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
+//                }
+                if (phoneList.contains(item.getNumber())) {
+                    int i = phoneList.indexOf(item.getNumber());
+                    Log.d(TAG, "onClick: " + "chatwith = " + userList.get(i));
                 }
                 if (username != "") {
                     //open up chat window
                     Toast.makeText(Contacts.this, username, Toast.LENGTH_SHORT).show();
                     UserDetails.setChatWith(username);
-                    Intent intent = new Intent(Contacts.this,Chats.class);
+                    Intent intent = new Intent(Contacts.this, Chats.class);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     UserDetails.setChatWith("");
                     Toast.makeText(Contacts.this, "Blank username", Toast.LENGTH_SHORT).show();
                 }
@@ -147,23 +139,9 @@ public class Contacts extends AppCompatActivity {
 
         handleAddContacts();
 
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-                doOnSuccess(s, null);
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                System.out.println("" + volleyError);
-            }
-        });
-
-        RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
-        rQueue.add(request);
-
 
     }
+
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_CONTACTS);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_CONTACTS);
@@ -244,6 +222,20 @@ public class Contacts extends AppCompatActivity {
     }
 
     public void handleAddContacts() {
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                doOnSuccess(s);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                System.out.println("" + volleyError);
+            }
+        });
+
+        RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
+        rQueue.add(request);
         for (Contact contact : contacts) {
             try {
                 String name = contact.getDisplayName();
@@ -254,74 +246,86 @@ public class Contacts extends AppCompatActivity {
                     for (PhoneNumber phoneNumber : contact.getPhoneNumbers()) {
                         number += phoneNumber.getNumber() + "\n";
                     }
-                    Log.d(TAG, "handleAddContacts: " + number);
                 }
                 if (contact.getEmails().size() != 0 || contact.getEmails() != null) {
                     for (Email e : contact.getEmails()) {
                         email += e.getAddress() + "\n";
                     }
-                    Log.d(TAG, "handleAddContacts: " + email);
-
                 }
-                ContactModel x = new ContactModel(name, number, email, photoUri);
-                itemAdapter.add(x);
-                fastAdapter.notifyDataSetChanged();
+                if(phoneList.contains(number)){
+                    Log.d(TAG, "handleAddContacts: " + number);
+                }
+                ContactModel x = null;
+                Log.d(TAG, "handleAddContacts: " + phoneList.toString());
+                for (String phone : phoneList) {
+                    Log.d(TAG, "phoneNum: " + phone);
+                    if (phone.equals(number)) {
+                        x = new ContactModel(name, number, email, photoUri);
+                        itemAdapter.add(x);
+                        fastAdapter.notifyDataSetChanged();
+                    }
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         if (!checkPermission()) {
             Log.i(TAG, "Permission not granted ");
             requestPermission();
-        }
-        else
+        } else
             Log.i(TAG, "permission granted ");
 
 
     }
 
-    public void doOnSuccess(String s, @Nullable String phoneNum){
+    public void doOnSuccess(String s) {
         try {
             JSONObject obj = new JSONObject(s);
             Iterator i = obj.keys();
             String key = "";
-             String phone = "";
-            while(i.hasNext()){
+            String phone = "";
+            while (i.hasNext()) {
                 key = i.next().toString();
-                if(!key.equals(com.example.chatup.UserDetails.username)) {
+                Log.d(TAG, "doOnSuccess: " + key);
+                if (!key.equals(com.example.chatup.UserDetails.username)) {
                     String tempKey = key;
                     //key is our username node
                     //so now we use mDatabase to access our node
                     DatabaseReference userReference;
-                    userReference = mDatabase.getReference(String.format("users/%s",key));
+                    userReference = mDatabase.getReference(String.format("users/%s", key));
                     userReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                           String phoneNumDb = map.get("phone").toString();
+                            DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
+
+                            String phoneNum = newPost.getPhone();
+                            Log.d(TAG, "onDataChange: " + phoneNum);
+
+                            phoneList.add(phoneNum);
+                            userList.add(tempKey);
 
 
-                           phoneList.add(phoneNumDb);
-                           userList.add(tempKey);
-
-                           try{
-                               if(phoneNum.equals(phoneNumDb)){
-
-                                   Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
-                               }
-                           }
-                           catch (NullPointerException e){
-                               e.printStackTrace();
-                           }
+//                            try {
+//                                if (phoneNum.equals(phoneNumDb)) {
+//
+//                                    Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
+//                                }
+//                            } catch (NullPointerException e) {
+//                                e.printStackTrace();
+//                            }
                             Log.d(TAG, "onDataChange: " + phoneNum);
                             Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
                         }
+
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
                     });
                 }
             }
