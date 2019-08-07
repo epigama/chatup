@@ -41,7 +41,19 @@ public class Settings extends AppCompatActivity {
 
         userName.setText(UserDetails.getUsername());
         bio.setText(UserDetails.getBio());
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this,FAQ.class));
+            }
+        });
 
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new );
+            }
+        });
 
 
 
