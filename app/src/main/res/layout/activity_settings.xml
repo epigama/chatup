@@ -80,12 +80,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
             android:fontFamily="@font/font_family"
             android:gravity="center"
             android:text="@string/invite"
-            android:textSize="15dp"
-            android:drawableLeft="@drawable/ic_person_black"/>
+            android:textSize="18dp"
+            android:drawableLeft="@drawable/ic_people_black_24dp"
+            android:drawablePadding="10dp"/>
+
+
+
     </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FAQ"
+        android:textSize="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_help_outline"
+        android:drawablePadding="10dp"/>
 </LinearLayout>
