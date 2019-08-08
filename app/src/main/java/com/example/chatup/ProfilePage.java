@@ -3,6 +3,8 @@ package com.example.chatup;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +33,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class ProfilePage extends AppCompatActivity {
     //DECLARING THE VARIABLES
     static int PReqCode = 1;
@@ -39,6 +45,7 @@ public class ProfilePage extends AppCompatActivity {
     public FirebaseAuth mAuth;
     //TAG
     String TAG = "";
+    ImageView imageView;
     EditText user_name, user_bio;
     String userName, userBio;
     Button save_details;
@@ -55,6 +62,21 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         //Hidden status bar
         getSupportActionBar().hide();
+
+        URL url = null;
+        try {
+            url = new URL("https://avatars2.githubusercontent.com/u/37215508?v=4");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bmp = null;
+        try {
+            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageView.setImageBitmap(bmp);
+
         try {
             uid = getIntent().getStringExtra("uid");
         } catch (Exception e) {

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<FrameLayout
+    android:id="@+id/framelayoutparent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Settings_Profile_Picture"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="3dp"
+            android:layout_gravity="start|top"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Settings_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/Settings_Bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway"
+                android:textSize="15dp"
+                android:layout_weight="1"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/EditProfile"
+        android:text="Edit Your Profile"
+        android:textSize="18dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/font_family"
+            android:gravity="center"
+            android:id="@+id/Settings_Invite"
+            android:text="@string/invite"
+            android:textSize="18dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_people_black_24dp"
+            android:drawablePadding="10dp"/>
+
+
+
+    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FAQ"
+        android:textSize="18dp"
+        android:id="@+id/Settings_Faq"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_help_outline"
+        android:drawablePadding="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="18dp"
+        android:id="@+id/Settings_Notifications"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_notifications"
+        android:drawablePadding="10dp"
+        android:clickable="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textSize="18dp"
+        android:clickable="true"
+        android:id="@+id/Settings_Feedback"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_feedback"
+        android:drawablePadding="10dp"/>
+</LinearLayout>
