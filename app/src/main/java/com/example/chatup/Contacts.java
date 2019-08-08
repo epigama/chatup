@@ -87,8 +87,8 @@ public class Contacts extends AppCompatActivity {
             requestPermission();
         getSupportActionBar().hide();
 
-        phoneList = new ArrayList<>();
-        userList = new ArrayList<>();
+        //phoneList = new ArrayList<>();
+        //userList = new ArrayList<>();
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -120,14 +120,15 @@ public class Contacts extends AppCompatActivity {
                 int index = -1;
                 String username = "";
                 String phone = "";
-                for(int i = 0; i < phoneList.size(); i ++){
-                    phone = phoneList.get(i);
-                    if(phone.equals(phoneNum))
-                        index = i;
-                    username = phoneList.get(i);
-                    Log.d(TAG, "onClick: " + "username = " + username);
-                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
-                }
+                Log.d(TAG, "onClick: " + phoneList.toString());
+//                for(int i = 0; i < phoneList.size(); i ++){
+//                    phone = phoneList.get(i);
+//                    if(phone.equals(phoneNum))
+//                        index = i;
+//                    username = phoneList.get(i);
+//                    Log.d(TAG, "onClick: " + "username = " + username);
+//                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
+//                }
                 if (username != "") {
                     //open up chat window
                     Toast.makeText(Contacts.this, username, Toast.LENGTH_SHORT).show();
@@ -145,11 +146,10 @@ public class Contacts extends AppCompatActivity {
         });
         contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
 
-        handleAddContacts();
 
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
-            public void onResponse(String s) {
+            public void onResponse(String s) { //abbey ctrl click bhi tu hi kar na :/
                 doOnSuccess(s, null);
             }
         },new Response.ErrorListener(){
@@ -162,6 +162,7 @@ public class Contacts extends AppCompatActivity {
         RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
         rQueue.add(request);
 
+        handleAddContacts();
 
     }
     private boolean checkPermission() {
@@ -301,25 +302,27 @@ public class Contacts extends AppCompatActivity {
                     userReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                           String phoneNumDb = map.get("phone").toString();
+                            DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
+                            String phoneNum = newPost.getPhone();
+                            Log.d(TAG, "onDataChange: " + phoneNum);
 
+                            phoneList.add(phoneNum);
+                            userList.add(tempKey);
 
-                           phoneList.add(phoneNumDb);
                            userList.add(tempKey);
 
-                           try{
-                               if(phoneNum.equals(phoneNumDb)){
+                          // try{
+                            //   if(phoneNum.equals(phoneNumDb)){
 
-                                   Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
+                         //          Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
                                }
-                           }
-                           catch (NullPointerException e){
-                               e.printStackTrace();
-                           }
-                            Log.d(TAG, "onDataChange: " + phoneNum);
-                            Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
-                        }
+                           //}
+                          // catch (NullPointerException e){
+                            //   e.printStackTrace();
+                          // }
+                            //Log.d(TAG, "onDataChange: " + phoneNum);
+                            //Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
+                       // }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
                     });
@@ -330,5 +333,7 @@ public class Contacts extends AppCompatActivity {
         }
         pd.dismiss();
     }
+
+
 
 }
