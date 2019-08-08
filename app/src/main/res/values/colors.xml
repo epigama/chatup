@@ -16,5 +16,6 @@
     <color name="pinkNew">#FBEAEB</color>
     <color name="blackNew">#1D1B1B</color>
     <color name="red">#EC4D37</color>
+    <color name="grey">#E0E0E0</color>
     <color name="peterRiverBlue">#3498db</color>
 </resources>

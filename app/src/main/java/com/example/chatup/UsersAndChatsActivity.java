@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;//it's on x should have worked na yes wait
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -62,7 +62,9 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-
+                        Fragment users_fragment= new Users();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                                users_fragment).commit();
 
                         Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         //Bluetooth
@@ -72,12 +74,18 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         Toast.makeText(UsersAndChatsActivity.this, "Activity selected", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.favorites:
-                        startActivity(new Intent(UsersAndChatsActivity.this,Contacts.class));
+                        Fragment contacts_fragment= new Contacts();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                                contacts_fragment).commit();
+
+
                         Toast.makeText(UsersAndChatsActivity.this, "Contacts selected", Toast.LENGTH_SHORT).show();
                       //  startActivity(new Intent(UsersAndChatsActivity.this, ContactList.class));
                         break;
                     case R.id.profile:
-                        startActivity(new Intent(UsersAndChatsActivity.this,Chats.class));
+                        Fragment settings_fragment= new Settings() ;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                                settings_fragment).commit();
                         Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
                         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
                     //    Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);

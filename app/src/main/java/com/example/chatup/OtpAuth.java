@@ -62,7 +62,7 @@ public class OtpAuth extends AppCompatActivity {
 
             if (e instanceof FirebaseAuthInvalidCredentialsException) {
                 Log.d(TAG, "onVerificationFailed: " + "Invalid request");
-                // ...
+                //...
             } else if (e instanceof FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
                 Log.d(TAG, "onVerificationFailed: " + "SMS Quota over");

@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.github.tamir7.contacts.Contact;
 import com.github.tamir7.contacts.Email;
 import com.github.tamir7.contacts.PhoneNumber;
+import com.github.tamir7.contacts.Query;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,72 +45,59 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.WRITE_CONTACTS;
 
-public class Contacts extends AppCompatActivity {
+public class Contacts extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 200;
-
+    public static boolean isAppWentToBg = false;
+    public static boolean isWindowFocused = false;
+    public static boolean isBackPressed = false;
     private static String TAG = MainActivity.class.getSimpleName();
-    private Context context = Contacts.this;
-
     RecyclerView recyclerView;
     List<ContactModel> cardList;
     FastAdapter<ContactModel> fastAdapter;
     ItemAdapter<ContactModel> itemAdapter;
     Map<String, String> userAndPhoneMap;
-
     List<Contact> contacts;
-
-    public static boolean isAppWentToBg = false;
-
-    public static boolean isWindowFocused = false;
-
-    public static boolean isBackPressed = false;
-
     ProgressDialog pd;
-
     ArrayList<String> phoneList;
     ArrayList<String> userList;
     FirebaseDatabase mDatabase;
-
     String url = "https://chaton-343f1.firebaseio.com/users.json";
 
 
-
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
-        if (!checkPermission())
-            requestPermission();
-        getSupportActionBar().hide();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_contacts, container, false);
 
-        //phoneList = new ArrayList<>();
-        //userList = new ArrayList<>();
+
+        //onBackPressed();
+
+        phoneList = new ArrayList<>();
+        userList = new ArrayList<>();
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        pd = new ProgressDialog(Contacts.this);
+        pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
 
-        View view = getLayoutInflater().inflate(R.layout.activity_contact_model, null);
-        Button invite = view.findViewById(R.id.button_invite);
-        invite.setVisibility(View.GONE);
 
 
-        com.github.tamir7.contacts.Contacts.initialize(this);
-        recyclerView = findViewById(R.id.recycler);
+        com.github.tamir7.contacts.Contacts.initialize(getContext());
+        recyclerView = view.findViewById(R.id.recycler);
 
         itemAdapter = new ItemAdapter<>();
         fastAdapter = FastAdapter.with(itemAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(fastAdapter);
 
         fastAdapter.withOnClickListener(new OnClickListener<ContactModel>() {
@@ -114,31 +105,34 @@ public class Contacts extends AppCompatActivity {
             public boolean onClick(@Nullable View v, IAdapter<ContactModel> adapter, ContactModel item, int position) {
                 String phoneNum = item.getNumber();
                 Log.d(TAG, "onClick: " + " clicked");
+                Log.d(TAG, "onClick: " + phoneNum);
 
-                Toast.makeText(Contacts.this, "Clicked position " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Clicked position " + position, Toast.LENGTH_SHORT).show();
 
                 int index = -1;
                 String username = "";
                 String phone = "";
-                Log.d(TAG, "onClick: " + phoneList.toString());
 //                for(int i = 0; i < phoneList.size(); i ++){
 //                    phone = phoneList.get(i);
-//                    if(phone.equals(phoneNum))
+//                    if(phone.equals(item.getNumber()))
 //                        index = i;
-//                    username = phoneList.get(i);
+//                    username = userList.get(i);
 //                    Log.d(TAG, "onClick: " + "username = " + username);
 //                    Log.d(TAG, "onClick: " + "phone = " + phone); //we need to debug that first phir kuch hoga
 //                }
+//                if (phoneList.contains(item.getNumber())) {
+//                    int i = phoneList.indexOf(item.getNumber());
+//                    Log.d(TAG, "onClick: " + "chatwith = " + userList.get(i));
+//                }
                 if (username != "") {
                     //open up chat window
-                    Toast.makeText(Contacts.this, username, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), username, Toast.LENGTH_SHORT).show();
                     UserDetails.setChatWith(username);
-                    Intent intent = new Intent(Contacts.this,Chats.class);
+                    Intent intent = new Intent(getContext(), Chats.class);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     UserDetails.setChatWith("");
-                    Toast.makeText(Contacts.this, "Blank username", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Blank username", Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -146,67 +140,24 @@ public class Contacts extends AppCompatActivity {
         });
         contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
 
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) { //abbey ctrl click bhi tu hi kar na :/
-                doOnSuccess(s, null);
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                System.out.println("" + volleyError);
-            }
-        });
-
-        RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
-        rQueue.add(request);
-
         handleAddContacts();
 
-    }
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_CONTACTS);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_CONTACTS);
-
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
-    }
-
-    //request for permission
-    private void requestPermission() {
-
-        ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS, WRITE_CONTACTS}, PERMISSION_REQUEST_CODE);
-
+ return view;
     }
 
 
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "onStart isAppWentToBg " + isAppWentToBg);
-
-        applicationWillEnterForeground();
-
-        super.onStart();
-    }
 
     private void applicationWillEnterForeground() {
         if (isAppWentToBg) {
             isAppWentToBg = false;
-            Toast.makeText(getApplicationContext(), "App is in foreground",
-                    Toast.LENGTH_SHORT).show();
+
         }
         contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
         handleAddContacts();
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
 
-        Log.d(TAG, "onStop ");
-        applicationdidenterbackground();
-    }
 
     public void applicationdidenterbackground() {
         if (!isWindowFocused) {
@@ -216,123 +167,124 @@ public class Contacts extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
+//    @Override
+//    public void onBackPressed() {
+//
+//        if (this instanceof Contacts) {
+//
+//        } else {
+//            isBackPressed = true;
+//        }
+//
+//        Log.d(TAG,
+//                "onBackPressed " + isBackPressed + ""
+//                        + this.getLocalClassName());
+//        super.onBackPressed();
+//    }
 
-        if (this instanceof Contacts) {
 
-        } else {
-            isBackPressed = true;
-        }
-
-        Log.d(TAG,
-                "onBackPressed " + isBackPressed + ""
-                        + this.getLocalClassName());
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-
-        isWindowFocused = hasFocus;
-
-        if (isBackPressed && !hasFocus) {
-            isBackPressed = false;
-            isWindowFocused = true;
-        }
-
-        super.onWindowFocusChanged(hasFocus);
-    }
 
     public void handleAddContacts() {
-        for (Contact contact : contacts) {
-            try {
-                String name = contact.getDisplayName();
-                String number = "";
-                String email = "";
-                String photoUri = contact.getPhotoUri();
-                if (contact.getPhoneNumbers().size() != 0 || contact.getPhoneNumbers() != null) {
-                    for (PhoneNumber phoneNumber : contact.getPhoneNumbers()) {
-                        number += phoneNumber.getNumber() + "\n";
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+                    JSONObject obj = new JSONObject(s);
+                    Iterator i = obj.keys();
+                    String key = "";
+                    while (i.hasNext()) {
+                        key = i.next().toString();
+                        Log.d(TAG, "doOnSuccess: " + key);
+                        if (!key.equals(com.example.chatup.UserDetails.username)) {
+                            String tempKey = key;
+                            //key is our username node
+                            //so now we use mDatabase to access our node
+                            DatabaseReference userReference;
+                            userReference = mDatabase.getReference(String.format("users/%s", key));
+                            userReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Log.d(TAG, "onDataChange: " + dataSnapshot.getKey());
+                                    DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
+
+                                    String phoneNum = newPost.getPhone();
+                                    Log.d(TAG, "onDataChange: " + phoneNum);
+
+                                    phoneList.add(phoneNum);
+                                    userList.add(tempKey);
+
+                                    Set<String> set = new HashSet<>(phoneList);
+                                    phoneList.clear();
+                                    phoneList.addAll(set);
+
+                                    Query q = com.github.tamir7.contacts.Contacts.getQuery();
+                                    q.whereEqualTo(Contact.Field.PhoneNumber, phoneNum);
+                                    List<Contact> contacts = q.find();
+
+                                    if(!contacts.isEmpty()) {
+//
+                                        Log.d(TAG, "onDataChange: " + phoneNum);
+                                        Toast.makeText(getContext(), phoneNum, Toast.LENGTH_SHORT).show();
+
+                                        for (Contact contact : contacts) {
+                                            try {
+                                                String name = contact.getDisplayName();
+                                                String number = "";
+                                                String email = "";
+                                                String photoUri = contact.getPhotoUri();
+                                                if (contact.getPhoneNumbers().size() != 0 || contact.getPhoneNumbers() != null) {
+                                                    for (PhoneNumber phoneNumber : contact.getPhoneNumbers()) {
+                                                        number += phoneNumber.getNumber() + "\n";
+                                                    }
+                                                }
+                                                if (contact.getEmails().size() != 0 || contact.getEmails() != null) {
+                                                    for (Email e : contact.getEmails()) {
+                                                        email += e.getAddress() + "\n";
+                                                    }
+                                                }
+                                                if (phoneList.contains(number)) {
+                                                    Log.d(TAG, "handleAddContacts: " + number);
+                                                }
+                                                ContactModel x = null;
+                                                Log.d(TAG, "handleAddContacts: " + phoneList.toString());
+                                                for (String phone : phoneList) {
+                                                    Log.d(TAG, "phoneNum: " + phone);
+                                                    if (phone.equals(phoneNum)) {
+                                                        x = new ContactModel(name, number, email, photoUri);
+                                                        itemAdapter.add(x);
+                                                        fastAdapter.notifyDataSetChanged();
+                                                    }
+                                                }
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
+                        }
                     }
-                    Log.d(TAG, "handleAddContacts: " + number);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                if (contact.getEmails().size() != 0 || contact.getEmails() != null) {
-                    for (Email e : contact.getEmails()) {
-                        email += e.getAddress() + "\n";
-                    }
-                    Log.d(TAG, "handleAddContacts: " + email);
-
-                }
-                ContactModel x = new ContactModel(name, number, email, photoUri);
-                itemAdapter.add(x);
-                fastAdapter.notifyDataSetChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
+                pd.dismiss();            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                System.out.println("" + volleyError);
             }
-        }
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!checkPermission()) {
-            Log.i(TAG, "Permission not granted ");
-            requestPermission();
-        }
-        else
-            Log.i(TAG, "permission granted ");
+        });
 
+        RequestQueue rQueue = Volley.newRequestQueue(getContext());
+        rQueue.add(request);
 
     }
 
-    public void doOnSuccess(String s, @Nullable String phoneNum){
-        try {
-            JSONObject obj = new JSONObject(s);
-            Iterator i = obj.keys();
-            String key = "";
-             String phone = "";
-            while(i.hasNext()){
-                key = i.next().toString();
-                if(!key.equals(com.example.chatup.UserDetails.username)) {
-                    String tempKey = key;
-                    //key is our username node
-                    //so now we use mDatabase to access our node
-                    DatabaseReference userReference;
-                    userReference = mDatabase.getReference(String.format("users/%s",key));
-                    userReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
-                            String phoneNum = newPost.getPhone();
-                            Log.d(TAG, "onDataChange: " + phoneNum);
-
-                            phoneList.add(phoneNum);
-                            userList.add(tempKey);
-
-                           userList.add(tempKey);
-
-                          // try{
-                            //   if(phoneNum.equals(phoneNumDb)){
-
-                         //          Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
-                               }
-                           //}
-                          // catch (NullPointerException e){
-                            //   e.printStackTrace();
-                          // }
-                            //Log.d(TAG, "onDataChange: " + phoneNum);
-                            //Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
-                       // }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) { }
-                    });
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        pd.dismiss();
-    }
 
 
 

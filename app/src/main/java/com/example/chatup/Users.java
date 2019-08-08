@@ -3,15 +3,22 @@ package com.example.chatup;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,22 +30,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Users extends AppCompatActivity {
+public class Users extends Fragment {
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>(); //this is users ka list
     int totalUsers = 0;
     ProgressDialog pd;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        usersList = (ListView)findViewById(R.id.usersList);
-        noUsersText = (TextView)findViewById(R.id.noUsersText);
+        View view = inflater.inflate(R.layout.activity_users, container,false);
 
-        pd = new ProgressDialog(Users.this);
+        usersList = (ListView)view.findViewById(R.id.usersList);
+        noUsersText = (TextView)view.findViewById(R.id.noUsersText);
+
+        pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
 
@@ -56,16 +64,17 @@ public class Users extends AppCompatActivity {
             }
         });
 
-        RequestQueue rQueue = Volley.newRequestQueue(Users.this);
+        RequestQueue rQueue = Volley.newRequestQueue(getContext());
         rQueue.add(request);
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserDetails.chatWith = al.get(position);
-                startActivity(new Intent(Users.this,Chats.class));
+                startActivity(new Intent(getContext(),Chats.class));
             }
         });
+        return view;
     }
 
     public void doOnSuccess(String s){
@@ -96,26 +105,13 @@ public class Users extends AppCompatActivity {
         else{
             noUsersText.setVisibility(View.GONE);
             usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter(new ArrayAdapter<String>(Users.this, android.R.layout.simple_list_item_1, al));
+            usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
         }
 
         pd.dismiss();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater= new MenuInflater(getApplicationContext());
-        menuInflater.inflate(R.menu.main_menu,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.Settings:
-                startActivity(new Intent(getApplicationContext(),Settings.class));
-        }
-        return true;
-    }
+
 
 }

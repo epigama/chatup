@@ -20,12 +20,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Feedback"></activity>
         <activity android:name=".FAQ" />
-        <activity android:name=".Settings" />
+
         <activity android:name=".Contact" />
-        <activity android:name=".Users" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
-        <activity android:name=".Contacts" />
+
         <activity android:name=".OtpAuth" />
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".ProfilePage" />
