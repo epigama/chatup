@@ -63,5 +63,8 @@
     <string name="faq_change_profile_desc">Go to \"Edit Profile\" options in Settings and edit your profile </string>
     <string name="faq_contact">How to report or send feedback?</string>
     <string name="faq_contact_desc">Open settings. In the feedback option pose your views</string>
+    <string name="feedback_intro">Thank you for being part of our app. Your feedback is of utmost importance to us. Please pose your opinions in order to help us grow. </string>
+    <string name="feedback_desc">Enter your feedback here.</string>
+    <string name="feedback">Feedback</string>
 
 </resources>
