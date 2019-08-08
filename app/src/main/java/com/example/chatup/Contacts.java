@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.github.tamir7.contacts.Contact;
 import com.github.tamir7.contacts.Email;
 import com.github.tamir7.contacts.PhoneNumber;
+import com.github.tamir7.contacts.Query;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -225,8 +226,87 @@ public class Contacts extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                doOnSuccess(s);
-            }
+                try {
+                    JSONObject obj = new JSONObject(s);
+                    Iterator i = obj.keys();
+                    String key = "";
+                    String phone = "";
+                    while (i.hasNext()) {
+                        key = i.next().toString();
+                        Log.d(TAG, "doOnSuccess: " + key);
+                        if (!key.equals(com.example.chatup.UserDetails.username)) {
+                            String tempKey = key;
+                            //key is our username node
+                            //so now we use mDatabase to access our node
+                            DatabaseReference userReference;
+                            userReference = mDatabase.getReference(String.format("users/%s", key));
+                            userReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
+
+                                    String phoneNum = newPost.getPhone();
+                                    Log.d(TAG, "onDataChange: " + phoneNum);
+
+                                    phoneList.add(phoneNum);
+                                    userList.add(tempKey);
+
+                                    Query q = com.github.tamir7.contacts.Contacts.getQuery();
+                                    q.whereEqualTo(Contact.Field.PhoneNumber, phoneNum);
+                                    List<Contact> contacts = q.find();
+
+                                    if(!contacts.isEmpty()) {
+//
+                                        Log.d(TAG, "onDataChange: " + phoneNum);
+                                        Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
+
+                                        for (Contact contact : contacts) {
+                                            try {
+                                                String name = contact.getDisplayName();
+                                                String number = "";
+                                                String email = "";
+                                                String photoUri = contact.getPhotoUri();
+                                                if (contact.getPhoneNumbers().size() != 0 || contact.getPhoneNumbers() != null) {
+                                                    for (PhoneNumber phoneNumber : contact.getPhoneNumbers()) {
+                                                        number += phoneNumber.getNumber() + "\n";
+                                                    }
+                                                }
+                                                if (contact.getEmails().size() != 0 || contact.getEmails() != null) {
+                                                    for (Email e : contact.getEmails()) {
+                                                        email += e.getAddress() + "\n";
+                                                    }
+                                                }
+                                                if (phoneList.contains(number)) {
+                                                    Log.d(TAG, "handleAddContacts: " + number);
+                                                }
+                                                ContactModel x = null;
+                                                Log.d(TAG, "handleAddContacts: " + phoneList.toString());
+                                                for (String phone : phoneList) {
+                                                    Log.d(TAG, "phoneNum: " + phone);
+                                                    if (phone.equals(phoneNum)) {
+                                                        x = new ContactModel(name, number, email, photoUri);
+                                                        itemAdapter.add(x);
+                                                        fastAdapter.notifyDataSetChanged();
+                                                    }
+                                                }
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pd.dismiss();            }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
@@ -236,40 +316,7 @@ public class Contacts extends AppCompatActivity {
 
         RequestQueue rQueue = Volley.newRequestQueue(Contacts.this);
         rQueue.add(request);
-        for (Contact contact : contacts) {
-            try {
-                String name = contact.getDisplayName();
-                String number = "";
-                String email = "";
-                String photoUri = contact.getPhotoUri();
-                if (contact.getPhoneNumbers().size() != 0 || contact.getPhoneNumbers() != null) {
-                    for (PhoneNumber phoneNumber : contact.getPhoneNumbers()) {
-                        number += phoneNumber.getNumber() + "\n";
-                    }
-                }
-                if (contact.getEmails().size() != 0 || contact.getEmails() != null) {
-                    for (Email e : contact.getEmails()) {
-                        email += e.getAddress() + "\n";
-                    }
-                }
-                if(phoneList.contains(number)){
-                    Log.d(TAG, "handleAddContacts: " + number);
-                }
-                ContactModel x = null;
-                Log.d(TAG, "handleAddContacts: " + phoneList.toString());
-                for (String phone : phoneList) {
-                    Log.d(TAG, "phoneNum: " + phone);
-                    if (phone.equals(number)) {
-                        x = new ContactModel(name, number, email, photoUri);
-                        itemAdapter.add(x);
-                        fastAdapter.notifyDataSetChanged();
-                    }
-                }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Override
@@ -285,54 +332,7 @@ public class Contacts extends AppCompatActivity {
     }
 
     public void doOnSuccess(String s) {
-        try {
-            JSONObject obj = new JSONObject(s);
-            Iterator i = obj.keys();
-            String key = "";
-            String phone = "";
-            while (i.hasNext()) {
-                key = i.next().toString();
-                Log.d(TAG, "doOnSuccess: " + key);
-                if (!key.equals(com.example.chatup.UserDetails.username)) {
-                    String tempKey = key;
-                    //key is our username node
-                    //so now we use mDatabase to access our node
-                    DatabaseReference userReference;
-                    userReference = mDatabase.getReference(String.format("users/%s", key));
-                    userReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
 
-                            String phoneNum = newPost.getPhone();
-                            Log.d(TAG, "onDataChange: " + phoneNum);
-
-                            phoneList.add(phoneNum);
-                            userList.add(tempKey);
-
-
-//                            try {
-//                                if (phoneNum.equals(phoneNumDb)) {
-//
-//                                    Toast.makeText(Contacts.this, "Eurekaa", Toast.LENGTH_SHORT).show();
-//                                }
-//                            } catch (NullPointerException e) {
-//                                e.printStackTrace();
-//                            }
-                            Log.d(TAG, "onDataChange: " + phoneNum);
-                            Toast.makeText(getApplicationContext(), phoneNum, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        pd.dismiss();
     }
 
 }

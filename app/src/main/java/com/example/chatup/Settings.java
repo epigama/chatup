@@ -51,7 +51,7 @@ public class Settings extends AppCompatActivity {
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new );
+//                startActivity(new );
             }
         });
 
