@@ -42,7 +42,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         toolbar.setElevation(0);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("ChatUp");
+
 
 
 //        recyclerView = findViewById(R.id.recycler);

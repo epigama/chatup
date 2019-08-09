@@ -25,9 +25,7 @@ public class IntroPage extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+
+
     }
 }

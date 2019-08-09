@@ -41,12 +41,19 @@ public class Chats extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_chats);
+        setContentView(R.layout.activity_chats);
 
         mDatabase = FirebaseDatabase.getInstance();
+        //getSupportActionBar().hide();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(UserDetails.getChatWith());
+        toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
+
+        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+        toolbar.setElevation(0);
+        setSupportActionBar(toolbar);
+
 
         layout = findViewById(R.id.layout1);
         layout_2 = findViewById(R.id.layout2);
@@ -117,12 +124,12 @@ public class Chats extends AppCompatActivity {
         textView.setText(message);
         textView.setTextColor(getColor(R.color.white));
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp2.setMargins(10,10,10,10);
+        lp2.setMargins(10,20,10,10);
         lp2.weight = 7.0f;
 
 
         if(type == 1) {
-            lp2.gravity = Gravity.LEFT;
+            lp2.gravity = Gravity.RIGHT;
             textView.setBackgroundResource(R.drawable.bubble_in);
             textView.setTextColor(getResources().getColor(R.color.white));
         }

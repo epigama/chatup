@@ -53,7 +53,6 @@ public class PhoneAuthentication extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        getSupportActionBar().hide();
 
 //        editTextCode = findViewById(R.id.editTextCode);
         editTextPhone = findViewById(R.id.editTextPhone);

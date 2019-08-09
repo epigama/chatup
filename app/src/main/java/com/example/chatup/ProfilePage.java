@@ -62,7 +62,7 @@ public class ProfilePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
         //Hidden status bar
-        getSupportActionBar().hide();
+
 
         URL url = null;
         try {

@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:fitsSystemWindows="true">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinatorlayout"
         android:layout_width="match_parent"
@@ -30,8 +30,6 @@
                 app:layout_scrollFlags="enterAlways" >
 
             </androidx.appcompat.widget.Toolbar>
-
-
 
         </com.google.android.material.appbar.AppBarLayout>
 
