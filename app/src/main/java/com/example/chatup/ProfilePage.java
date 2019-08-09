@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +46,7 @@ public class ProfilePage extends AppCompatActivity {
     public FirebaseAuth mAuth;
     //TAG
     String TAG = "";
-    ImageView imageView;
+   // ImageView imageView;
     EditText user_name, user_bio;
     String userName, userBio;
     Button save_details;
@@ -75,8 +76,15 @@ public class ProfilePage extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        imageView.setImageBitmap(bmp);
+        catch(NetworkOnMainThreadException n)
+        {n.printStackTrace();}
+        try {
+            user_image_view.setImageBitmap(bmp); //ispe error hai..should we try catch this? I think pehle layout pe jaake dekh if imageview even exists
+        }
+        catch(NullPointerException ne) {
+            ne.printStackTrace();
 
+        }
         try {
             uid = getIntent().getStringExtra("uid");
         } catch (Exception e) {
@@ -110,7 +118,7 @@ public class ProfilePage extends AppCompatActivity {
 
                 } else {
                     CreateUserAccount(userName, userBio);
-                    startActivity(new Intent(ProfilePage.this, Users.class));
+                    startActivity(new Intent(ProfilePage.this, UsersAndChatsActivity.class));
                 }
 
             }

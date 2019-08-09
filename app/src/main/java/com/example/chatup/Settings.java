@@ -42,7 +42,7 @@ public class Settings extends Fragment {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),ProfilePage.class));
+                startActivity(new Intent(getContext(),ProfilePage.class)); //hai toh sahi
             }
         });
 

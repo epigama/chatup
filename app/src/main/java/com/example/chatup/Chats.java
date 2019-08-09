@@ -16,8 +16,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,9 +41,12 @@ public class Chats extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chats);
+        setContentView(R.layout.content_chats);
 
         mDatabase = FirebaseDatabase.getInstance();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(UserDetails.getChatWith());
 
         layout = findViewById(R.id.layout1);
         layout_2 = findViewById(R.id.layout2);
