@@ -6,34 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".FAQ"
     android:orientation="vertical"
-    android:background="@color/blue">
+    android:background="@color/white">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
+        android:layout_width="348dp"
+        android:layout_height="152dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/blue_rectangle_border"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/faq"
-            android:fontFamily="@font/font_family"
             android:layout_gravity="center"
+            android:fontFamily="@font/font_family"
+            android:gravity="center"
+            android:text="@string/faq"
+            android:textColor="@color/blue"
             android:textSize="@dimen/small_medium_text"
-            android:gravity="center"/>
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/font_family"
+            android:gravity="center"
+            android:text="@string/faq_desc"
+            android:textColor="@color/blue"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/faq_desc"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+
             android:gravity="center"
-            android:fontFamily="@font/font_family"
-            />
+            android:text="@string/link_to_mail"
+            android:textColor="@color/blue"
+            android:textSize="12dp" />
     </LinearLayout>
 
 
@@ -43,6 +63,8 @@
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -56,58 +78,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
-                android:textSize="20dp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border"
-            android:clickable="true">
-
-            <TextView
-                android:id="@+id/ChangeProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border">
-
-            <TextView
                 android:id="@+id/OpenSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_family"
                 android:text="@string/faq_open_settings"
                 android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
@@ -117,17 +94,17 @@
             android:clickable="true">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="169dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
+                android:id="@+id/ChangeProfile"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
+                android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -135,6 +112,50 @@
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@drawable/blue_rectangle_border">
+
+            <TextView
+                android:id="@+id/WriteFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_family"
+                android:text="@string/faq_write_feedback"
+                android:textSize="20dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@drawable/blue_rectangle_border">
+
+            <TextView
+                android:id="@+id/WriteFeedback1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_family"
+                android:text="@string/faq_write_feedback"
+                android:textSize="20dp" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -149,7 +170,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
+                android:text="@string/faq_extra"
+                android:id="@+id/ExtraThing"
                 android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
 
@@ -163,16 +185,16 @@
             android:clickable="true">
 
             <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="191dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
                 android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
+                android:id="@+id/SendMessage"
+                android:text="@string/faq_send_message"
                 android:textSize="18dp" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
@@ -181,6 +203,8 @@
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -195,7 +219,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
+                android:id="@+id/DarkMode"
+                android:text="@string/faq_dark_mode"
                 android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
 
@@ -210,7 +235,7 @@
 
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="169dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
@@ -219,192 +244,9 @@
                 android:clickable="true"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
                 android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border"
-            android:clickable="true">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
-                android:textSize="20dp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border"
-            android:clickable="true">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
-                android:textSize="20dp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border"
-            android:clickable="true">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_open_settings"
-                android:textSize="20dp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/blue_rectangle_border"
-            android:clickable="true">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:fontFamily="@font/font_family"
-                android:text="@string/faq_change_profile"
-                android:textSize="18dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
 
 </LinearLayout>
