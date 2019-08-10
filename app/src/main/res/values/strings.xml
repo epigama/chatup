@@ -68,7 +68,7 @@
     <string name="faq_desc">This page has possible FAQ. In case you don\'t find answers then please mail us in the link below </string>
     <string name="link_to_mail"><a href="http://bhavnaharitsa@gmail.com\">Please post questions</a></string>
     <string name="faq_write_feedback">How to write feedback?</string>
-    <string name="daq_write_feedback_desc">In Settings, you will find Feedback in the end. Click it to write to us.</string>
+    <string name="faq_write_feedback_desc">In Settings, you will find Feedback in the end. Click it to write to us.</string>
     <string name="faq_extra">Do I need anything extra to use this app?</string>
     <string name="faq_extra_desc">All you need is a internet connection and we have made it for you to use via Bluetooth too</string>
     <string name="faq_send_message">Can I send my messages outside the app</string>
