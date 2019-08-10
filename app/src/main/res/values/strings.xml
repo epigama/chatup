@@ -75,4 +75,6 @@
     <string name="faq_send_message_desc">You sure can. Click the share button near the arrow button.</string>
     <string name="faq_dark_mode">Can I enable dark mode?</string>
     <string name="faq_dark_mode_desc">Go to settings and click on dark mode to enable dark mode</string>
+    <string name="faq_enable_fingerprint">How to enable finger print?</string>
+    <string name="faq_enable_finger_print_desc">Long press on that chat and register your finger to enable finger print</string>
 </resources>
