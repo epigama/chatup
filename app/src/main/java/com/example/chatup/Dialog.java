@@ -11,8 +11,8 @@ public class Dialog extends AppCompatDialogFragment {
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder abuilder= new AlertDialog.Builder(getActivity());
         abuilder.setTitle("Go to")
-                .setMessage("Open settings")
-               .setPositiveButton("ok",new DialogInterface.OnClickListener() {
+                .setMessage(R.string.faq_open_settings_desc)
+        .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
 

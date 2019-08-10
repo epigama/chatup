@@ -122,13 +122,13 @@ public class Chats extends AppCompatActivity {
         textView.setText(message);
         textView.setTextColor(getColor(R.color.white));
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp2.setMargins(10,20,10,10);
+        lp2.setMargins(10,10,10,10);
         lp2.weight = 7.0f;
 
 
         if(type == 1) {
             lp2.gravity = Gravity.RIGHT;
-            textView.setBackgroundResource(R.drawable.bubble_in);
+            textView.setBackgroundResource(R.drawable.bubble_out);
             textView.setTextColor(getResources().getColor(R.color.white));
         }
         else{
