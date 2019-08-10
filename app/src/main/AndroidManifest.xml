@@ -18,13 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Feedback"></activity>
+        <activity android:name=".DarkMode"></activity>
+        <activity android:name=".Feedback" />
         <activity android:name=".FAQ" />
-
         <activity android:name=".Contact" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
-
         <activity android:name=".OtpAuth" />
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".ProfilePage" />

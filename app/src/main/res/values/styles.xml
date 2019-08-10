@@ -11,4 +11,18 @@
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/comfortaa</item>
     </style>
+
+    <style name="lightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="backgroundcolor">@color/grey</item>
+        <item name="cardbackgroundcolor">#29B6F6</item>
+        <item name="textColor">#ffff</item>
+        <item name="tintcolor">#81D4FA</item>
+        <item name="buttoncolor">#E91E63</item>
+    </style>
+
+
+
+
+
 </resources>

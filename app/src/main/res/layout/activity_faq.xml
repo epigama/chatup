@@ -62,7 +62,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal">
@@ -75,12 +75,15 @@
             android:background="@drawable/blue_rectangle_border">
 
             <TextView
+                android:id="@+id/OpenSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/font_family"
-                android:id="@+id/OpenSettings"
                 android:text="@string/faq_open_settings"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -94,17 +97,19 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/ChangeProfile"
                 android:layout_width="169dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
-                android:id="@+id/ChangeProfile"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_change_profile"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -127,9 +132,12 @@
                 android:id="@+id/EnableFingerPrint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_enable_fingerprint"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -143,9 +151,12 @@
                 android:id="@+id/WriteFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_write_feedback"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -167,12 +178,15 @@
 
             <TextView
 
+                android:id="@+id/ExtraThing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_extra"
-                android:id="@+id/ExtraThing"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -185,17 +199,19 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/SendMessage"
                 android:layout_width="191dp"
                 android:layout_height="70dp"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
                 android:fontFamily="@font/font_family"
-                android:id="@+id/SendMessage"
                 android:text="@string/faq_send_message"
-                android:textSize="18dp" />
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -216,12 +232,15 @@
 
             <TextView
 
+                android:id="@+id/DarkMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/font_family"
-                android:id="@+id/DarkMode"
                 android:text="@string/faq_dark_mode"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -237,16 +256,31 @@
 
                 android:layout_width="169dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
                 android:fontFamily="@font/font_family"
                 android:text="@string/faq_change_profile"
-                android:textSize="20dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
+
+    <TextView
+        android:layout_width="392dp"
+        android:layout_height="71dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_family"
+        android:gravity="center"
+        android:text="@string/faq_post_questions"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"
+        android:textStyle="bold" />
 
 
 </LinearLayout>
