@@ -124,11 +124,11 @@
             android:background="@drawable/blue_rectangle_border">
 
             <TextView
-                android:id="@+id/WriteFeedback"
+                android:id="@+id/EnableFingerPrint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_family"
-                android:text="@string/faq_write_feedback"
+                android:text="@string/faq_enable_fingerprint"
                 android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
 
@@ -140,7 +140,7 @@
             android:background="@drawable/blue_rectangle_border">
 
             <TextView
-                android:id="@+id/WriteFeedback1"
+                android:id="@+id/WriteFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_family"
