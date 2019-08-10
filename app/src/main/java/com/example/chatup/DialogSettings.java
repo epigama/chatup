@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class Dialog extends AppCompatDialogFragment {
+public class DialogSettings extends AppCompatDialogFragment {
     @Override
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder abuilder= new AlertDialog.Builder(getActivity());
