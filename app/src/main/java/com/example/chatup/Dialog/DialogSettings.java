@@ -1,10 +1,12 @@
-package com.example.chatup;
+package com.example.chatup.Dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.example.chatup.R;
 
 public class DialogSettings extends AppCompatDialogFragment {
     @Override
