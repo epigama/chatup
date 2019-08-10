@@ -7,24 +7,28 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.chatup.Dialog.DialogChangeProfile;
+import com.example.chatup.Dialog.DialogExtra;
+import com.example.chatup.Dialog.DialogFingerPrint;
 import com.example.chatup.Dialog.DialogSettings;
 import com.example.chatup.Dialog.DialogWriteFeedback;
 
 public class FAQ extends AppCompatActivity {
     TextView faq_open_settings;
     TextView faq_change_profile;
+    TextView faq_enable_fingerprint;
     TextView faq_write_feedback;
-    TextView write_feedback_1;
+    TextView faq_extra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
-//        getSupportActionBar().setTitle("FAQ");
+
         faq_open_settings=findViewById(R.id.OpenSettings);
         faq_change_profile=findViewById(R.id.ChangeProfile);
+        faq_enable_fingerprint=findViewById(R.id.EnableFingerPrint);
         faq_write_feedback=findViewById(R.id.WriteFeedback);
-        faq_write_feedback=findViewById(R.id.WriteFeedback1);
+        faq_extra=findViewById(R.id.ExtraThing);
 
 
         faq_open_settings.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +63,30 @@ public class FAQ extends AppCompatActivity {
 
             private void opendialog() {
                 DialogWriteFeedback dialog= new DialogWriteFeedback();
+                dialog.show(getSupportFragmentManager(),"dialog");
+            }
+        });
+
+        faq_extra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opendialog();
+            }
+
+            private void opendialog() {
+                DialogExtra dialog= new DialogExtra();
+                dialog.show(getSupportFragmentManager(),"dialog");
+            }
+        });
+
+        faq_enable_fingerprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opendialog();
+            }
+
+            private void opendialog() {
+                DialogFingerPrint dialog= new DialogFingerPrint();
                 dialog.show(getSupportFragmentManager(),"dialog");
             }
         });
