@@ -1,7 +1,6 @@
 package com.example.chatup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,7 @@ public class FAQ extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
 //        getSupportActionBar().setTitle("FAQ");
-        faq=findViewById(R.id.textView);
+        faq=findViewById(R.id.OpenSettings);
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -23,7 +22,7 @@ public class FAQ extends AppCompatActivity {
             }
 
             private void opendialog() {
-                Dialog dialog= new Dialog();
+                DialogSettings dialog= new DialogSettings();
                 dialog.show(getSupportFragmentManager(),"dialog");
             }
         });
