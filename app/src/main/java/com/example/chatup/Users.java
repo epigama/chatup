@@ -33,25 +33,21 @@ import java.util.Iterator;
 public class Users extends Fragment {
     ListView usersList;
     TextView noUsersText;
-    ArrayList<String> al = new ArrayList<>(); //this is users ka list
+    ArrayList<String> al = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.activity_users, container,false);
-
         usersList = (ListView)view.findViewById(R.id.usersList);
         noUsersText = (TextView)view.findViewById(R.id.noUsersText);
-
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
 
         String url = "https://chaton-343f1.firebaseio.com/users.json";
-
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
@@ -76,7 +72,6 @@ public class Users extends Fragment {
         });
         return view;
     }
-
     public void doOnSuccess(String s){
         try {
             JSONObject obj = new JSONObject(s);
@@ -90,7 +85,6 @@ public class Users extends Fragment {
                 if(!key.equals(com.example.chatup.UserDetails.username)) {
                     al.add(key);
                 }
-
                 totalUsers++;
             }
 

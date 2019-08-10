@@ -6,101 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".FAQ"
     android:orientation="vertical">
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/faq_open_settings"
-            android:textStyle="bold"
-            android:fontFamily="@font/font_family"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/blue"
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/faq_open_settings_desc"
-            />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/textView1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/faq_change_profile"
-            android:textStyle="bold"
-            android:fontFamily="@font/font_family"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/blue"
-            android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/faq_change_profile_desc"
-            />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_gravity="left"
+            android:background="#88FF0000">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/faq_contact"
-                android:textStyle="bold"
+                android:text="@string/feedback_intro"
+                android:fontFamily="@font/font_family"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:background="@drawable/blue_rectangle_border"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback_intro"
+                android:layout_marginLeft="4dp"
+                android:id="@+id/textView"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
                 android:fontFamily="@font/font_family"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/blue"
-                android:textSize="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/faq_contact_desc"
-                />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-
-
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </LinearLayout>
