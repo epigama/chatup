@@ -131,4 +131,16 @@
         android:drawablePadding="10dp"
         android:text="Feedback"
         android:textSize="22dp" />
+
+    <TextView
+        android:id="@+id/Settings_DarkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_darkmode"
+        android:drawablePadding="10dp"
+        android:text="Darkmode"
+        android:textSize="22dp" />
 </LinearLayout>
