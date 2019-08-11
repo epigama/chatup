@@ -65,13 +65,10 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         Fragment users_fragment= new Users();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 users_fragment).commit();
-
-                        Toast.makeText(UsersAndChatsActivity.this, "home selected", Toast.LENGTH_SHORT).show();
                         //Bluetooth
                         break;
                     case R.id.activity:
                       //  startActivity(new Intent(UsersAndChatsActivity.this, Users.class));
-                        Toast.makeText(UsersAndChatsActivity.this, "Activity selected", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.favorites:
                         Fragment contacts_fragment= new Contacts();
@@ -79,14 +76,14 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                                 contacts_fragment).commit();
 
 
-                        Toast.makeText(UsersAndChatsActivity.this, "Contacts selected", Toast.LENGTH_SHORT).show();
+
                       //  startActivity(new Intent(UsersAndChatsActivity.this, ContactList.class));
                         break;
                     case R.id.profile:
                         Fragment settings_fragment= new Settings() ;
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 settings_fragment).commit();
-                        Toast.makeText(UsersAndChatsActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
+
                         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
                     //    Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);
                       //  startActivity(intent);

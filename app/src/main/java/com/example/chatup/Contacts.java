@@ -107,7 +107,6 @@ public class Contacts extends Fragment {
                 Log.d(TAG, "onClick: " + " clicked");
                 Log.d(TAG, "onClick: " + phoneNum);
 
-                Toast.makeText(getContext(), "Clicked position " + position, Toast.LENGTH_SHORT).show();
 
                 int index = -1;
                 String username = "";
@@ -126,13 +125,12 @@ public class Contacts extends Fragment {
 //                }
                 if (username != "") {
                     //open up chat window
-                    Toast.makeText(getContext(), username, Toast.LENGTH_SHORT).show();
+
                     UserDetails.setChatWith(username);
                     Intent intent = new Intent(getContext(), Chats.class);
                     startActivity(intent);
                 } else {
                     UserDetails.setChatWith("");
-                    Toast.makeText(getContext(), "Blank username", Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -224,7 +222,6 @@ public class Contacts extends Fragment {
                                     if(!contacts.isEmpty()) {
 //
                                         Log.d(TAG, "onDataChange: " + phoneNum);
-                                        Toast.makeText(getContext(), phoneNum, Toast.LENGTH_SHORT).show();
 
                                         for (Contact contact : contacts) {
                                             try {
