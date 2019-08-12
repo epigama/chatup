@@ -1,7 +1,9 @@
 package com.example.chatup;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -111,6 +113,10 @@ public class ProfilePage extends AppCompatActivity {
                 UserDetails.setUsername(userName);
                 UserDetails.setBio(userBio);
 
+                //Write to shared preferences
+                SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+                editor.putString("saved_username", userName);
+                editor.apply();
 
                 if (userName.isEmpty() || userBio.isEmpty()) {
                     ShowMessage("Please check your details");

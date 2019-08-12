@@ -1,8 +1,11 @@
 package com.example.chatup;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,8 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 
 import java.util.List;
+
+import static com.example.chatup.UserDetails.username;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
 
@@ -42,7 +47,12 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         toolbar.setElevation(0);
         setSupportActionBar(toolbar);
 
-
+        //Read from sharedpreferences
+        SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        String name = prefs.getString("saved_username", "");
+        Log.d(TAG, "sharedpreference: " + name);
+        Toast.makeText(this, "Sharedpreference: " + name, Toast.LENGTH_SHORT).show();
+        UserDetails.setUsername(name);
 
 
 //        recyclerView = findViewById(R.id.recycler);
