@@ -1,6 +1,10 @@
 package com.example.chatup;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -54,12 +59,18 @@ public class Chats extends AppCompatActivity {
         toolbar.setElevation(0);
         setSupportActionBar(toolbar);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("channelOne", "channelOne", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
         layout = findViewById(R.id.layout1);
         layout_2 = findViewById(R.id.layout2);
         sendButton = findViewById(R.id.sendButton);
         messageArea = findViewById(R.id.messageArea);
         scrollView = findViewById(R.id.scrollView);
+
 
         reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getUsername(), UserDetails.getChatWith()));
         reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getUsername()));
@@ -92,6 +103,7 @@ public class Chats extends AppCompatActivity {
                 }
                 else{
                     addMessageBox(message, 2);
+                    createNotification(Chats.this, userName, message);
                 }
             }
 
@@ -115,6 +127,8 @@ public class Chats extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     public void addMessageBox(String message, int type){
@@ -141,12 +155,7 @@ public class Chats extends AppCompatActivity {
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater= new MenuInflater(getApplicationContext());
-        menuInflater.inflate(R.menu.main_menu,menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -155,5 +164,17 @@ public class Chats extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Settings.class));
         }
         return true;
+    }
+
+    private void createNotification(Context context, String title, String text) {
+        NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        NotificationCompat.Builder ncBuilder = new NotificationCompat.Builder(context);
+        ncBuilder.setContentTitle(title);
+        ncBuilder.setContentText(text);
+        //ncBuilder.setTicker("Notification Listener Service Example");
+        ncBuilder.setSmallIcon(R.drawable.ic_launcher_background);
+        ncBuilder.setAutoCancel(true);
+        ncBuilder.setChannelId("channelOne");
+        manager.notify((int)System.currentTimeMillis(),ncBuilder.build());
     }
 }
