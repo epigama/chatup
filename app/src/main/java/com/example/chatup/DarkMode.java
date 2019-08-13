@@ -16,7 +16,7 @@ public class DarkMode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.lightTheme);
+           // setTheme(R.style.lightTheme);
         }
         else{
             setTheme((R.style.AppTheme));

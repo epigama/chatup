@@ -20,11 +20,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DarkMode"></activity>
         <activity android:name=".Feedback" />
-        <activity android:name=".FAQ" />
         <activity android:name=".Contact" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
         <activity android:name=".OtpAuth" />
+        <activity android:name=".FAQ"/>
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".MainActivity" />
@@ -50,6 +50,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

@@ -1,23 +1,30 @@
 package com.example.chatup;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +36,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,12 +100,34 @@ public class Chats extends AppCompatActivity {
             }
         });
         reference1.addChildEventListener(new ChildEventListener() {
-
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
+                messageArea.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (event.getAction() == KeyEvent.ACTION_DOWN)
+                            if ((keyCode == KeyEvent.KEYCODE_DPAD_CENTER) ||
+                                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                                //do something
+                                //true because you handle the event
+                                String messageText = messageArea.getText().toString();
+
+                                if(!messageText.equals("")){
+                                    Map<String, String> map = new HashMap<String, String>();
+                                    map.put("message", messageText);
+                                    map.put("user", com.example.chatup.UserDetails.username);
+                                    reference1.push().setValue(map);
+                                    reference2.push().setValue(map);
+                                    messageArea.setText("");
+                                }
+
+                                return true;
+                            }
+                        return false;
+                    }
+                });
 
                 if(userName.equals(com.example.chatup.UserDetails.username)){
                     addMessageBox(message, 1);
@@ -135,6 +166,7 @@ public class Chats extends AppCompatActivity {
         TextView textView = new TextView(Chats.this);
         textView.setText(message);
         textView.setTextColor(getColor(R.color.white));
+
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp2.setMargins(10,10,10,10);
         lp2.weight = 7.0f;
@@ -142,7 +174,7 @@ public class Chats extends AppCompatActivity {
 
         if(type == 1) {
             lp2.gravity = Gravity.RIGHT;
-            textView.setBackgroundResource(R.drawable.bubble_out);
+            textView.setBackgroundResource(R.drawable.bubble_in);
             textView.setTextColor(getResources().getColor(R.color.white));
         }
         else{
@@ -152,8 +184,13 @@ public class Chats extends AppCompatActivity {
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
-        scrollView.fullScroll(View.FOCUS_DOWN);
-    }
+        scrollView.post(new Runnable() {
+
+            @Override
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });    }
 
 
 
@@ -167,14 +204,18 @@ public class Chats extends AppCompatActivity {
     }
 
     private void createNotification(Context context, String title, String text) {
+        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
+        View view = LayoutInflater.from(Chats.this).inflate(R.layout.custom_notification, null, false);
+        TextView heading = view.findViewById(R.id.Heading);
+        TextView body = view.findViewById(R.id.Description);
+        heading.setText(title);
+        body.setText(text);
+        Notification customNotification = new NotificationCompat.Builder(context, "channelOne")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(notificationLayout)
+                .build();
         NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        NotificationCompat.Builder ncBuilder = new NotificationCompat.Builder(context);
-        ncBuilder.setContentTitle(title);
-        ncBuilder.setContentText(text);
-        //ncBuilder.setTicker("Notification Listener Service Example");
-        ncBuilder.setSmallIcon(R.drawable.ic_launcher_background);
-        ncBuilder.setAutoCancel(true);
-        ncBuilder.setChannelId("channelOne");
-        manager.notify((int)System.currentTimeMillis(),ncBuilder.build());
+        manager.notify((int)System.currentTimeMillis(),customNotification);
     }
 }

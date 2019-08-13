@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/blue_rectangle_border">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_rectangle_border"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_open_settings"
+        android:textColor="@color/blue"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/HeadingText"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/medium_text"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/faq_open_settings_desc"
+        android:textColor="@color/blue"
+        android:layout_gravity="center"
+        android:id="@+id/DescriptionText"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/Ok"
+            android:layout_width="134dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/rounded_background_blue"
+            android:gravity="center"
+            android:text="Ok"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

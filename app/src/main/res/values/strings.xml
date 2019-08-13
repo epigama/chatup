@@ -59,7 +59,7 @@
     <string name="send">Send</string>
     <string name="faq_open_settings">How to open Settings?</string>
     <string name="faq_open_settings_desc">Click on the menu bar in Chats or Users page and in the option click Settings.</string>
-    <string name="faq_change_profile">How to change profie?</string>
+    <string name="faq_change_profile">How to change profile?</string>
     <string name="faq_change_profile_desc">Go to \"Edit Profile\" options in Settings and edit your profile </string>
     <string name="feedback_intro">Thank you for being part of our app. Your feedback is of utmost importance to us. Please pose your opinions in order to help us grow. </string>
     <string name="feedback_desc">Enter your feedback here.</string>
@@ -78,5 +78,5 @@
     <string name="faq_enable_fingerprint">How to enable finger print?</string>
     <string name="faq_enable_finger_print_desc">Long press on that chat and register your finger to enable finger print</string>
     <string name="faq_post_questions">Post your question and if it is frequently, we might add it in our FAQ section ;)</string>
-    <string name="saved_login">saved_login</string>
+
 </resources>

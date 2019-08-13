@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:maxHeight="80dp"
         android:textColor="#3d3d3d"
+        android:imeOptions="actionSend"
         android:textColorHint="#CFD8DC" />
 
     <ImageView

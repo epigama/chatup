@@ -24,7 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -44,11 +47,14 @@ public class ProfilePage extends AppCompatActivity {
     //DECLARING THE VARIABLES
     static int PReqCode = 1;
     static int REQUESCODE = 1;
+    String name="ChatUp";
     //FIREBASE AUTHENTICATION VARIABLES
     public FirebaseAuth mAuth;
+    FirebaseStorage storage;
+    StorageReference storageReference;
     //TAG
     String TAG = "";
-   // ImageView imageView;
+    // ImageView imageView;
     EditText user_name, user_bio;
     String userName, userBio;
     Button save_details;
@@ -63,6 +69,8 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
         //Hidden status bar
 
 
@@ -77,13 +85,12 @@ public class ProfilePage extends AppCompatActivity {
             bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NetworkOnMainThreadException n) {
+            n.printStackTrace();
         }
-        catch(NetworkOnMainThreadException n)
-        {n.printStackTrace();}
         try {
-            user_image_view.setImageBitmap(bmp); //ispe error hai..should we try catch this? I think pehle layout pe jaake dekh if imageview even exists
-        }
-        catch(NullPointerException ne) {
+            user_image_view.setImageBitmap(bmp);
+        } catch (NullPointerException ne) {
             ne.printStackTrace();
 
         }
@@ -94,7 +101,7 @@ public class ProfilePage extends AppCompatActivity {
         }
         //  Log.d(TAG, "uid "  +uid) ;
 
-        parentReference = FirebaseDatabase.getInstance().getReference("users"); //i am googling onmy end
+        parentReference = FirebaseDatabase.getInstance().getReference("users");
 
         //INITIALISING THE VARIABLES TO THE XML IDs
         mAuth = FirebaseAuth.getInstance();
@@ -134,14 +141,35 @@ public class ProfilePage extends AppCompatActivity {
         user_image_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= 22) {
-                    checkAndRequestForPermission();
-                } else {
-                    openGallery();
-                }
+                openGallery();
+                Log.d(TAG, "onClick: Uploading Image.");
+                        //get the signed in user
+                        if(name.equals("")) {
+                            StorageReference storageRefer = storageReference.child("images/users/" +  "/" + name + ".jpg");
+                            storageRefer.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // Get a URL to the uploaded content
+                                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+
+                                }
+                            })
+                            ;
+                        }
+
+                    }
+                });
+
             }
-        });
-    }
 
 
     private void checkAndRequestForPermission() {
@@ -173,48 +201,43 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null) {
-
-            // the user has successfully picked an image
-            // we need to save its reference to a Uri variable
+            Log.d(TAG, " Code check");
             pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
+            StorageReference storageReferen = storageReference.child("images/users/" +   ".jpg");
+            storageReferen.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Get a URL to the uploaded content
+                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                    Log.d(TAG, " DOWNLOAD URL " +downloadUrl);
+                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
 
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
 
+                }
+            })
+            ;
         }
+
     }
+
+
+
+
+
 
     public void ShowMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     public void CreateUserAccount(final String name, String bio) {
-//        mDatabase.createUserWithEmailAndPassword(name,bio)//kuch mila?
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // user account created successfully
-//                            ShowMessage("Account created");
-//                            // after we created user account we need to update his profile picture and name
-//                            updateUserInfo(name,pickedImgUri,mDatabase.getCurrentUser());
-//                        }
-//                        else
-//                        {
-////                            Log.d(TAG, "onComplete: " + task.getResult().getUser());
-//                            //addUserNameToUser(task.getResult().getUser());
-//                            //createNewUser(task.getResult().getUser());
-//
-//                            // account creation failed
-//                            ShowMessage("account creation failed" + task.getException().getMessage());
-//                            save_details.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                });
-
-//            BioModel model = new BioModel(name, bio);
         try {
             parentReference.child(userName).child("name").setValue(userName);
             parentReference.child(userName).child("bio").setValue(userBio);
@@ -226,78 +249,6 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
-    private void updateUserInfo(final String name, Uri pickedImgUri, final FirebaseUser currentUser) {
 
-        // first we need to upload user photo to firebase storage and get url
-
-        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
-        final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
-        imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                // image uploaded succesfully
-                // now we can get our image url
-
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        // uri contain user image url
-
-
-                        UserProfileChangeRequest profleUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
-                                .setPhotoUri(uri)
-                                .build();
-
-
-                        currentUser.updateProfile(profleUpdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if (task.isSuccessful()) {
-                                            // user info updated successfully
-                                            ShowMessage("Register Complete");
-                                            updateUI();
-                                        }
-
-                                    }
-                                });
-
-                    }
-                });
-
-
-            }
-        });
-    }
-
-    private void updateUI() {
-
-        Intent homeActivity = new Intent(getApplicationContext(), Chats.class);
-        startActivity(homeActivity);
-        finish();
-    }
-
-
-    private void addUserNameToUser(FirebaseUser user) {
-        String username = "";
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
-                // .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User profile updated.");
-                        }
-                    }
-                });
-    }
 }
 
