@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 public class ProfilePage extends AppCompatActivity {
@@ -69,6 +72,7 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        checkAndRequestForPermission();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         //Hidden status bar
@@ -182,9 +186,7 @@ public class ProfilePage extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PReqCode);
-            }
-
+                        PReqCode); }
         } else
             openGallery();
 
@@ -205,25 +207,32 @@ public class ProfilePage extends AppCompatActivity {
             Log.d(TAG, " Code check");
             pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
-            StorageReference storageReferen = storageReference.child("images/users/" +   ".jpg");
-            storageReferen.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Get a URL to the uploaded content
-                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                    Log.d(TAG, " DOWNLOAD URL " +downloadUrl);
-                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
+            StorageReference storageReferen = storageReference.child("/images/users/" +  UserDetails.getUsername() +  ".jpg");
+            UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onFailure(@NonNull Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_SHORT).show();
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
 
+                    // Continue with the task to get the download URL
+                    return storageReferen.getDownloadUrl();
                 }
-            })
-            ;
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        Toast.makeText(ProfilePage.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "DOWNLOAD " +downloadUri);
+                    } else {
+                        Log.e(TAG, "onComplete: " + "Incomplete upload");
+                    }
+                }
+            });
+
         }
 
     }
