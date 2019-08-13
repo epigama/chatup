@@ -114,6 +114,9 @@ public class ProfilePage extends AppCompatActivity {
         user_bio = findViewById(R.id.UserBio);
         save_details = findViewById(R.id.SaveDetails);
 
+        user_name.setText(UserDetails.getUsername());
+        user_bio.setText(UserDetails.getBio());
+
         save_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +130,7 @@ public class ProfilePage extends AppCompatActivity {
                 //Write to shared preferences
                 SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString("saved_username", userName);
+                editor.putString("saved_bio", userBio);
                 editor.apply();
 
                 if (userName.isEmpty() || userBio.isEmpty()) {
