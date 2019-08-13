@@ -50,9 +50,9 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         //Read from sharedpreferences
         SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
         String name = prefs.getString("saved_username", "");
-        Log.d(TAG, "sharedpreference: " + name);
-        Toast.makeText(this, "Sharedpreference: " + name, Toast.LENGTH_SHORT).show();
+        String bio = prefs.getString("saved_bio", "");
         UserDetails.setUsername(name);
+        UserDetails.setBio(bio);
 
 
 //        recyclerView = findViewById(R.id.recycler);
