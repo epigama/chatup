@@ -21,7 +21,7 @@ public class Settings extends Fragment {
     TextView notifications;
     TextView faq;
     TextView feedback;
-    TextView darkmode;
+   // TextView darkmode;
 
     @Nullable
     @Override
@@ -34,7 +34,7 @@ public class Settings extends Fragment {
         notifications=view.findViewById(R.id.Settings_Notifications);
         faq=view.findViewById(R.id.Settings_Faq);
         feedback=view.findViewById(R.id.Settings_Feedback);
-        darkmode=view.findViewById(R.id.Settings_DarkMode);
+       // darkmode=view.findViewById(R.id.Settings_DarkMode);
 
 
         userName = view.findViewById(R.id.Settings_Name);
@@ -64,12 +64,7 @@ public class Settings extends Fragment {
             }
         });
 
-        darkmode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(),DarkMode.class));
-            }
-        });
+
 
 
     return  view;
