@@ -18,12 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DarkMode"></activity>
         <activity android:name=".Feedback" />
         <activity android:name=".Contact" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
         <activity android:name=".OtpAuth" />
-        <activity android:name=".FAQ"/>
+        <activity android:name=".FAQ" />
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".MainActivity" />
@@ -39,17 +40,17 @@
         <activity
             android:name=".UsersAndChatsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
         <service android:name=".Notifications.FirebaseMessageService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service android:name=".Notifications.FirebaseIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

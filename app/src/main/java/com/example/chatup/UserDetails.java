@@ -7,6 +7,16 @@ public class UserDetails {
     public static String UID = "";
     public static String phoneNum = "";
 
+    public static int darkSwitch = 0; //0 = Light, 1 = Dark
+
+    public static int getDarkSwitch() {
+        return darkSwitch;
+    }
+
+    public static void setDarkSwitch(int darkSwitch) {
+        UserDetails.darkSwitch = darkSwitch;
+    }
+
     public static String getPhoneNum() {
         return phoneNum;
     }

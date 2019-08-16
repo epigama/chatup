@@ -39,6 +39,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +60,8 @@ public class Chats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
+
+
 
         mDatabase = FirebaseDatabase.getInstance();
         //getSupportActionBar().hide();
@@ -135,42 +141,39 @@ public class Chats extends AppCompatActivity {
                 else{
                     addMessageBox(message, 2);
                     createNotification(Chats.this, userName, message);
-                }
-            }
+                } }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
 
     }
 
     public void addMessageBox(String message, int type){
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        Calendar calobj = Calendar.getInstance();
         TextView textView = new TextView(Chats.this);
+        TextView  text= new TextView(Chats.this);
         textView.setText(message);
+        text.setText(DateFormat.getInstance().format(new Date()));
+      //  text.setText(df.format(calobj.getTime()));
+        text.setGravity(Gravity.RIGHT);
         textView.setTextColor(getColor(R.color.white));
+        layout.addView(text);
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp2.setMargins(10,10,10,10);
-        lp2.weight = 7.0f;
 
+        lp2.weight = 7.0f;
 
         if(type == 1) {
             lp2.gravity = Gravity.RIGHT;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 
 public class IntroPage extends AppCompatActivity {
@@ -12,12 +13,14 @@ public class IntroPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.dark_theme);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_intro_page);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this,PhoneAuthentication.class);
+                Intent intent = new Intent(IntroPage.this,UsersAndChatsActivity.class);
                 startActivity(intent);
             }
         }, splash_screen_timer);

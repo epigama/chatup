@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,8 +36,12 @@ public class UsersAndChatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_and_chats);
-//        getSupportActionBar().hide();
-
+       if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+           setTheme(R.style.dark_theme);
+       }
+       else{
+           setTheme(R.style.AppTheme);
+       }
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
