@@ -6,6 +6,15 @@ public class UserDetails {
     public static String chatWith = "";
     public static String UID = "";
     public static String phoneNum = "";
+    public static String uri = "";
+
+    public static String getUri() {
+        return uri;
+    }
+
+    public static void setUri(String uri) {
+        UserDetails.uri = uri;
+    }
 
     public static int darkSwitch = 0; //0 = Light, 1 = Dark
 

@@ -117,6 +117,12 @@ public class ProfilePage extends AppCompatActivity {
         user_name.setText(UserDetails.getUsername());
         user_bio.setText(UserDetails.getBio());
 
+        //Extract uri from sharedpreferences, if not blank set it to user_image_view
+        SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        String uriString = prefs.getString(getString(R.string.local_img_uri), "");
+        if(!(uriString.equals("") || uriString.equals(" "))){
+            //
+        }
         save_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +166,6 @@ public class ProfilePage extends AppCompatActivity {
                                     // Get a URL to the uploaded content
                                     Uri downloadUrl = taskSnapshot.getUploadSessionUri();
                                     Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -212,6 +217,11 @@ public class ProfilePage extends AppCompatActivity {
             pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
 
+            //Persist pickedImgUri so that it stays
+            SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
+            editor.apply();
+
             StorageReference storageReferen = storageReference.child("/images/users/" +  UserDetails.getUsername() +  ".jpg");
             UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -230,9 +240,11 @@ public class ProfilePage extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         Toast.makeText(ProfilePage.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "DOWNLOAD " +downloadUri);
+                        Log.w(TAG, "DOWNLOAD " +downloadUri.toString());
+                        parentReference.child(userName).child("uri").setValue(downloadUri.toString());
+                        UserDetails.setUri(downloadUri.toString());
                     } else {
-                        Log.e(TAG, "onComplete: " + "Incomplete upload");
+                        Log.w(TAG, "onComplete: " + "Incomplete upload");
                     }
                 }
             });

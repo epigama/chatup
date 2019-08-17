@@ -78,5 +78,5 @@
     <string name="faq_enable_fingerprint">How to enable finger print?</string>
     <string name="faq_enable_finger_print_desc">Long press on that chat and register your finger to enable finger print</string>
     <string name="faq_post_questions">Post your question and if it is frequently, we might add it in our FAQ section ;)</string>
-
+    <string name="local_img_uri">local_img_uri</string>
 </resources>
