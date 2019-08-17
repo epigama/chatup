@@ -10,6 +10,7 @@
         android:layout_height="45dp"
         android:src="@drawable/ic_add"
         android:layout_marginLeft="3dp"
+        android:id="@+id/AddContent"
         />
 
     <EditText

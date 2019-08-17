@@ -5,9 +5,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,15 +29,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
+import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.w3c.dom.Text;
 
@@ -48,6 +57,10 @@ import java.util.Map;
 
 
 public class Chats extends AppCompatActivity {
+    String TAG="";
+    StorageReference image_storage;
+    public static final int RESCODE=1;
+    ImageView add_content;
     LinearLayout layout;
     RelativeLayout layout_2;
     ImageView sendButton;
@@ -85,6 +98,8 @@ public class Chats extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
         messageArea = findViewById(R.id.messageArea);
         scrollView = findViewById(R.id.scrollView);
+        add_content=findViewById(R.id.AddContent);
+        image_storage=FirebaseStorage.getInstance().getReference();
 
 
         reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getUsername(), UserDetails.getChatWith()));
@@ -155,6 +170,15 @@ public class Chats extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+        add_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent gallery_intent = new Intent();
+               gallery_intent.setType("image/*");
+               gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
+               startActivityForResult(Intent.createChooser(gallery_intent,"SELECT IMAGE"),RESCODE);
+            }
+        });
 
 
     }
@@ -220,5 +244,48 @@ public class Chats extends AppCompatActivity {
                 .build();
         NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         manager.notify((int)System.currentTimeMillis(),customNotification);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode==RESCODE && resultCode==RESULT_OK){
+            Uri imageUi= data.getData();
+            final String current_user_ref="messages/" +UserDetails.getChatWith()+"/"+UserDetails.getUsername();
+            final String chat_user_ref="messages/" +UserDetails.getUsername()+"/"+UserDetails.getChatWith();
+
+            DatabaseReference user_message_push=reference1.child("messages").child(UserDetails.getUsername()).child(UserDetails.getChatWith()).push();
+            final String push_id=user_message_push.getKey();
+            StorageReference file_path=image_storage.child("messages_images").child(push_id+".jpg");
+            file_path.putFile(imageUi).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        String download_url=task.getResult().toString();
+                        Map messageMap= new HashMap();
+                        messageMap.put("message", download_url);
+                        messageMap.put("seen", false);
+                        messageMap.put("from", UserDetails.getUsername());
+                        messageMap.put("type","image");
+                       Map messageUserMAp= new HashMap();
+                       messageUserMAp.put(current_user_ref +"/" + push_id,messageMap);
+                        messageUserMAp.put(chat_user_ref +"/" + push_id,messageMap);
+
+                        messageArea.setText("");
+                        reference1.updateChildren(messageUserMAp, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                if(databaseError!=null){
+                                    Log.d(TAG, " CHAT LOG " + databaseError.getMessage().toString());
+                                }
+                            }
+                        });
+
+
+                    }
+                }
+            });
+        }
     }
 }
