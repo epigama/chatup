@@ -1,5 +1,6 @@
 package com.example.chatup;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,12 +10,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 
 public class IntroPage extends AppCompatActivity {
+    int currentdaynight;
     public static final int splash_screen_timer = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.dark_theme);
+      //  setTheme(R.style.dark_theme);
         super.onCreate(savedInstanceState);
+        currentdaynight= AppCompatDelegate.getDefaultNightMode();
 
         setContentView(R.layout.activity_intro_page);
         new Handler().postDelayed(new Runnable() {
@@ -30,5 +33,13 @@ public class IntroPage extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
+            recreate();
+        }
     }
 }

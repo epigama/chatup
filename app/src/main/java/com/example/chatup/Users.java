@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Users extends Fragment {
+    int currentdaynight;
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Users extends Fragment {
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
-
+     currentdaynight= AppCompatDelegate.getDefaultNightMode();
         String url = "https://chaton-343f1.firebaseio.com/users.json";
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
@@ -104,6 +106,8 @@ public class Users extends Fragment {
 
         pd.dismiss();
     }
+
+
 
 
 
