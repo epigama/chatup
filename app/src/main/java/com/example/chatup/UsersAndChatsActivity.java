@@ -1,26 +1,30 @@
 package com.example.chatup;
 
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 
 import java.util.List;
-
-import static com.example.chatup.UserDetails.username;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
 
@@ -36,12 +40,50 @@ public class UsersAndChatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_and_chats);
-       if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-           setTheme(R.style.dark_theme);
-       }
-       else{
-           setTheme(R.style.AppTheme);
-       }
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(UsersAndChatsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = getString(R.string.msg_subscribed);
+                        if (!task.isSuccessful()) {
+                            msg = getString(R.string.msg_subscribe_failed);
+                        }
+                        Log.d(TAG, msg);
+                        Toast.makeText(UsersAndChatsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("channelOne", "channelOne", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.dark_theme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -77,31 +119,30 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-                        Fragment users_fragment= new Users();
+                        Fragment users_fragment = new Users();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 users_fragment).commit();
                         //Bluetooth
                         break;
                     case R.id.activity:
-                      //  startActivity(new Intent(UsersAndChatsActivity.this, Users.class));
+                        //  startActivity(new Intent(UsersAndChatsActivity.this, Users.class));
                         break;
                     case R.id.favorites:
-                        Fragment contacts_fragment= new Contacts();
+                        Fragment contacts_fragment = new Contacts();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 contacts_fragment).commit();
 
 
-
-                      //  startActivity(new Intent(UsersAndChatsActivity.this, ContactList.class));
+                        //  startActivity(new Intent(UsersAndChatsActivity.this, ContactList.class));
                         break;
                     case R.id.profile:
-                        Fragment settings_fragment= new Settings() ;
+                        Fragment settings_fragment = new Settings();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 settings_fragment).commit();
 
                         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, new AllUsersFragment());
-                    //    Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);
-                      //  startActivity(intent);
+                        //    Intent intent = new Intent(UsersAndChatsActivity.this, Users.class);
+                        //  startActivity(intent);
                         break;
                 }
             }
