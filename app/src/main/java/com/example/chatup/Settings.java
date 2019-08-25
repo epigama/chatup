@@ -24,12 +24,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class Settings extends Fragment {
+    int currentdaynight;
     ImageView profile_pic;
     TextView edit_profile;
     TextView userName;
@@ -43,7 +45,11 @@ public class Settings extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.activity_settings, container, false);
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+
+        }
         if (UserDetails.getDarkSwitch() == 1) {
             ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.dark_theme);
             inflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
@@ -52,7 +58,7 @@ public class Settings extends Fragment {
             inflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
         }
 
-
+          currentdaynight=AppCompatDelegate.getDefaultNightMode();
         invite = view.findViewById(R.id.Settings_Invite);
         notifications = view.findViewById(R.id.Settings_Notifications);
         faq = view.findViewById(R.id.Settings_Faq);
@@ -118,5 +124,15 @@ public class Settings extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (currentdaynight != AppCompatDelegate.getDefaultNightMode()) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .detach(Settings.this)
+                    .attach(Settings.this)
+                    .commit();
+        }
+    }
 }

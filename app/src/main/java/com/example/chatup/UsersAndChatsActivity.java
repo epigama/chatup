@@ -27,6 +27,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import java.util.List;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
+    int currentdaynight; //initialise this
 
 
     private String TAG = this.getClass().getSimpleName();
@@ -38,7 +39,15 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.dark_theme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
+        currentdaynight=AppCompatDelegate.getDefaultNightMode();//call here
         setContentView(R.layout.activity_users_and_chats);
 
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -92,7 +101,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
         toolbar.setBackgroundColor(getResources().getColor(R.color.white));
         toolbar.setElevation(0);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         //Read from sharedpreferences
         SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
@@ -149,5 +158,13 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();//check if not upgrade
+        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
+            recreate();
+        }
     }
 }

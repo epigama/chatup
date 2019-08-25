@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPage extends AppCompatActivity {
+    int currentdaynight;
     private String TAG = this.getClass().getSimpleName();
     EditText email, password;
     Button signin;
@@ -29,6 +31,7 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_via_email);
         getSupportActionBar().hide();
+        currentdaynight= AppCompatDelegate.getDefaultNightMode();
 
         //intialising the variables to the xml ids
         email = findViewById(R.id.login_email);
@@ -73,5 +76,13 @@ public class LoginPage extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //TODO updateUI(currentUser);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
+            recreate();
+        }
     }
 }

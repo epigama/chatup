@@ -1,6 +1,7 @@
 package com.example.chatup;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
+import android.os.ParcelFormatException;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -47,6 +50,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class ProfilePage extends AppCompatActivity {
+    int currentdaynight;
     //DECLARING THE VARIABLES
     static int PReqCode = 1;
     static int REQUESCODE = 1;
@@ -70,13 +74,17 @@ public class ProfilePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode()
+                ==AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.dark_theme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
         checkAndRequestForPermission();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         //Hidden status bar
-
+       currentdaynight=AppCompatDelegate.getDefaultNightMode();
 
         URL url = null;
         try {
@@ -274,6 +282,12 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
+            recreate();
+        }
+    }
 }
 
