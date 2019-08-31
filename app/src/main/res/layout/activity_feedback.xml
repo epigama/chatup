@@ -12,24 +12,26 @@
         android:layout_height="wrap_content"
         android:text="@string/feedback"
         android:textSize="@dimen/medium_large_text"
+        android:textStyle="bold"
         android:fontFamily="@font/font_family"
         android:textColor="@color/blue"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"/>
 
     <TextView
-        android:layout_width="269dp"
-        android:layout_height="86dp"
+        android:layout_width="360dp"
+        android:layout_height="189dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:background="@drawable/blue_rectangle_border"
         android:fontFamily="@font/font_family"
-        android:textColor="@color/white"
-        android:paddingTop="5dp"
         android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:paddingRight="5dp"
-        android:background="@drawable/rounded_background_blue"
+        android:gravity="center"
         android:text="@string/feedback_intro"
-        android:textSize="@dimen/small_medium_text1" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text" />
 
 
 
