@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,14 +95,13 @@ public class ProfilePage extends AppCompatActivity {
         }
         Bitmap bmp = null;
         try {
-            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (IOException e) {
+            //bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            Glide.with(this).load(url).into(user_image_view);
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (NetworkOnMainThreadException n) {
-            n.printStackTrace();
         }
         try {
-            user_image_view.setImageBitmap(bmp);
+            //user_image_view.setImageBitmap(bmp);
         } catch (NullPointerException ne) {
             ne.printStackTrace();
 
@@ -129,7 +129,8 @@ public class ProfilePage extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
         String uriString = prefs.getString(getString(R.string.local_img_uri), "");
         if(!(uriString.equals("") || uriString.equals(" "))){
-            //
+            Glide.with(this).load(uriString).into(user_image_view);
+
         }
         save_details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,11 +226,6 @@ public class ProfilePage extends AppCompatActivity {
             pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
 
-            //Persist pickedImgUri so that it stays
-            SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
-            editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
-            editor.apply();
-
             StorageReference storageReferen = storageReference.child("/images/users/" +  UserDetails.getUsername() +  ".jpg");
             UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -248,6 +244,11 @@ public class ProfilePage extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         Toast.makeText(ProfilePage.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
+                        //Persist pickedImgUri so that it stays
+                        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putString(getString(R.string.local_img_uri), downloadUri.toString());
+                        editor.apply();
+
                         Log.w(TAG, "DOWNLOAD " +downloadUri.toString());
                         parentReference.child(userName).child("uri").setValue(downloadUri.toString());
                         UserDetails.setUri(downloadUri.toString());
