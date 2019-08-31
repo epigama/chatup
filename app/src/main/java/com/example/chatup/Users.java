@@ -42,20 +42,20 @@ public class Users extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_users, container,false);
-        usersList = (ListView)view.findViewById(R.id.usersList);
-        noUsersText = (TextView)view.findViewById(R.id.noUsersText);
+        View view = inflater.inflate(R.layout.activity_users, container, false);
+        usersList = (ListView) view.findViewById(R.id.usersList);
+        noUsersText = (TextView) view.findViewById(R.id.noUsersText);
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
-     currentdaynight= AppCompatDelegate.getDefaultNightMode();
+        currentdaynight = AppCompatDelegate.getDefaultNightMode();
         String url = "https://chaton-343f1.firebaseio.com/users.json";
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 doOnSuccess(s);
             }
-        },new Response.ErrorListener(){
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 System.out.println("" + volleyError);
@@ -69,22 +69,24 @@ public class Users extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserDetails.chatWith = al.get(position);
-                startActivity(new Intent(getContext(),Chats.class));
+                startActivity(new Intent(getContext(), Chats.class));
             }
         });
         return view;
     }
-    public void doOnSuccess(String s){
+
+
+    public void doOnSuccess(String s) {
         try {
             JSONObject obj = new JSONObject(s);
 
             Iterator i = obj.keys();
             String key = "";
 
-            while(i.hasNext()){
+            while (i.hasNext()) {
                 key = i.next().toString();
 
-                if(!key.equals(com.example.chatup.UserDetails.username)) {
+                if (!key.equals(com.example.chatup.UserDetails.username)) {
                     al.add(key);
                 }
                 totalUsers++;
@@ -93,23 +95,26 @@ public class Users extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        try {
 
-        if(totalUsers <=1){
-            noUsersText.setVisibility(View.VISIBLE);
-            usersList.setVisibility(View.GONE);
-        }
-        else{
-            noUsersText.setVisibility(View.GONE);
-            usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
-        }
+            if (totalUsers <= 1) {
+                noUsersText.setVisibility(View.VISIBLE);
+                usersList.setVisibility(View.GONE);
+            } else {
+                noUsersText.setVisibility(View.GONE);
+                usersList.setVisibility(View.VISIBLE);
+                usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
+            }
 
-        pd.dismiss();
+            pd.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
-
-
-
-
 }
+
+
+
+
+
+
