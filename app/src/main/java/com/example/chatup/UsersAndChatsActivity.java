@@ -52,6 +52,9 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
         currentdaynight = AppCompatDelegate.getDefaultNightMode();//call here
         setContentView(R.layout.activity_users_and_chats);
+        Fragment users_fragment = new Users();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                users_fragment).commit();
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
