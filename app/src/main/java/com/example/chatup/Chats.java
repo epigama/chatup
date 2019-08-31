@@ -86,7 +86,7 @@ public class Chats extends AppCompatActivity {
     DatabaseReference reference1, reference2;
     FirebaseDatabase mDatabase;
     private BroadcastReceiver mRegistrationBroadcastReciever;
-    private TextView txtRegId ;
+    //private TextView txtRegId ;
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReciever);
@@ -390,6 +390,8 @@ public class Chats extends AppCompatActivity {
                    if (task.isSuccessful()) {
                        downloadUri = task.getResult();
                        Toast.makeText(Chats.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
+
+
                        Log.w(TAG, "DOWNLOAD CHATS IMAGES" + downloadUri.toString());
                        parentReference.child("uri").setValue(downloadUri.toString());
                        UserDetails.setUri(downloadUri.toString());
@@ -458,7 +460,7 @@ public Uri getImageUri(Context inContext, Bitmap inImage) {
         String regId = pref.getString("regId", null);
 
         Log.e(TAG, "Firebase Registration Id" + regId);
-
+/**
         if(!TextUtils.isEmpty(regId))
         {
             txtRegId.setText(regId);
@@ -466,7 +468,7 @@ public Uri getImageUri(Context inContext, Bitmap inImage) {
         else
         {
             txtRegId.setText("Firebase Reg id not recieved");
-        }
+        }**/
 
     }
 }
