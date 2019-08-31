@@ -5,62 +5,64 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-<FrameLayout
-    android:id="@+id/framelayoutparent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="10dp"
-    android:orientation="vertical">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
+        android:id="@+id/framelayoutparent"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
+        android:layout_height="166dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Settings_Profile_Picture"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="3dp"
-            android:layout_gravity="start|top"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
+            android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="30dp"
-            android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Settings_Profile_Picture"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/blue_rectangle_border"
+                android:layout_gravity="start|top"
+                android:layout_marginTop="3dp"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
-            <TextView
-                android:id="@+id/Settings_Name"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/Settings_Bio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/raleway"
-                android:textSize="15dp"
+                android:layout_height="97dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Settings_Name"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/Settings_Bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
 
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,6 +72,8 @@
         android:id="@+id/EditProfile"
         android:text="Edit Your Profile"
         android:textSize="18dp"
+        android:textStyle="italic"
+        android:fontFamily="@font/font_family"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -101,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_help_outline"
         android:drawablePadding="10dp"
@@ -114,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_notifications"
         android:drawablePadding="10dp"
@@ -126,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_feedback"
         android:drawablePadding="10dp"
@@ -138,10 +142,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_darkmode"
         android:drawablePadding="10dp"
         android:text="Darkmode"
+    android:foreground="?attr/selectableItemBackground"
         android:textSize="22dp" />
 </LinearLayout>
