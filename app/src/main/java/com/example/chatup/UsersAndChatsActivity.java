@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
@@ -43,6 +45,8 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
+
+
         Fragment users_fragment= new Users();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                 users_fragment).commit();
@@ -65,19 +69,6 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         String bio = prefs.getString("saved_bio", "");
         UserDetails.setUsername(name);
         UserDetails.setBio(bio);
-
-
-//        recyclerView = findViewById(R.id.recycler);
-        //   itemAdapter = new ItemAdapter<>();
-        // fastAdapter = FastAdapter.with(itemAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(fastAdapter);
-
-        //    ChatModel model = new ChatModel("Regina", "How do you do?", "12:30");
-        //  ChatModel model1 = new ChatModel("Senorita", "How's the weather like?", "12:32");
-        //itemAdapter.add(model);
-        //itemAdapter.add(model1);
-        //L̥fastAdapter.notifyAdapterDataSetChanged();
 
         navigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
@@ -113,6 +104,32 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.profile),"Settings page","Open Settings page to edit profile and for other facilities")
+        .tintTarget(false)
+                        .titleTextColor(R.color.white)
+                        .outerCircleColor(R.color.olive_green)
+                        .dimColor(R.color.light_olive_green)
+        );
+
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.activity),"Activity Page","This page will control your activities")
+                        .tintTarget(false)
+                        .titleTextColor(R.color.white)
+                        .outerCircleColor(R.color.purple)
+                        .dimColor(R.color.light_purple)
+        );
+
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.favorites),"Contacts Page","View your contacts here")
+                        .tintTarget(false)
+                        .titleTextColor(R.color.white)
+                        .outerCircleColor(R.color.orange)
+                        .dimColor(R.color.light_orange)
+        );
+
+
 
 
     }

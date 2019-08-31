@@ -10,6 +10,7 @@
     <color name="tint_blue">#B3E5FC</color>
     <color name="olive_green">#1B5E20</color>
     <color name="light_olive_green">#8BC34A</color>
+    <color name="mid_olive_green">#558B2F</color>
     <color name="yellow">#FFF748</color>
     <color name="violet">#3C1A5B</color>
     <color name="blue">#2F3C7E</color>
@@ -17,5 +18,9 @@
     <color name="blackNew">#1D1B1B</color>
     <color name="red">#EC4D37</color>
     <color name="grey">#E0E0E0</color>
+    <color name="purple">#4527A0</color>
+    <color name="light_purple">#B39DDB</color>
+    <color name="orange">#FF6D00</color>
+    <color name="light_orange">#FFB74D</color>
     <color name="peterRiverBlue">#3498db</color>
 </resources>
