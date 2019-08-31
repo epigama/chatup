@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -47,9 +48,24 @@ public class Settings extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_settings, container, false);
-        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
 
         }
+
+        //Extract uri from sharedpreferences, if not blank set it to user_image_view
+        try{
+        SharedPreferences prefs = getContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        String uriString = prefs.getString(getString(R.string.local_img_uri), "");
+        Toast.makeText(getContext(), "Sharedpreference image: " + uriString, Toast.LENGTH_LONG).show();
+        if (!(uriString.equals("") || uriString.equals(" "))) {
+            Glide.with(this).load(uriString).into(profile_pic);
+        }
+    }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         if (UserDetails.getDarkSwitch() == 1) {
             ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.dark_theme);
             inflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
@@ -99,9 +115,9 @@ public class Settings extends Fragment {
         });
 
         //Extract uri from sharedpreferences, if not blank set it to user_image_view
-        SharedPreferences prefs = getContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
-        String uriString = prefs.getString(getString(R.string.local_img_uri), "");
-        if(!(uriString.equals("") || uriString.equals(" "))){
+        SharedPreferences preferences = getContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        String uri_string = preferences.getString(getString(R.string.local_img_uri), "");
+        if(!(uri_string.equals("") || uri_string.equals(" "))){
             Uri uri = Uri.parse(UserDetails.getUri());
            Glide.with(this).load(new File(uri.getPath())).into(profile_pic);
            // profile_pic.setImageURI(uri);
