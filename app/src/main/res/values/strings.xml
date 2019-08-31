@@ -34,7 +34,7 @@
     <string name="invite">Invite</string>
     <string name="no_users_found">No users found!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--TODO:Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_users_and_chats">UsersAndChatsActivity</string>
     <string name="title_home">Home</string>
@@ -79,4 +79,7 @@
     <string name="faq_enable_finger_print_desc">Long press on that chat and register your finger to enable finger print</string>
     <string name="faq_post_questions">Post your question and if it is frequently, we might add it in our FAQ section ;)</string>
     <string name="local_img_uri">local_img_uri</string>
+    <string name="msg_token_fmt">Token: %s</string>
+    <string name="msg_subscribed">Successfully subscribed</string>
+    <string name="msg_subscribe_failed">Subscribe failed</string>
 </resources>
