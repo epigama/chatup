@@ -43,6 +43,9 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
+        Fragment users_fragment= new Users();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                users_fragment).commit();
         currentdaynight=AppCompatDelegate.getDefaultNightMode();//call here
         setContentView(R.layout.activity_users_and_chats);
 
