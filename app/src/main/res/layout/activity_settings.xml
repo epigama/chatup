@@ -107,6 +107,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="40dp"
         android:clickable="true"
+        android:fontFamily="@font/font_family"
         android:drawableLeft="@drawable/ic_help_outline"
         android:drawablePadding="10dp"
         android:text="FAQ"
@@ -120,6 +121,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="40dp"
         android:clickable="true"
+        android:fontFamily="@font/font_family"
         android:drawableLeft="@drawable/ic_notifications"
         android:drawablePadding="10dp"
         android:text="Notifications"
@@ -132,6 +134,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="40dp"
         android:clickable="true"
+        android:fontFamily="@font/font_family"
         android:drawableLeft="@drawable/ic_feedback"
         android:drawablePadding="10dp"
         android:text="Feedback"
@@ -147,6 +150,7 @@
         android:drawableLeft="@drawable/ic_darkmode"
         android:drawablePadding="10dp"
         android:text="Darkmode"
+        android:fontFamily="@font/font_family"
     android:foreground="?attr/selectableItemBackground"
         android:textSize="22dp" />
 </LinearLayout>

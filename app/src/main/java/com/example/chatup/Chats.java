@@ -229,7 +229,8 @@ public class Chats extends AppCompatActivity {
                 }
                 else{
                     addMessageBox(message, 2);
-                    createNotification(Chats.this, userName, message);
+                    sendNotificationToUser(userName, message);
+                    //createNotification(Chats.this, userName, message);
                 } }
 
             @Override
@@ -471,4 +472,10 @@ public Uri getImageUri(Context inContext, Bitmap inImage) {
         }**/
 
     }
+
+    public static void sendNotificationToUser(String user, final String message) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("parentReference");
+        reference.child("username").setValue(user);
+        reference.child("message").setValue(message);
+ }
 }

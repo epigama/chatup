@@ -1,7 +1,9 @@
 package com.example.chatup;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class FAQ extends AppCompatActivity {
     TextView faq_extra;
     TextView faq_send_messages_outside;
     TextView faq_enable_darkmode;
+    TextView faq_post_questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class FAQ extends AppCompatActivity {
         faq_extra=findViewById(R.id.ExtraThing);
         faq_send_messages_outside=findViewById(R.id.SendMessage);
         faq_enable_darkmode=findViewById(R.id.DarkMode);
+        faq_post_questions=findViewById(R.id.PostQuestions);
 
         faq_open_settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +94,8 @@ public class FAQ extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+
 
 
 
@@ -241,6 +247,17 @@ public class FAQ extends AppCompatActivity {
                 });
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.show();
+            }
+        });
+
+        faq_post_questions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","bhavnaharitsa@gmail.com", null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Questions");
+                intent.putExtra(Intent.EXTRA_TEXT, "I would like to ask...   ");
+                startActivity(Intent.createChooser(intent, "Choose an Email client :"));
             }
         });
 

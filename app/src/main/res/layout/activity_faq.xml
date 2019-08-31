@@ -49,6 +49,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:clickable="true"
+            android:id="@+id/PostQuestions"
 
             android:gravity="center"
             android:text="@string/link_to_mail"
