@@ -18,9 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DarkMode"></activity>
+        <activity android:name=".DarkMode" />
         <activity android:name=".Feedback" />
-        <activity android:name=".Contact" />
         <activity android:name=".Chats" />
         <activity android:name=".Invite" />
         <activity android:name=".OtpAuth" />
@@ -51,6 +50,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
