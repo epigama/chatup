@@ -118,7 +118,7 @@ public class Chats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
       // imageView = new ImageView(Chats.this);
-        image=findViewById(R.id.images);
+
 
         parentReference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -174,26 +174,32 @@ public class Chats extends AppCompatActivity {
         image_storage=FirebaseStorage.getInstance().getReference();
 
 
-        reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getUsername(), UserDetails.getChatWith()));
-        reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getUsername()));
+        reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getPhoneNum(), UserDetails.getChatWith()));
+        reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getPhoneNum()));
+try {
+    sendButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String messageText = messageArea.getText().toString();
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String messageText = messageArea.getText().toString();
+            if (!messageText.equals("")) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("message", messageText);
+//                map.put("image", downloadUri.toString());
+                map.put("user", com.example.chatup.UserDetails.username);
+                reference1.push().setValue(map);
+                reference2.push().setValue(map);
+                messageArea.setText("");
 
-                if(!messageText.equals("")){
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put("message", messageText);
-                    map.put("image",downloadUri.toString());
-                    map.put("user", com.example.chatup.UserDetails.username);
-                    reference1.push().setValue(map);
-                    reference2.push().setValue(map);
-                    messageArea.setText("");
-
-                }
             }
-        });
+
+        }
+
+    });
+}
+catch (Exception e){
+    e.printStackTrace();
+}
         reference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -265,7 +271,7 @@ public class Chats extends AppCompatActivity {
         TextView  text= new TextView(Chats.this);
        //ye bey
         textView.setText(message);
-        text.setText(DateFormat.getInstance().format(new Date()));
+      //  text.setText();
       //  text.setText(df.format(calobj.getTime()));
         text.setGravity(Gravity.RIGHT);
       //  imageView.setForegroundGravity(Gravity.RIGHT);
@@ -336,7 +342,7 @@ public class Chats extends AppCompatActivity {
                 image.setLayoutParams(lp);
                 Uri uri = getImageUri(context,photo);
 
-                StorageReference storageReferen = storageReference.child("/images/message/" +  UserDetails.getUsername() +  UserDetails.getChatWith() + ".jpg");
+                StorageReference storageReferen = storageReference.child("/images/message/" +  UserDetails.getPhoneNum() +  UserDetails.getChatWith() + ".jpg");
                 UploadTask uploadTask = storageReferen.putFile(uri);
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -373,7 +379,7 @@ public class Chats extends AppCompatActivity {
 //        editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
 //        editor.apply();
 
-           StorageReference storageReferen = storageReference.child("users/" + UserDetails.getUsername() + ".jpg");
+           StorageReference storageReferen = storageReference.child("users/" + UserDetails.getPhoneNum() + ".jpg");
            UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                @Override
