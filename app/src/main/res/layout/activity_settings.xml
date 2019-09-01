@@ -32,8 +32,8 @@
                 app:civ_border_width="2dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="97dp"
+                android:layout_width="219dp"
+                android:layout_height="110dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
@@ -41,10 +41,10 @@
 
                 <TextView
                     android:id="@+id/Settings_Name"
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/font_family"
                     android:textColor="@color/black"
                     android:textSize="22dp" />
 
@@ -54,10 +54,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/raleway"
+                    android:fontFamily="@font/font_family"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
+
 
 
             </LinearLayout>
@@ -153,4 +154,6 @@
         android:fontFamily="@font/font_family"
     android:foreground="?attr/selectableItemBackground"
         android:textSize="22dp" />
+
+
 </LinearLayout>

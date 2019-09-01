@@ -18,6 +18,14 @@
         android:id="@+id/noUsersText"
         android:visibility="gone"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Users"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:fontFamily="@font/font_family"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

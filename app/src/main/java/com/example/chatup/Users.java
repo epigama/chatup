@@ -86,7 +86,7 @@ public class Users extends Fragment {
             while (i.hasNext()) {
                 key = i.next().toString();
 
-                if (!key.equals(com.example.chatup.UserDetails.username)) {
+                if (!key.equals(UserDetails.username)) {
                     al.add(key);
                 }
                 totalUsers++;

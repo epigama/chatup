@@ -28,11 +28,7 @@
                 android:id="@+id/layout1">
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/images"
-                android:src="@color/blue"/>
+
         </RelativeLayout>
     </ScrollView>
 
