@@ -56,9 +56,6 @@ import static android.Manifest.permission.WRITE_CONTACTS;
 
 public class Contacts extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 200;
-    public static boolean isAppWentToBg = false;
-    public static boolean isWindowFocused = false;
-    public static boolean isBackPressed = false;
     private static String TAG = MainActivity.class.getSimpleName();
     RecyclerView recyclerView;
     List<ContactModel> cardList;
@@ -145,40 +142,12 @@ public class Contacts extends Fragment {
 
 
 
-    private void applicationWillEnterForeground() {
-        if (isAppWentToBg) {
-            isAppWentToBg = false;
-
-        }
-        contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
-        handleAddContacts();
-
-    }
 
 
 
-    public void applicationdidenterbackground() {
-        if (!isWindowFocused) {
-            isAppWentToBg = true;
 
-        }
 
-    }
 
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (this instanceof Contacts) {
-//
-//        } else {
-//            isBackPressed = true;
-//        }
-//
-//        Log.d(TAG,
-//                "onBackPressed " + isBackPressed + ""
-//                        + this.getLocalClassName());
-//        super.onBackPressed();
-//    }
 
 
 
@@ -195,7 +164,7 @@ public class Contacts extends Fragment {
                         Log.d(TAG, "doOnSuccess: " + key);
                         if (!key.equals(com.example.chatup.UserDetails.username)) {
                             String tempKey = key;
-                            //key is our username node
+                            //key is our phonenum node
                             //so now we use mDatabase to access our node
                             DatabaseReference userReference;
                             userReference = mDatabase.getReference(String.format("users/%s", key));
