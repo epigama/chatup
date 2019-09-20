@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Contact_detail"></activity>
         <activity android:name=".DarkMode" />
         <activity android:name=".Feedback" />
         <activity android:name=".Chats" />
