@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +30,7 @@ public class PhoneAuthentication extends AppCompatActivity {
     Button signInButton;
     String codeSent;
     private String phoneNum;
+    CountryCodePicker cpp;
 
 
     //FRIEBASE AUTHENTICATION VARIABLE
@@ -58,6 +60,8 @@ public class PhoneAuthentication extends AppCompatActivity {
         editTextPhone = findViewById(R.id.editTextPhone);
 //
         signInButton = findViewById(R.id.sign_in_btn);
+        cpp=findViewById(R.id.CodePicker);
+        cpp.registerCarrierNumberEditText(editTextPhone);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class PhoneAuthentication extends AppCompatActivity {
     }
 
     private void sendVerificationCode() {
+        phoneNum= cpp.getFullNumberWithPlus();
 
         phoneNum = "+91" + editTextPhone.getText().toString();
         //DEFAULT +91 SO THAT USER SHOULD NOT ENTER EVERYTIME
