@@ -27,7 +27,7 @@ public class Settings extends Fragment {
     TextView bio;
     TextView invite;
     TextView notifications;
-    TextView faq;
+
     TextView feedback;
     TextView darkmode;
 
@@ -66,7 +66,7 @@ public class Settings extends Fragment {
           currentdaynight=AppCompatDelegate.getDefaultNightMode();
         invite = view.findViewById(R.id.Settings_Invite);
         notifications = view.findViewById(R.id.Settings_Notifications);
-        faq = view.findViewById(R.id.Settings_Faq);
+
         feedback = view.findViewById(R.id.Settings_Feedback);
         darkmode = view.findViewById(R.id.Settings_DarkMode);
         profile_pic=view.findViewById(R.id.Settings_Profile_Picture);
@@ -82,14 +82,6 @@ public class Settings extends Fragment {
 
         userName.setText(UserDetails.getUsername());
         bio.setText(UserDetails.getBio());
-
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), FAQ.class));
-            }
-        });
 
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
