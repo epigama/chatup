@@ -18,7 +18,6 @@ public class IntroPage extends AppCompatActivity {
       //  setTheme(R.style.dark_theme);
         super.onCreate(savedInstanceState);
         currentdaynight= AppCompatDelegate.getDefaultNightMode();
-
         setContentView(R.layout.activity_intro_page);
         new Handler().postDelayed(new Runnable() {
             @Override
