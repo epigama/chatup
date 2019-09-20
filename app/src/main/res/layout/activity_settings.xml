@@ -111,7 +111,7 @@
         android:fontFamily="@font/font_family"
         android:drawableLeft="@drawable/ic_help_outline"
         android:drawablePadding="10dp"
-        android:text="CONTACT"
+        android:text="Contact"
         android:textSize="22dp" />
 
 
