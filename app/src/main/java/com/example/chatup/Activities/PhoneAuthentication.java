@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chatup.Models.UserDetails;
+import com.example.chatup.R;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.FirebaseAuth;

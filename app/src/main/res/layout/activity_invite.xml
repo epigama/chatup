@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Invite"
+    tools:context=".Activities.Invite"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">

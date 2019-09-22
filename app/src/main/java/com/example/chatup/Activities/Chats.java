@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -13,19 +13,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,7 +36,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.firebase.client.Firebase;
+import com.example.chatup.Notifications.Config;
+import com.example.chatup.Fragments.Settings;
+import com.example.chatup.Models.UserDetails;
+import com.example.chatup.Notifications.NotificationUtils;
+import com.example.chatup.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,13 +54,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -186,7 +181,7 @@ try {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("message", messageText);
 //                map.put("image", downloadUri.toString());
-                map.put("user", com.example.chatup.UserDetails.username);
+                map.put("user", UserDetails.username);
                 reference1.push().setValue(map);
                 reference2.push().setValue(map);
                 messageArea.setText("");
@@ -218,7 +213,7 @@ catch (Exception e){
                                 if(!messageText.equals("")){
                                     Map<String, String> map = new HashMap<String, String>();
                                     map.put("message", messageText);
-                                    map.put("user", com.example.chatup.UserDetails.username);
+                                    map.put("user", UserDetails.username);
                                     reference1.push().setValue(map);
                                     reference2.push().setValue(map);
                                     messageArea.setText("");
@@ -230,7 +225,7 @@ catch (Exception e){
                     }
                 });
 
-                if(userName.equals(com.example.chatup.UserDetails.username)){
+                if(userName.equals(UserDetails.username)){
                     addMessageBox(message, 1);
                 }
                 else{
@@ -308,7 +303,7 @@ catch (Exception e){
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.Settings:
-                startActivity(new Intent(getApplicationContext(),Settings.class));
+                startActivity(new Intent(getApplicationContext(), Settings.class));
         }
         return true;
     }

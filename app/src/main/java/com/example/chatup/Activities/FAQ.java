@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,11 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chatup.Dialog.DialogChangeProfile;
-import com.example.chatup.Dialog.DialogExtra;
-import com.example.chatup.Dialog.DialogFingerPrint;
-import com.example.chatup.Dialog.DialogMessagesOutside;
-import com.example.chatup.Dialog.DialogWriteFeedback;
+import com.example.chatup.R;
 
 public class FAQ extends AppCompatActivity {
     TextView faq_open_settings;

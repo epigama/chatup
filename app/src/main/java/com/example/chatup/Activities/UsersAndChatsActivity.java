@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,6 +15,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatup.Constants.Constants;
+import com.example.chatup.Fragments.Contacts;
+import com.example.chatup.Fragments.Settings;
+import com.example.chatup.Fragments.Users;
+import com.example.chatup.Models.ChatModel;
+import com.example.chatup.Models.UserDetails;
+import com.example.chatup.R;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;

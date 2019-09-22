@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.chatup.Activities.DarkMode;
+import com.example.chatup.Activities.Feedback;
+import com.example.chatup.Activities.ProfilePage;
+import com.example.chatup.Constants.Constants;
+import com.example.chatup.R;
+import com.example.chatup.Models.UserDetails;
+
 import java.io.File;
 import static android.content.Context.MODE_PRIVATE;
 

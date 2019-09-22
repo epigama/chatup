@@ -1,12 +1,13 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.example.chatup.R;
 
 
 public class IntroPage extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class IntroPage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this,PhoneAuthentication.class);
+                Intent intent = new Intent(IntroPage.this, PhoneAuthentication.class);
                 startActivity(intent);
             }
         }, splash_screen_timer);

@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Notifications;
 
 public class Config {
 

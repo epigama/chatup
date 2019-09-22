@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Models;
 
 public class UserDetails {
     public static String username = "";

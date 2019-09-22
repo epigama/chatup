@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -21,36 +22,34 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.chatup.Activities.Chats;
+import com.example.chatup.R;
+import com.example.chatup.Models.UserDetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-public class ContactList extends Fragment {
-
+public class Users extends Fragment {
+    int currentdaynight;
     ListView usersList;
     TextView noUsersText;
-    ArrayList<String> al = new ArrayList<>(); //this is users ka list
+    ArrayList<String> al = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.activity_users, container, false);
         usersList = (ListView) view.findViewById(R.id.usersList);
         noUsersText = (TextView) view.findViewById(R.id.noUsersText);
-
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
-
+        currentdaynight = AppCompatDelegate.getDefaultNightMode();
         String url = "https://chaton-343f1.firebaseio.com/users.json";
-
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
@@ -87,26 +86,35 @@ public class ContactList extends Fragment {
             while (i.hasNext()) {
                 key = i.next().toString();
 
-                if (!key.equals(com.example.chatup.UserDetails.username)) {
+                if (!key.equals(UserDetails.username)) {
                     al.add(key);
                 }
-
                 totalUsers++;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        try {
 
-        if (totalUsers <= 1) {
-            noUsersText.setVisibility(View.VISIBLE);
-            usersList.setVisibility(View.GONE);
-        } else {
-            noUsersText.setVisibility(View.GONE);
-            usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
+            if (totalUsers <= 1) {
+                noUsersText.setVisibility(View.VISIBLE);
+                usersList.setVisibility(View.GONE);
+            } else {
+                noUsersText.setVisibility(View.GONE);
+                usersList.setVisibility(View.VISIBLE);
+                usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
+            }
+
+            pd.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        pd.dismiss();
     }
 }
+
+
+
+
+
+
