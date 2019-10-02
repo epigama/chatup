@@ -135,18 +135,6 @@ public class Contacts extends Fragment {
 
  return view;
     }
-
-
-
-
-
-
-
-
-
-
-
-
     public void handleAddContacts() {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
