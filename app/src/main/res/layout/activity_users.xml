@@ -8,7 +8,7 @@
 
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Users"
+    tools:context=".Fragments.Users"
     android:orientation="vertical">
 
     <TextView
@@ -17,6 +17,14 @@
         android:text="@string/no_users_found"
         android:id="@+id/noUsersText"
         android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Users"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:fontFamily="@font/font_family"/>
 
     <ListView
         android:layout_width="match_parent"

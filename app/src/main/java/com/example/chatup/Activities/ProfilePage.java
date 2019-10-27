@@ -1,19 +1,12 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.Manifest;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.NetworkOnMainThreadException;
-import android.os.ParcelFormatException;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,25 +22,23 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.Continuation;
+import com.example.chatup.Constants.Constants;
+import com.example.chatup.R;
+import com.example.chatup.Models.UserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class ProfilePage extends AppCompatActivity {
@@ -64,7 +55,7 @@ public class ProfilePage extends AppCompatActivity {
     String TAG = "";
     // ImageView imageView;
     EditText user_name, user_bio;
-    String userName, userBio;
+    String userName, userBio, phone;
     Button save_details;
     ImageView user_image_view;
     Uri pickedImgUri;
@@ -164,9 +155,16 @@ public class ProfilePage extends AppCompatActivity {
         user_image_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery();
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, REQUESCODE);
+              //  openGallery();
                 Log.d(TAG, "onClick: Uploading Image.");
                         //get the signed in user
+
+
+
+
                         if(name.equals("")) {
                             StorageReference storageRefer = storageReference.child("images/users/" +  "/" + name + ".jpg");
                             storageRefer.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -222,10 +220,56 @@ public class ProfilePage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null) {
+            pickedImgUri= data.getData();
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
+            //this shall crop
+
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if(resultCode==REQUESCODE){
+                   // Uri result_url=result.getUri();
+                    StorageReference file_path=storageReference.child(uid + ". jpg");
+                    file_path.putFile(pickedImgUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                           if(task.isSuccessful()){
+                               Toast.makeText(ProfilePage.this,"Profile image upload success",Toast.LENGTH_SHORT).show();
+                               final String download_url=task.getResult().getUploadSessionUri().toString();
+                               parentReference.child("Users").child(uid).child("image")
+                                       .setValue(download_url)
+                                       .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<Void> task) {
+                                               if(task.isSuccessful()){
+                                                   Toast.makeText(ProfilePage.this,"Imagesuccessfully oploaded to database",Toast.LENGTH_SHORT).show();
+                                               }
+                                               else{
+                                                   String message=task.getException().toString();
+                                               }
+
+                                           }
+                                       });
+                           }
+                           else{
+                               String message=task.getException().toString();
+                               Toast.makeText(ProfilePage.this,"Error  ",Toast.LENGTH_SHORT).show();
+                           }
+                           //this wil upload to firebase
+                        }
+                    });
+                }
+
+            }
+
             Log.d(TAG, " Code check");
-            pickedImgUri = data.getData();
+           // pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
 
+
+/**
             StorageReference storageReferen = storageReference.child("/images/users/" +  UserDetails.getUsername() +  ".jpg");
             UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -241,22 +285,28 @@ public class ProfilePage extends AppCompatActivity {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
+                     try{
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         Toast.makeText(ProfilePage.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
                         //Persist pickedImgUri so that it stays
-                        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
-                        editor.putString(getString(R.string.local_img_uri), downloadUri.toString());
-                        editor.apply();
+//                        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+//                        editor.putString(getString(R.string.local_img_uri), downloadUri.toString());
+//                        editor.apply();
 
-                        Log.w(TAG, "DOWNLOAD " +downloadUri.toString());
+                        Log.w(TAG, "DOWNLOAD " + downloadUri.toString());
                         parentReference.child(userName).child("uri").setValue(downloadUri.toString());
                         UserDetails.setUri(downloadUri.toString());
                     } else {
                         Log.w(TAG, "onComplete: " + "Incomplete upload");
                     }
                 }
-            });
+                     catch (Exception e){
+                         e.printStackTrace();
+                     }
+            }
+**/
+            //});
 
         }
 
@@ -273,9 +323,9 @@ public class ProfilePage extends AppCompatActivity {
 
     public void CreateUserAccount(final String name, String bio) {
         try {
-            parentReference.child(userName).child("name").setValue(userName);
-            parentReference.child(userName).child("bio").setValue(userBio);
-            parentReference.child(userName).child("phone").setValue(UserDetails.getPhoneNum());
+            parentReference.child(UserDetails.getPhoneNum()).child("name").setValue(userName);
+            parentReference.child(UserDetails.getPhoneNum()).child("bio").setValue(userBio);
+            parentReference.child(UserDetails.getPhoneNum()).child("phone").setValue(UserDetails.getPhoneNum());
         } catch (NullPointerException e) {
             Log.d(TAG, " null pointer" + e);
         }

@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Notifications;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -19,6 +19,8 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.chatup.R;
 
 import java.io.IOException;
 import java.io.InputStream;

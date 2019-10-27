@@ -4,30 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Invite"
+    tools:context=".Activities.Contact_detail"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">
-    
-    
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/invitation"
-        android:textSize="@dimen/medium_text"
+        android:id="@+id/ContactUS"
+        android:text="Contact US"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:textColor="@color/blue"
         android:fontFamily="@font/font_family"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/small_medium_text"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="2dp"/>
 
-    <Button
-        android:id="@+id/invite_folks"
-        android:layout_width="152dp"
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/blue_rectangle_border"
-        android:gravity="center"
-        android:text="Invite your folks"
+        android:id="@+id/FAQ"
+        android:text="FAQ"
+        android:clickable="true"
+        android:textSize="20dp"
         android:textColor="@color/blue"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:fontFamily="@font/font_family"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="2dp"/>
 </LinearLayout>

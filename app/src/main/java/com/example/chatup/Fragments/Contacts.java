@@ -1,22 +1,15 @@
-package com.example.chatup;
+package com.example.chatup.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +20,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.chatup.Activities.Chats;
+import com.example.chatup.Activities.MainActivity;
+import com.example.chatup.Models.ContactModel;
+import com.example.chatup.Models.DatabaseModel;
+import com.example.chatup.Models.UserDetails;
+import com.example.chatup.R;
 import com.github.tamir7.contacts.Contact;
 import com.github.tamir7.contacts.Email;
 import com.github.tamir7.contacts.PhoneNumber;
@@ -51,14 +50,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static android.Manifest.permission.READ_CONTACTS;
-import static android.Manifest.permission.WRITE_CONTACTS;
-
 public class Contacts extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 200;
-    public static boolean isAppWentToBg = false;
-    public static boolean isWindowFocused = false;
-    public static boolean isBackPressed = false;
     private static String TAG = MainActivity.class.getSimpleName();
     RecyclerView recyclerView;
     List<ContactModel> cardList;
@@ -142,46 +135,6 @@ public class Contacts extends Fragment {
 
  return view;
     }
-
-
-
-    private void applicationWillEnterForeground() {
-        if (isAppWentToBg) {
-            isAppWentToBg = false;
-
-        }
-        contacts = com.github.tamir7.contacts.Contacts.getQuery().find();
-        handleAddContacts();
-
-    }
-
-
-
-    public void applicationdidenterbackground() {
-        if (!isWindowFocused) {
-            isAppWentToBg = true;
-
-        }
-
-    }
-
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (this instanceof Contacts) {
-//
-//        } else {
-//            isBackPressed = true;
-//        }
-//
-//        Log.d(TAG,
-//                "onBackPressed " + isBackPressed + ""
-//                        + this.getLocalClassName());
-//        super.onBackPressed();
-//    }
-
-
-
     public void handleAddContacts() {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -193,9 +146,9 @@ public class Contacts extends Fragment {
                     while (i.hasNext()) {
                         key = i.next().toString();
                         Log.d(TAG, "doOnSuccess: " + key);
-                        if (!key.equals(com.example.chatup.UserDetails.username)) {
+                        if (!key.equals(UserDetails.username)) {
                             String tempKey = key;
-                            //key is our username node
+                            //key is our phonenum node
                             //so now we use mDatabase to access our node
                             DatabaseReference userReference;
                             userReference = mDatabase.getReference(String.format("users/%s", key));

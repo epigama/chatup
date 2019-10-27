@@ -1,12 +1,11 @@
-package com.example.chatup;
+package com.example.chatup.Models;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.chatup.R;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.materialize.holder.StringHolder;

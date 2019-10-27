@@ -18,19 +18,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DarkMode"></activity>
-        <activity android:name=".Feedback" />
-        <activity android:name=".Contact" />
-        <activity android:name=".Chats" />
-        <activity android:name=".Invite" />
-        <activity android:name=".OtpAuth" />
-        <activity android:name=".FAQ" />
-        <activity android:name=".PhoneAuthentication" />
-        <activity android:name=".ProfilePage" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginPage" />
-        <activity android:name=".DeviceListActivity" />
-        <activity android:name=".IntroPage">
+        <activity android:name=".Activities.Contact_detail"></activity>
+        <activity android:name=".Activities.DarkMode" />
+        <activity android:name=".Activities.Feedback" />
+        <activity android:name=".Activities.Chats" />
+        <activity android:name=".Activities.Invite" />
+        <activity android:name=".Activities.OtpAuth" />
+        <activity android:name=".Activities.FAQ" />
+        <activity android:name=".Activities.PhoneAuthentication" />
+        <activity android:name=".Activities.ProfilePage" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.IntroPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UsersAndChatsActivity"
+            android:name=".Activities.UsersAndChatsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <service android:name=".Notifications.FirebaseMessageService">
@@ -51,6 +49,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
