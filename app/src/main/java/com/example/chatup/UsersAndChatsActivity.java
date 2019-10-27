@@ -1,8 +1,10 @@
 package com.example.chatup;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +42,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
     private List<ChatModel> chatList;
     private FastAdapter<ChatModel> fastAdapter;
     private ItemAdapter<ChatModel> itemAdapter;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,16 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
 
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                // Permission is not granted, so request it right away!
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
 
         currentdaynight = AppCompatDelegate.getDefaultNightMode();//call here
         setContentView(R.layout.activity_users_and_chats);
@@ -201,6 +216,31 @@ catch (Exception e){
         super.onRestart();//check if not upgrade
         if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
             recreate();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay!
+                    Toast.makeText(this, "Contacts permission granted Yayyy!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // permission denied, boo!
+                    //TODO: Hide the contacts button itself, maybe.
+                    //Ask the permission recursively once again, for now!
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_CONTACTS},
+                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                }
+                return;
+            }
         }
     }
 }
