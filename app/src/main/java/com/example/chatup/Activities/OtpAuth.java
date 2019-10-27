@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chatup.Activities.ProfilePage;
+import com.example.chatup.Models.UserDetails;
+import com.example.chatup.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;

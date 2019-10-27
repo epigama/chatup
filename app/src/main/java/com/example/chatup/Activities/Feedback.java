@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.chatup.R;
 
 public class Feedback extends AppCompatActivity {
     Button feedback_mail;

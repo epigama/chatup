@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DarkMode"
+    tools:context=".Activities.DarkMode"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">

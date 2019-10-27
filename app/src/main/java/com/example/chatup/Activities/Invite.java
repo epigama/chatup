@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.Activities;
 
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -18,6 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.chatup.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
