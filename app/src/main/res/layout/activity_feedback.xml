@@ -8,6 +8,16 @@
     android:orientation="vertical">
 
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Animation_Id"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="10dp"
+        app:lottie_loop="true"
+        android:layout_gravity="center"
+        app:lottie_fileName="heart.json"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,14 +28,6 @@
         android:textColor="@color/blue"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"/>
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Animation_Id"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        android:layout_gravity="center"
-        app:lottie_fileName="heart.json"/>
 
     <TextView
         android:layout_width="360dp"
@@ -43,19 +45,20 @@
         android:textSize="@dimen/medium_text" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/FeedbackMail"
-        android:gravity="center"
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_background_blue"
+        android:drawableRight="@drawable/ic_arrow_white"
+        android:fontFamily="@font/font_family"
+        android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:drawableRight="@drawable/ic_arrow_white"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_background_blue"
-        android:textColor="@color/white"
         android:text="@string/feedback_reques"
-        android:textSize="15dp"/>
+        android:textColor="@color/white"
+        android:textSize="15dp" />
 
 
 
