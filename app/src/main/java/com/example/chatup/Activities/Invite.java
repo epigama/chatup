@@ -43,7 +43,7 @@ public class Invite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
 
         invite_folks = findViewById(R.id.invite_folks);
@@ -57,14 +57,13 @@ public class Invite extends AppCompatActivity {
 
     }
     private void onInviteClicked() {
-        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
-                .setMessage(getString(R.string.invitation_message))
-//                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
-//                .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
-//                .setCallToActionText(getString(R.string.invitation_cta))
-                .build();
-        startActivityForResult(intent, REQUEST_INVITE);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey, I found this terrific app. Do try it out!!");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
+
 
 
 
