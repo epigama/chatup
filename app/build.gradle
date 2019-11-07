@@ -72,4 +72,5 @@ dependencies {
     implementation 'com.hbb20:ccp:2.1.9'
     implementation 'com.google.firebase:firebase-invites:17.0.0'
     implementation 'com.github.joielechong:countrycodepicker:2.4.1'
+    implementation 'com.ramotion.cardslider:card-slider:0.3.1'
 }
