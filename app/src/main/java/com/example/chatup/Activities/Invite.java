@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.chatup.R;
+import com.google.android.gms.appinvite.AppInviteInvitation;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -34,6 +35,7 @@ public class Invite extends AppCompatActivity {
 
     //Initial value of isEnablesNLS is  false so that every time user installs the app, he has to manually enable it.
     private boolean isEnabledNLS = false;
+    int REQUEST_INVITE=001;
 
 
 
@@ -43,23 +45,25 @@ public class Invite extends AppCompatActivity {
         setContentView(R.layout.activity_invite);
         getSupportActionBar().hide();
 
+
         invite_folks = findViewById(R.id.invite_folks);
         invite_folks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent sendIntent = new Intent();
-                    sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                    sendIntent.setType("text/plain");
-                    startActivity(sendIntent);
-                } catch (Exception e) {
-                    //e.toString();
-                }
+                onInviteClicked();
             }
         });
       //  checkPermission();
 
+    }
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+//                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
+//                .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
+//                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
     }
 
 
