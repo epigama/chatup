@@ -156,7 +156,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-                        Fragment users_fragment = new Contacts();
+                        Fragment users_fragment = new Users();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 users_fragment).commit();
                         //Bluetooth
