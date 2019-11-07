@@ -50,6 +50,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.chatup.Models.UserDetails.phoneNum;
+
 public class Contacts extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 200;
     private static String TAG = MainActivity.class.getSimpleName();
@@ -157,9 +159,13 @@ public class Contacts extends Fragment {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Log.d(TAG, "onDataChange: " + dataSnapshot.getKey());
                                     DatabaseModel newPost = dataSnapshot.getValue(DatabaseModel.class);
-
-                                    String phoneNum = newPost.getPhone();
-                                    Log.d(TAG, "onDataChange: " + phoneNum);
+                                   try {
+                                       String phoneNum = newPost.getPhone();
+                                       Log.d(TAG, "onDataChange: " + phoneNum);
+                                   }
+                                   catch (Exception e){
+                                       e.printStackTrace();
+                                   }
 
                                     phoneList.add(phoneNum);
                                     userList.add(tempKey);
