@@ -1,7 +1,6 @@
 package com.example.chatup.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,9 +9,9 @@ import android.widget.Button;
 
 import com.example.chatup.R;
 
+
 public class Feedback extends AppCompatActivity {
     Button feedback_mail;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

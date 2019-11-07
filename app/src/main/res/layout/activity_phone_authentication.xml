@@ -29,12 +29,12 @@
         android:orientation="horizontal">
 
         <com.hbb20.CountryCodePicker
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            app:ccp_defaultNameCode="India"
-            android:id="@+id/CodePicker">
-
-
+            android:id="@+id/CodePicker"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_showNameCode="true">
         </com.hbb20.CountryCodePicker>
 
         <EditText

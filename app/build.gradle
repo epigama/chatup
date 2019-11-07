@@ -70,5 +70,5 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     implementation 'com.airbnb.android:lottie:3.0.1'
     implementation 'com.hbb20:ccp:2.1.9'
-    implementation 'com.github.scrounger:countrycurrencypicker:1.1.1'
+    implementation 'com.github.joielechong:countrycodepicker:2.4.1'
 }
