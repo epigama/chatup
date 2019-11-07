@@ -70,7 +70,7 @@ public class Settings extends Fragment {
             inflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
         }
 
-          currentdaynight=AppCompatDelegate.getDefaultNightMode();
+        currentdaynight=AppCompatDelegate.getDefaultNightMode();
         invite = view.findViewById(R.id.Settings_Invite);
         notifications = view.findViewById(R.id.Settings_Notifications);
 
