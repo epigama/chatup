@@ -25,9 +25,23 @@
         android:textColor="@color/blue"
         android:textSize="25dp"
         android:fontFamily="@font/font_family"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="It's quite empty. Common, invite your contacts!!"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="@font/font_family"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/usersList"/>
+        android:id="@+id/usersList"
+        />
+
+
 </LinearLayout>
