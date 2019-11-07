@@ -78,7 +78,7 @@ public class PhoneAuthentication extends AppCompatActivity {
     private void sendVerificationCode() {
         phoneNum= cpp.getFullNumberWithPlus();
 
-        phoneNum = cpp + editTextPhone.getText().toString();
+        phoneNum = "+91" + editTextPhone.getText().toString();
         //DEFAULT +91 SO THAT USER SHOULD NOT ENTER EVERYTIME
 
         UserDetails.setPhoneNum(phoneNum);
