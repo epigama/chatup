@@ -3,13 +3,19 @@ package com.example.chatup.Activities;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.Toast;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -40,9 +46,6 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import java.util.List;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
-    int currentdaynight; //initialise this
-
-
     private String TAG = this.getClass().getSimpleName();
 
     private RecyclerView recyclerView;
@@ -53,12 +56,6 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.dark_theme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
         super.onCreate(savedInstanceState);
 
         // Here, thisActivity is the current activity
@@ -72,7 +69,6 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
 
-        currentdaynight = AppCompatDelegate.getDefaultNightMode();//call here
         setContentView(R.layout.activity_users_and_chats);
         Fragment users_fragment = new Users();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
@@ -116,18 +112,27 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.dark_theme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+
+//        // Get the primary text color of the theme
+//        TypedValue typedValue = new TypedValue();
+//        Resources.Theme theme = this.getTheme();
+//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+//        TypedArray arr =
+//                this.obtainStyledAttributes(typedValue.data, new int[]{
+//                        android.R.attr.textColorPrimary, android.R.attr.colorBackground});
+//        int textColor = arr.getColor(0, -1);
+//        int backgroundColor = arr.getColor(1, -1);
+        int textColorPrimaryColor =
+                themeAttributeToColor(
+                        android.R.attr.textColorPrimary,
+                        this);
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("ChatUp");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
+        toolbar.setTitleTextColor(textColorPrimaryColor);
 
-        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+//        toolbar.setBackgroundColor(backgroundColor);
         toolbar.setElevation(0);
 //        setSupportActionBar(toolbar);
 
@@ -219,14 +224,6 @@ catch (Exception e){
 
 
     @Override
-    protected void onRestart() {
-        super.onRestart();//check if not upgrade
-        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
-            recreate();
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -248,6 +245,22 @@ catch (Exception e){
                 }
                 return;
             }
+        }
+    }
+
+    public static int themeAttributeToColor(int themeAttributeId,
+                                            Context context) {
+        TypedValue outValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        boolean wasResolved =
+                theme.resolveAttribute(
+                        themeAttributeId, outValue, true);
+        if (wasResolved) {
+            return ContextCompat.getColor(
+                    context, outValue.resourceId);
+        } else {
+            // fallback colour handling
+            return 0;
         }
     }
 }

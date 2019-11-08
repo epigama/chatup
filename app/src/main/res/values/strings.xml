@@ -85,4 +85,7 @@
     <string name="msg_subscribe_failed">Subscribe failed</string>
     <string name="invitation_title">Invite</string>
     <string name="invitation_message">Hey, i found this terrific app Tryit out!!</string>
+    <string name="key_enable_dark_mode">dark_mode</string>
+    <string name="summary_upload_over_wifi">This enables dark mode</string>
+    <string name="title_auto_upload">Dark Mode</string>
 </resources>
