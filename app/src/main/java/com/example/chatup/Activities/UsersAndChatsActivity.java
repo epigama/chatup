@@ -126,13 +126,15 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                 themeAttributeToColor(
                         android.R.attr.textColorPrimary,
                         this);
+        int backgroundColorPrimaryColor = themeAttributeToColor(android.R.attr.colorBackground, this);
         ChipNavigationBar navigationBar = findViewById(R.id.bottom_menu);
+        navigationBar.setBackgroundColor(backgroundColorPrimaryColor);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("ChatUp");
         toolbar.setTitleTextColor(textColorPrimaryColor);
 
-//        toolbar.setBackgroundColor(backgroundColor);
+//        toolbar.setBackgroundColor(backgroundColorPrimaryColor);
         toolbar.setElevation(0);
 //        setSupportActionBar(toolbar);
 

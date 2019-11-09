@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Feedback"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
 
 
 
@@ -26,7 +27,7 @@
         android:layout_marginTop="70dp"
         android:fontFamily="@font/font_family"
         android:text="@string/feedback"
-        android:textColor="@color/blue"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="@dimen/medium_large_text"
         android:textStyle="bold" />
 
@@ -41,7 +42,7 @@
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:text="@string/feedback_intro"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="@dimen/medium_text" />
 
     <Button
