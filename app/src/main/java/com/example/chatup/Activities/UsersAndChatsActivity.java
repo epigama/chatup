@@ -53,6 +53,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
     private FastAdapter<ChatModel> fastAdapter;
     private ItemAdapter<ChatModel> itemAdapter;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 001;
+    private boolean firstRun = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,11 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         Fragment users_fragment = new Users();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                 users_fragment).commit();
+
+        //Show TapTargetView only if the user is opening the app for the first time.
+        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean("first_run", firstRun);
+        editor.apply();
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -191,38 +197,45 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                 }
             }
         });
-        try{
-        TapTargetView.showFor(this,                 // `this` is an Activity
-                TapTarget.forView(findViewById(R.id.profile), "Settings page", "Open Settings page to edit profile and for other facilities")
-                        .tintTarget(false)
-                        .titleTextColor(R.color.white)
-                        .outerCircleColor(R.color.olive_green)
-                        .dimColor(R.color.light_olive_green)
-        );
 
-        TapTargetView.showFor(this,                 // `this` is an Activity
-                TapTarget.forView(findViewById(R.id.activity), "Activity Page", "This page will control your activities")
-                        .tintTarget(false)
-                        .titleTextColor(R.color.white)
-                        .outerCircleColor(R.color.purple)
-                        .dimColor(R.color.light_purple)
-        );
+        //Read from sharedpreferences and check if it is the first run
+        SharedPreferences firstRunCheckSharedPref = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        firstRun = firstRunCheckSharedPref.getBoolean("first_run", false);
+        if(firstRun){
+            try{
+                TapTargetView.showFor(this,                 // `this` is an Activity
+                        TapTarget.forView(findViewById(R.id.profile), "Settings page", "Open Settings page to edit profile and for other facilities")
+                                .tintTarget(false)
+                                .titleTextColor(R.color.white)
+                                .outerCircleColor(R.color.olive_green)
+                                .dimColor(R.color.light_olive_green)
+                );
+
+                TapTargetView.showFor(this,                 // `this` is an Activity
+                        TapTarget.forView(findViewById(R.id.activity), "Activity Page", "This page will control your activities")
+                                .tintTarget(false)
+                                .titleTextColor(R.color.white)
+                                .outerCircleColor(R.color.purple)
+                                .dimColor(R.color.light_purple)
+                );
 
 
-        TapTargetView.showFor(this,                 // `this` is an Activity
-                TapTarget.forView(findViewById(R.id.favorites), "Contacts Page", "View your contacts here")
-                        .tintTarget(false)
-                        .titleTextColor(R.color.white)
-                        .outerCircleColor(R.color.orange)
-                        .dimColor(R.color.light_orange)
-        );
+                TapTargetView.showFor(this,                 // `this` is an Activity
+                        TapTarget.forView(findViewById(R.id.favorites), "Contacts Page", "View your contacts here")
+                                .tintTarget(false)
+                                .titleTextColor(R.color.white)
+                                .outerCircleColor(R.color.orange)
+                                .dimColor(R.color.light_orange)
+                );
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            editor.putBoolean("first_run", false);
+            editor.apply();
+        }
+
     }
-catch (Exception e){
-        e.printStackTrace();
-    }
-    }
-
-
 
 
     @Override

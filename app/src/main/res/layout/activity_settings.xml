@@ -163,7 +163,11 @@
                android:layout_marginLeft="15dp"
                android:layout_marginTop="40dp"
                android:text="Dark Mode?   "
-               android:textColor="?android:attr/textColorPrimary"/>
+               android:textSize="22dp"
+               android:drawablePadding="10dp"
+               android:textColor="?android:attr/textColorPrimary"
+               android:drawableLeft="@drawable/ic_darkmode"
+               android:fontFamily="@font/font_family"/>
        </LinearLayout>
     </ScrollView>
 
