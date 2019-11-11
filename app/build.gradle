@@ -73,4 +73,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-invites:17.0.0'
     implementation 'com.github.joielechong:countrycodepicker:2.4.1'
     implementation 'com.ramotion.cardslider:card-slider:0.3.1'
+    implementation 'com.github.BakerJQ:Android-InfiniteCards:1.0.5'
+    implementation 'com.github.AppIntro:AppIntro:5.1.0'
 }
