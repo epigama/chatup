@@ -1,8 +1,13 @@
 package com.example.chatup.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +42,7 @@ public class Users extends Fragment {
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>();
+    ArrayList<String> usersAl = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
 
@@ -85,9 +92,14 @@ public class Users extends Fragment {
 
             while (i.hasNext()) {
                 key = i.next().toString();
-
-                if (!key.equals(UserDetails.username)) {
+                if (!key.equals(UserDetails.phoneNum)) {
                     al.add(key);
+                    String contactName = getContactName(getContext(), key);
+                    if(contactName != ""){
+                        Log.d("", "onItemClick: " + "Contact exists");
+                        Toast.makeText(getContext(),  contactName + " Exists", Toast.LENGTH_SHORT).show();
+                        usersAl.add(contactName);
+                    }
                 }
                 totalUsers++;
             }
@@ -103,13 +115,31 @@ public class Users extends Fragment {
             } else {
                 noUsersText.setVisibility(View.GONE);
                 usersList.setVisibility(View.VISIBLE);
-                usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, al));
+                usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, usersAl));
             }
 
             pd.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getContactName(Context context, String number) {
+        Uri lookupUri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] mPhoneNumberProjection = { ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
+        Cursor cur = context.getContentResolver().query(lookupUri,mPhoneNumberProjection, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                String name = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                return name;
+            }
+        } finally {
+            if (cur != null)
+                cur.close();
+        }
+        return "";
     }
 }
 
