@@ -84,9 +84,10 @@
     <string name="msg_subscribed">Successfully subscribed</string>
     <string name="msg_subscribe_failed">Subscribe failed</string>
     <string name="invitation_title">Invite</string>
-    <string name="invitation_message">Hey, i found this terrific app Tryit out!!</string>
+    <string name="invitation_message">Hey, i found this terrific app Try it out!!</string>
     <string name="desc1">Connect around the world!</string>
     <string name="desc1_1">ChatUp allows you to connect around the entire world</string>
     <string name="desc2">We have worked towards giving you the best experience with an adorable UI</string>
     <string name="desc3">Share stuff to people</string>
+    <string name="desc4">And many more coming up, just for you!!</string>
 </resources>
