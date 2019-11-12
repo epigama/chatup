@@ -90,4 +90,7 @@
     <string name="desc2">We have worked towards giving you the best experience with an adorable UI</string>
     <string name="desc3">Share stuff to people</string>
     <string name="desc4">And many more coming up, just for you!!</string>
+    <string name="key_enable_dark_mode">dark_mode</string>
+    <string name="summary_upload_over_wifi">This enables dark mode</string>
+    <string name="title_auto_upload">Dark Mode</string>
 </resources>

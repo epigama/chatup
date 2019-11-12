@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -37,8 +40,8 @@ public class Settings extends Fragment {
     TextView notifications;
 
     TextView feedback;
-    TextView darkmode;
-
+//    TextView darkmode;
+    Switch darkSwitch;
 
     @Nullable
     @Override
@@ -76,11 +79,12 @@ public class Settings extends Fragment {
         notifications = view.findViewById(R.id.Settings_Notifications);
 
         feedback = view.findViewById(R.id.Settings_Feedback);
-        darkmode = view.findViewById(R.id.Settings_DarkMode);
+//        darkmode = view.findViewById(R.id.Settings_DarkMode);
         profile_pic=view.findViewById(R.id.Settings_Profile_Picture);
         userName = view.findViewById(R.id.Settings_Name);
         bio = view.findViewById(R.id.Settings_Bio);
         edit_profile = view.findViewById(R.id.EditProfile);
+        darkSwitch = view.findViewById(R.id.dark_switch);
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,18 +102,38 @@ public class Settings extends Fragment {
             }
         });
 
-        darkmode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), DarkMode.class));
-            }
-        });
+//        darkmode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getContext(), DarkMode.class));
+//            }
+//        });
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), Invite.class));
             }
         });
+
+        //Extract dark mode value from sharedpref and set state of darkSwitch accordingly.
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean isChecked = settings.getBoolean("switch", false);
+        darkSwitch.setChecked(isChecked);
+
+        darkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //Use sharedpreferences to save switch value and access it in Application class
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor e = settings.edit();
+                e.putBoolean("switch", darkSwitch.isChecked());
+                e.commit();
+                if(isChecked)
+                    darkMode();
+                else
+                    lightMode();
+            }
+        });
+
 
         //Extract uri from sharedpreferences, if not blank set it to user_image_view
         SharedPreferences preferences = getContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
@@ -135,4 +159,25 @@ public class Settings extends Fragment {
                     .commit();
         }
     }
+
+    private void loadDarkModeFromPreferences(SharedPreferences sharedPreferences) {
+        Boolean darkMode = (sharedPreferences.getBoolean(getString(R.string.key_enable_dark_mode), false));
+    }
+
+    public void darkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        getContext().setTheme(R.style.dark_theme);
+        UserDetails.setDarkSwitch(1);
+    }
+
+    public void lightMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getContext().setTheme(R.style.AppTheme);
+        UserDetails.setDarkSwitch(0);
+
+    }
+
+
 }
+
+

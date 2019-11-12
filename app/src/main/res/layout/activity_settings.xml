@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="?android:attr/colorBackground">
 
     <FrameLayout
         android:id="@+id/framelayoutparent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/font_family"
-                    android:textColor="@color/black"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="22dp" />
 
                 <TextView
@@ -55,7 +55,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/font_family"
-                    android:textColor="@color/black"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -73,6 +73,7 @@
         android:id="@+id/EditProfile"
         android:text="Edit Your Profile"
         android:textSize="18dp"
+        android:textColor="?android:attr/textColorPrimary"
         android:textStyle="italic"
         android:fontFamily="@font/font_family"
         android:layout_marginTop="8dp"
@@ -92,6 +93,7 @@
             android:fontFamily="@font/font_family"
             android:gravity="center"
             android:id="@+id/Settings_Invite"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="@string/invite"
             android:textSize="22dp"
             android:clickable="true"
@@ -102,59 +104,72 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/Settings_Faq"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        android:fontFamily="@font/font_family"
-        android:drawableLeft="@drawable/ic_help_outline"
-        android:drawablePadding="10dp"
-        android:text="Contact"
-        android:textSize="22dp" />
+        android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <TextView
+               android:id="@+id/Settings_Faq"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginTop="40dp"
+               android:clickable="true"
+               android:textColor="?android:attr/textColorPrimary"
+               android:fontFamily="@font/font_family"
+               android:drawableLeft="@drawable/ic_help_outline"
+               android:drawablePadding="10dp"
+               android:text="Contact"
+               android:textSize="22dp" />
 
 
-    <TextView
-        android:id="@+id/Settings_Notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        android:fontFamily="@font/font_family"
-        android:drawableLeft="@drawable/ic_notifications"
-        android:drawablePadding="10dp"
-        android:text="Notifications"
-        android:textSize="22dp" />
+           <TextView
+               android:id="@+id/Settings_Notifications"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginTop="40dp"
+               android:clickable="true"
+               android:textColor="?android:attr/textColorPrimary"
+               android:fontFamily="@font/font_family"
+               android:drawableLeft="@drawable/ic_notifications"
+               android:drawablePadding="10dp"
+               android:text="Notifications"
+               android:textSize="22dp" />
 
-    <TextView
-        android:id="@+id/Settings_Feedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        android:fontFamily="@font/font_family"
-        android:drawableLeft="@drawable/ic_feedback"
-        android:drawablePadding="10dp"
-        android:text="Feedback"
-        android:textSize="22dp" />
+           <TextView
+               android:id="@+id/Settings_Feedback"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginTop="40dp"
+               android:textColor="?android:attr/textColorPrimary"
+               android:clickable="true"
+               android:fontFamily="@font/font_family"
+               android:drawableLeft="@drawable/ic_feedback"
+               android:drawablePadding="10dp"
+               android:text="Feedback"
+               android:textSize="22dp" />
 
-    <TextView
-        android:id="@+id/Settings_DarkMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_darkmode"
-        android:drawablePadding="10dp"
-        android:text="Darkmode"
-        android:fontFamily="@font/font_family"
-    android:foreground="?attr/selectableItemBackground"
-        android:textSize="22dp" />
+
+           <Switch
+               android:id="@+id/dark_switch"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginTop="40dp"
+               android:text="Dark Mode?   "
+               android:textSize="22dp"
+               android:drawablePadding="10dp"
+               android:textColor="?android:attr/textColorPrimary"
+               android:drawableLeft="@drawable/ic_darkmode"
+               android:fontFamily="@font/font_family"/>
+       </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

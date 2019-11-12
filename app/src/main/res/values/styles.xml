@@ -32,7 +32,7 @@
         <!--<item name="buttoncolor">#E91E63</item>-->
     <!--</style>-->
 
-    <style name="dark_theme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="dark_theme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

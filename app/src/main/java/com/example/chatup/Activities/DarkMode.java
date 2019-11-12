@@ -40,14 +40,14 @@ public class DarkMode extends AppCompatActivity {
         });
     }
 
-    private void darkMode(){
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    public void darkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         setTheme(R.style.dark_theme);
         UserDetails.setDarkSwitch(1);
     }
 
-    private void lightMode(){
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    public void lightMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setTheme(R.style.AppTheme);
         UserDetails.setDarkSwitch(0);
 

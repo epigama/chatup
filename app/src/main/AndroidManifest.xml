@@ -17,9 +17,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:name=".MyApplication"
+        android:theme="@style/dark_theme">
+        <activity android:name=".Activities.Contact_detail"></activity>
         <activity android:name=".DescActivity"></activity>
-        <activity android:name=".Activities.Contact_detail" />
         <activity android:name=".Activities.DarkMode" />
         <activity android:name=".Activities.Feedback" />
         <activity android:name=".Activities.Chats" />

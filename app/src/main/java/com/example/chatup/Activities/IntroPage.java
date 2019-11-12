@@ -11,19 +11,16 @@ import com.example.chatup.R;
 
 
 public class IntroPage extends AppCompatActivity {
-    int currentdaynight;
     public static final int splash_screen_timer = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      //  setTheme(R.style.dark_theme);
         super.onCreate(savedInstanceState);
-        currentdaynight= AppCompatDelegate.getDefaultNightMode();
         setContentView(R.layout.activity_intro_page);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this, UsersAndChatsActivity.class);
+                Intent intent = new Intent(IntroPage.this, PhoneAuthentication.class);
                 startActivity(intent);
             }
         }, splash_screen_timer);
@@ -35,11 +32,5 @@ public class IntroPage extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if(currentdaynight!=AppCompatDelegate.getDefaultNightMode()){
-            recreate();
-        }
-    }
+
 }
