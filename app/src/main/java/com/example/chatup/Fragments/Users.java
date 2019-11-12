@@ -41,6 +41,7 @@ public class Users extends Fragment {
     int currentdaynight;
     ListView usersList;
     TextView noUsersText;
+    TextView noUsersText2;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> usersAl = new ArrayList<>();
     int totalUsers = 0;
@@ -52,6 +53,7 @@ public class Users extends Fragment {
         View view = inflater.inflate(R.layout.activity_users, container, false);
         usersList = (ListView) view.findViewById(R.id.usersList);
         noUsersText = (TextView) view.findViewById(R.id.noUsersText);
+        noUsersText2 = view.findViewById(R.id.invite_folks);
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");
         pd.show();
@@ -114,6 +116,7 @@ public class Users extends Fragment {
                 usersList.setVisibility(View.GONE);
             } else {
                 noUsersText.setVisibility(View.GONE);
+                noUsersText2.setVisibility(View.GONE);
                 usersList.setVisibility(View.VISIBLE);
                 usersList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, usersAl));
             }
