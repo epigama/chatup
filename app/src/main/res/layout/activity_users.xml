@@ -31,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:id="@+id/invite_folks"
         android:text="It's quite empty. Common, invite your contacts!!"
         android:layout_gravity="center"
         android:gravity="center"
