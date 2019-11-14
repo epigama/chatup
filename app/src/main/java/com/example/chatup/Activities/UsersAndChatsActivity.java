@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -31,6 +32,7 @@ import com.example.chatup.Fragments.Settings;
 import com.example.chatup.Fragments.Users;
 import com.example.chatup.Models.ChatModel;
 import com.example.chatup.Models.UserDetails;
+import com.example.chatup.PrefManager;
 import com.example.chatup.R;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -47,34 +49,54 @@ import java.util.List;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
     private String TAG = this.getClass().getSimpleName();
-
-    private RecyclerView recyclerView;
-    private List<ChatModel> chatList;
-    private FastAdapter<ChatModel> fastAdapter;
-    private ItemAdapter<ChatModel> itemAdapter;
+    private PrefManager prefManager;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 001;
     private boolean firstRun = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefManager = new PrefManager(this);
+//        if(prefManager.isFirstTimeLaunch()){
+//            TapTargetView.showFor(this,                 // `this` is an Activity
+//                    TapTarget.forView(findViewById(R.id.profile), "Settings page", "Open Settings page to edit profile and for other facilities")
+//                            .tintTarget(false)
+//                            .titleTextColor(R.color.white)
+//                            .outerCircleColor(R.color.olive_green)
+//                            .dimColor(R.color.light_olive_green)
+//            );
+//
+//            TapTargetView.showFor(this,                 // `this` is an Activity
+//                    TapTarget.forView(findViewById(R.id.activity), "Activity Page", "This page will control your activities")
+//                            .tintTarget(false)
+//                            .titleTextColor(R.color.white)
+//                            .outerCircleColor(R.color.purple)
+//                            .dimColor(R.color.light_purple)
+//            );
+//
+//
+//            TapTargetView.showFor(this,                 // `this` is an Activity
+//                    TapTarget.forView(findViewById(R.id.favorites), "Contacts Page", "View your contacts here")
+//                            .tintTarget(false)
+//                            .titleTextColor(R.color.white)
+//                            .outerCircleColor(R.color.orange)
+//                            .dimColor(R.color.light_orange)
+//            );
 
-        // Here, thisActivity is the current activity
+        //}
+
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
-
-                // Permission is not granted, so request it right away!
+            // Permission is not granted, so request it right away!
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_CONTACTS},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
-
         setContentView(R.layout.activity_users_and_chats);
         Fragment users_fragment = new Users();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                 users_fragment).commit();
-
         //Show TapTargetView only if the user is opening the app for the first time.
         SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
         editor.putBoolean("first_run", firstRun);
@@ -203,30 +225,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         firstRun = firstRunCheckSharedPref.getBoolean("first_run", false);
         if(firstRun){
             try{
-                TapTargetView.showFor(this,                 // `this` is an Activity
-                        TapTarget.forView(findViewById(R.id.profile), "Settings page", "Open Settings page to edit profile and for other facilities")
-                                .tintTarget(false)
-                                .titleTextColor(R.color.white)
-                                .outerCircleColor(R.color.olive_green)
-                                .dimColor(R.color.light_olive_green)
-                );
 
-                TapTargetView.showFor(this,                 // `this` is an Activity
-                        TapTarget.forView(findViewById(R.id.activity), "Activity Page", "This page will control your activities")
-                                .tintTarget(false)
-                                .titleTextColor(R.color.white)
-                                .outerCircleColor(R.color.purple)
-                                .dimColor(R.color.light_purple)
-                );
-
-
-                TapTargetView.showFor(this,                 // `this` is an Activity
-                        TapTarget.forView(findViewById(R.id.favorites), "Contacts Page", "View your contacts here")
-                                .tintTarget(false)
-                                .titleTextColor(R.color.white)
-                                .outerCircleColor(R.color.orange)
-                                .dimColor(R.color.light_orange)
-                );
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -278,4 +277,17 @@ public class UsersAndChatsActivity extends AppCompatActivity {
             return 0;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = UsersAndChatsActivity.this.getSharedPreferences("com.example.chatup", Context.MODE_PRIVATE);
+        if (prefs.getBoolean("firstrun", true)) {
+            SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putBoolean("first_run", firstRun);
+            editor.apply();
+            SharedPreferences firstRunCheckSharedPref = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+         //   firstRun = firstRunCheckSharedPref.getBoolean("first_run", false);
+        }}
+
 }

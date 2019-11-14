@@ -21,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chatup.Activities.Chats;
-import com.example.chatup.Activities.MainActivity;
 import com.example.chatup.Models.ContactModel;
 import com.example.chatup.Models.DatabaseModel;
 import com.example.chatup.Models.UserDetails;
@@ -54,7 +53,7 @@ import static com.example.chatup.Models.UserDetails.phoneNum;
 
 public class Contacts extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 200;
-    private static String TAG = MainActivity.class.getSimpleName();
+    private static String TAG = "";
     RecyclerView recyclerView;
     List<ContactModel> cardList;
     FastAdapter<ContactModel> fastAdapter;

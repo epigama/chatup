@@ -160,10 +160,6 @@ public class Settings extends Fragment {
         }
     }
 
-    private void loadDarkModeFromPreferences(SharedPreferences sharedPreferences) {
-        Boolean darkMode = (sharedPreferences.getBoolean(getString(R.string.key_enable_dark_mode), false));
-    }
-
     public void darkMode(){
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         getContext().setTheme(R.style.dark_theme);

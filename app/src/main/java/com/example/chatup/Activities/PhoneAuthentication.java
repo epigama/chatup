@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chatup.Activities.OtpAuth;
+import com.example.chatup.Activities.UsersAndChatsActivity;
 import com.example.chatup.Models.UserDetails;
 import com.example.chatup.R;
 import com.google.firebase.FirebaseException;

@@ -16,7 +16,7 @@
         android:text="@string/desc4"
         android:fontFamily="@font/font_family"
         android:textSize="20dp"
-        android:textColor="blue"
+        android:textColor="@color/blue"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="20dp"/>
