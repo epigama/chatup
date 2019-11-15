@@ -16,7 +16,6 @@
         android:id="@+id/card_idea"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/blue_rectangle_border"
         cardview:cardCornerRadius="8dp"
         cardview:contentPadding="10dp"
         tools:cardElevation="200dp">
@@ -52,7 +51,6 @@
                     android:layout_height="26dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginBottom="7dp"
-                    android:background="@drawable/blue_rectangle_border"
                     android:text="@string/invite"
                     android:id="@+id/button_invite"
                     android:textColor="@color/blue"
