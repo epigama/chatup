@@ -9,13 +9,13 @@
     android:layout_marginRight="5dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
-    android:background="@drawable/blue_rectangle_border"
+
     >
 
     <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/card_idea"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="61dp"
         cardview:cardCornerRadius="8dp"
         cardview:contentPadding="10dp"
         tools:cardElevation="200dp">
@@ -37,11 +37,12 @@
                 <TextView
                     android:id="@+id/text_name"
                     android:layout_width="200dp"
-                    android:layout_height="47dp"
+                    android:layout_height="48dp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center_vertical"
                     android:paddingTop="3dp"
                     android:paddingBottom="20dp"
+                    android:fontFamily="@font/font_family"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/small_medium_text" />
 
@@ -51,8 +52,10 @@
                     android:layout_height="26dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginBottom="7dp"
+                    android:background="@drawable/blue_rectangle_border"
                     android:text="@string/invite"
                     android:id="@+id/button_invite"
+                    android:fontFamily="@font/font_family"
                     android:textColor="@color/blue"
                     android:textSize="12dp" />
             </LinearLayout>
