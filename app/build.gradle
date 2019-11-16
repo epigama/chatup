@@ -75,4 +75,5 @@ dependencies {
     implementation 'com.ramotion.cardslider:card-slider:0.3.1'
     implementation 'com.github.BakerJQ:Android-InfiniteCards:1.0.5'
     implementation 'com.github.AppIntro:AppIntro:5.1.0'
+    implementation 'com.github.stfalcon:chatkit:0.3.3'
 }

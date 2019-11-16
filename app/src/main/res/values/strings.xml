@@ -93,4 +93,5 @@
     <string name="key_enable_dark_mode">dark_mode</string>
     <string name="summary_upload_over_wifi">This enables dark mode</string>
     <string name="title_auto_upload">Dark Mode</string>
+    <string name="hint_enter_a_message">Type here..</string>
 </resources>

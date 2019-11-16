@@ -85,6 +85,8 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
         //}
 
+        Intent intent = new Intent(this, Chats.class);
+        startActivity(intent);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -173,31 +175,20 @@ public class UsersAndChatsActivity extends AppCompatActivity {
         UserDetails.setUsername(name);
         UserDetails.setBio(bio);
 
-
-//        recyclerView = findViewById(R.id.recycler);
-        //   itemAdapter = new ItemAdapter<>();
-        // fastAdapter = FastAdapter.with(itemAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(fastAdapter);
-
-        //    ChatModel model = new ChatModel("Regina", "How do you do?", "12:30");
-        //  ChatModel model1 = new ChatModel("Senorita", "How's the weather like?", "12:32");
-        //itemAdapter.add(model);
-        //itemAdapter.add(model1);
-        //L̥fastAdapter.notifyAdapterDataSetChanged();
-
         navigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-                        Fragment users_fragment = new Users();
+                        Fragment recent_chat_fragment = new Users();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
-                                users_fragment).commit();
+                                recent_chat_fragment).commit();
                         //Bluetooth
                         break;
                     case R.id.activity:
-                        //  startActivity(new Intent(UsersAndChatsActivity.this, Users.class));
+                        Fragment users_fragment = new Users();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
+                                users_fragment).commit();
                         break;
                     case R.id.favorites:
                         Fragment contacts_fragment = new Contacts();
