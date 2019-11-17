@@ -83,7 +83,7 @@ public class Chats extends AppCompatActivity {
     MessagesListAdapter<Message> adapter;
     MessagesList messagesList;
     MessageInput input;
-    String messageText = "";
+    String messageText;
     //private TextView txtRegId ;
     @Override
     protected void onPause() {
@@ -202,21 +202,22 @@ public class Chats extends AppCompatActivity {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
-                                if(!messageText.equals("")){
-                                    Map<String, String> mapX = new HashMap<String, String>();
-                                    map.put("message", messageText);
+                                if(!message.equals("")){
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    map.put("message", message);
                                     map.put("user", UserDetails.username);
-                                    reference1.push().setValue(mapX);
-                                    reference2.push().setValue(mapX);
+
+//                                    reference1.push().setValue(mapX);
+//                                    reference2.push().setValue(mapX);
 //                                    messageArea.setText("");
                                 }
 
 
                 if(userName.equals(UserDetails.username)){
-                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(UserDetails.getPhoneNum(), UserDetails.getUsername(), null, true), messageText), true);
+                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(UserDetails.getPhoneNum(), UserDetails.getUsername(), null, true), message), true);
                 }
                 else{
-                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(""+System.currentTimeMillis() + 1, UserDetails.getUsername(), null, true), messageText), true);
+                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(""+System.currentTimeMillis() + 1, UserDetails.getUsername(), null, true), message), true);
                     //createNotification(Chats.this, userName, message);
                 } }
 
