@@ -72,6 +72,7 @@ public class PhoneAuthentication extends AppCompatActivity {
                 sendVerificationCode();
                 Intent intent = new Intent(PhoneAuthentication.this, OtpAuth.class);
                 intent.putExtra("phone", phoneNum);
+                UserDetails.phoneNum = phoneNum;
                 startActivity(intent);
             }
         });
@@ -83,7 +84,6 @@ public class PhoneAuthentication extends AppCompatActivity {
         phoneNum = "+91" + editTextPhone.getText().toString();
         //DEFAULT +91 SO THAT USER SHOULD NOT ENTER EVERYTIME
 
-        UserDetails.setPhoneNum(phoneNum);
 
         if (phoneNum.isEmpty()) {
             editTextPhone.setError("Phone number is required");

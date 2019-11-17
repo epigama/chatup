@@ -122,7 +122,7 @@ public class DescActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(DescActivity.this, UsersAndChatsActivity.class));
+        startActivity(new Intent(DescActivity.this, PhoneAuthentication.class));
         finish();
     }
 

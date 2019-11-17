@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -78,18 +77,13 @@ public class Chats extends AppCompatActivity {
     String TAG="";
     StorageReference image_storage;
     public static final int RESCODE=1;
-    ImageView add_content;
-    LinearLayout layout;
-    RelativeLayout layout_2;
-    ImageView sendButton;
-    EditText messageArea;
-    ScrollView scrollView;
     DatabaseReference reference1, reference2;
     FirebaseDatabase mDatabase;
     private BroadcastReceiver mRegistrationBroadcastReciever;
+    MessagesListAdapter<Message> adapter;
     MessagesList messagesList;
     MessageInput input;
-    MessagesListAdapter<Message> adapter;
+    String messageText = "";
     //private TextView txtRegId ;
     @Override
     protected void onPause() {
@@ -102,17 +96,17 @@ public class Chats extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         //Register gcm cloud messaging 'registration complete' reciever
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
-//                new IntentFilter(Config.REGISTRATION_COMPLETE));
-//
-//        //register new push message reciever
-//        //By this, the activity will be notified each time a push message is recieved
-//
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
-//                new IntentFilter(Config.PUSH_NOTIFICATION));
-//
-//        //Clear the notification area when app is opened
-//        NotificationUtils.clearNotifications(getApplicationContext());
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        //register new push message reciever
+        //By this, the activity will be notified each time a push message is recieved
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        //Clear the notification area when app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
 
     }
 
@@ -121,8 +115,12 @@ public class Chats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
-      // imageView = new ImageView(Chats.this);
+        // imageView = new ImageView(Chats.this);
 
+        input = findViewById(R.id.input);
+        messagesList = findViewById(R.id.messagesList);
+        adapter = new MessagesListAdapter<>(UserDetails.phoneNum, null);
+        messagesList.setAdapter(adapter);
 
         parentReference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -137,7 +135,7 @@ public class Chats extends AppCompatActivity {
                     //Now subscrive to 'global' topic to recieve app wide notifications
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
-                //    displayFirebaseRegId();
+                    displayFirebaseRegId();
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     //New push notification is recieved
 
@@ -149,10 +147,19 @@ public class Chats extends AppCompatActivity {
                 }
             }
         };
-       // displayFirebaseRegId();
+        displayFirebaseRegId();
 
 
         mDatabase = FirebaseDatabase.getInstance();
+        //getSupportActionBar().hide();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(UserDetails.getChatWith());
+        toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
+
+        toolbar.setBackgroundColor(getResources().getColor(R.color.white));
+        toolbar.setElevation(0);
+        setSupportActionBar(toolbar);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("channelOne", "channelOne", NotificationManager.IMPORTANCE_DEFAULT);
@@ -160,96 +167,71 @@ public class Chats extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        layout = findViewById(R.id.layout1);
-        layout_2 = findViewById(R.id.layout2);
-        sendButton = findViewById(R.id.sendButton);
-        messageArea = findViewById(R.id.messageArea);
-        scrollView = findViewById(R.id.scrollView);
-        add_content=findViewById(R.id.AddContent);
         image_storage=FirebaseStorage.getInstance().getReference();
-        messagesList = findViewById(R.id.messagesList);
-        adapter = new MessagesListAdapter<>("Test-Sender", null);
-        messagesList.setAdapter(adapter);
-        input = findViewById(R.id.input);
+
         reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getPhoneNum(), UserDetails.getChatWith()));
         reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getPhoneNum()));
-//try {
-//    sendButton.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            String messageText = messageArea.getText().toString();
-//
-//            if (!messageText.equals("")) {
-//                Map<String, String> map = new HashMap<String, String>();
-//                map.put("message", messageText);
-////                map.put("image", downloadUri.toString());
-//                map.put("user", UserDetails.username);
-//                reference1.push().setValue(map);
-//                reference2.push().setValue(map);
-//                messageArea.setText("");
-//
-//            }
-//
-//        }
-//
-//    });
-//}
-//catch (Exception e){
-//    e.printStackTrace();
-//}
-//        reference1.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-//                String message = map.get("message").toString();
-//                String userName = map.get("user").toString();
-//                messageArea.setOnKeyListener(new View.OnKeyListener() {
-//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                        if (event.getAction() == KeyEvent.ACTION_DOWN)
-//                            if ((keyCode == KeyEvent.KEYCODE_DPAD_CENTER) ||
-//                                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
-//                                //do something
-//                                //true because you handle the event
-//                                String messageText = messageArea.getText().toString();
-//
-//                                if(!messageText.equals("")){
-//                                    Map<String, String> map = new HashMap<String, String>();
-//                                    map.put("message", messageText);
-//                                    map.put("user", UserDetails.username);
-//                                    reference1.push().setValue(map);
-//                                    reference2.push().setValue(map);
-//                                    messageArea.setText("");
-//                                }
-//
-//                                return true;
-//                            }
-//                        return false;
-//                    }
-//                });
-//
-//                if(userName.equals(UserDetails.username)){
-//                    addMessageBox(message, 1);
-//                }
-//                else{
-//                    addMessageBox(message, 2);
-//                    sendNotificationToUser(userName, message);
-//                    //createNotification(Chats.this, userName, message);
-//                } }
+        try {
+            input.setInputListener(new MessageInput.InputListener()  {
+                @Override
+                public boolean onSubmit(CharSequence input) {
+                    messageText = input.toString();
 
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) { }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) { }
-//        });
-//
-//
+                    if (!messageText.equals("")) {
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("message", messageText);
+//                map.put("image", downloadUri.toString());
+                        map.put("user", UserDetails.username);
+                        reference1.push().setValue(map);
+                        reference2.push().setValue(map);
+
+                    }
+                    return false;
+                }
+
+            });
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        reference1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                String message = map.get("message").toString();
+                String userName = map.get("user").toString();
+                                if(!messageText.equals("")){
+                                    Map<String, String> mapX = new HashMap<String, String>();
+                                    map.put("message", messageText);
+                                    map.put("user", UserDetails.username);
+                                    reference1.push().setValue(mapX);
+                                    reference2.push().setValue(mapX);
+//                                    messageArea.setText("");
+                                }
+
+
+                if(userName.equals(UserDetails.username)){
+                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(UserDetails.getPhoneNum(), UserDetails.getUsername(), null, true), messageText), true);
+                }
+                else{
+                    adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(""+System.currentTimeMillis() + 1, UserDetails.getUsername(), null, true), messageText), true);
+                    //createNotification(Chats.this, userName, message);
+                } }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+
 //        add_content.setOnClickListener(new View.OnClickListener() {
 //
 //            public void onClick(View v) {
@@ -257,15 +239,6 @@ public class Chats extends AppCompatActivity {
 //                startActivityForResult(cameraIntent,RESCODE);
 //            }
 //        });
-//
-       input.setInputListener(new MessageInput.InputListener() {
-          @Override
-            public boolean onSubmit(CharSequence input) {
-                //validate and send message
-                adapter.addToStart(new Message("test_id", new User("test_id", "test_name", null, true), input.toString()), true);
-                return true;
-            }
-        });
     }
 
 
@@ -275,12 +248,12 @@ public class Chats extends AppCompatActivity {
 //        Calendar calobj = Calendar.getInstance();
 //        TextView textView = new TextView(Chats.this);
 //        TextView  text= new TextView(Chats.this);
-//       //ye bey
+//        //ye bey
 //        textView.setText(message);
-//      //  text.setText();
-//      //  text.setText(df.format(calobj.getTime()));
+//        //  text.setText();
+//        //  text.setText(df.format(calobj.getTime()));
 //        text.setGravity(Gravity.RIGHT);
-//      //  imageView.setForegroundGravity(Gravity.RIGHT);
+//        //  imageView.setForegroundGravity(Gravity.RIGHT);
 //        textView.setTextColor(getColor(R.color.white));
 //        layout.addView(text);
 //
@@ -296,7 +269,7 @@ public class Chats extends AppCompatActivity {
 //        else{
 //            lp2.gravity = Gravity.LEFT;
 //            textView.setBackgroundResource(R.drawable.bubble_out);
-//           // textView.setTextColor(R.color.black);
+//            // textView.setTextColor(R.color.black);
 //        }
 //        textView.setLayoutParams(lp2);
 //        layout.addView(textView);
@@ -307,187 +280,183 @@ public class Chats extends AppCompatActivity {
 //                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 //            }
 //        });    }
-//
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.Settings:
-//                startActivity(new Intent(getApplicationContext(), Settings.class));
-//        }
-//        return true;
-//    }
-//
-//    private void createNotification(Context context, String title, String text) {
-//        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
-//        View view = LayoutInflater.from(Chats.this).inflate(R.layout.custom_notification, null, false);
-//        TextView heading = view.findViewById(R.id.Heading);
-//        TextView body = view.findViewById(R.id.Description);
-//        heading.setText(title);
-//        body.setText(text);
-//        Notification customNotification = new NotificationCompat.Builder(context, "channelOne")
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-//                .setCustomContentView(notificationLayout)
-//                .build();
-//        NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//        manager.notify((int)System.currentTimeMillis(),customNotification);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == RESCODE) {
-//            try {
-//                Bitmap photo = (Bitmap) data.getExtras().get("data");
-//                image.setImageBitmap(photo);
-//                // image.setImageDrawable(getResources().getDrawable(R.drawable.girl));
-//                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) image.getLayoutParams();
-//                //  earLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-//                image.setLayoutParams(lp);
-//                Uri uri = getImageUri(context,photo);
-//
-//                StorageReference storageReferen = storageReference.child("/images/message/" +  UserDetails.getPhoneNum() +  UserDetails.getChatWith() + ".jpg");
-//                UploadTask uploadTask = storageReferen.putFile(uri);
-//                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//                    @Override
-//                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                        if (!task.isSuccessful()) {
-//                            throw task.getException();
-//                        }
-//
-//                        // Continue with the task to get the download URL
-//                        return storageReferen.getDownloadUrl();
-//                    }
-//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Uri> task) {
-//                        if (task.isSuccessful()) {
-//                            downloadUri= task.getResult();
-//                            Toast.makeText(Chats.this, "Sent" + downloadUri, Toast.LENGTH_SHORT).show();
-//                            Log.w(TAG, "SENT IMAGE " +downloadUri.toString());
-//                            parentReference.child("uri").setValue(downloadUri.toString());
-//                            UserDetails.setUri(downloadUri.toString());
-//                        } else {
-//                            Log.w(TAG, "onComplete: " + "Incomplete upload");
-//                        }
-//                    }
-//                });
-//
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//
-////        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
-////        editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
-////        editor.apply();
-//
-//           StorageReference storageReferen = storageReference.child("users/" + UserDetails.getPhoneNum() + ".jpg");
-//           UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
-//           Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//               @Override
-//               public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                   if (!task.isSuccessful()) {
-//                       throw task.getException();
-//                   }
-//
-//                   // Continue with the task to get the download URL
-//                   return storageReferen.getDownloadUrl();
-//               }
-//           }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//               @Override
-//               public void onComplete(@NonNull Task<Uri> task) {
-//                   if (task.isSuccessful()) {
-//                       downloadUri = task.getResult();
-//                       Toast.makeText(Chats.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
-//
-//
-//                       Log.w(TAG, "DOWNLOAD CHATS IMAGES" + downloadUri.toString());
-//                       parentReference.child("uri").setValue(downloadUri.toString());
-//                       UserDetails.setUri(downloadUri.toString());
-//                   } else {
-//                       Log.w(TAG, "onComplete: " + "Incomplete upload");
-//                   }
-//               }
-//           });
-//
-//    }
 
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Settings:
+                startActivity(new Intent(getApplicationContext(), Settings.class));
+        }
+        return true;
+    }
 
-/**
-        if(resultCode==RESCODE && resultCode==RESULT_OK){
-            Uri imageUi= data.getData();
-            final String current_user_ref="messages/" +UserDetails.getChatWith()+"/"+UserDetails.getUsername();
-            final String chat_user_ref="messages/" +UserDetails.getUsername()+"/"+UserDetails.getChatWith();
+    private void createNotification(Context context, String title, String text) {
+        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
+        View view = LayoutInflater.from(Chats.this).inflate(R.layout.custom_notification, null, false);
+        TextView heading = view.findViewById(R.id.Heading);
+        TextView body = view.findViewById(R.id.Description);
+        heading.setText(title);
+        body.setText(text);
+        Notification customNotification = new NotificationCompat.Builder(context, "channelOne")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(notificationLayout)
+                .build();
+        NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        manager.notify((int)System.currentTimeMillis(),customNotification);
+    }
 
-            DatabaseReference user_message_push=reference1.child("image").child(UserDetails.getUsername()).child(UserDetails.getChatWith()).push();
-            final String push_id=user_message_push.getKey();
-            StorageReference file_path=image_storage.child("messages_images").child(push_id+".jpg");
-            file_path.putFile(imageUi).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if(task.isSuccessful()){
-                        String download_url=task.getResult().toString();
-                        Map messageMap= new HashMap();
-                        messageMap.put("url", download_url);
-                        messageMap.put("seen", false);
-                        messageMap.put("from", UserDetails.getUsername());
-                        messageMap.put("type","image");
-                       Map messageUserMAp= new HashMap();
-                       messageUserMAp.put(current_user_ref +"/" + push_id,messageMap);
-                        messageUserMAp.put(chat_user_ref +"/" + push_id,messageMap);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESCODE) {
+            try {
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                image.setImageBitmap(photo);
+                // image.setImageDrawable(getResources().getDrawable(R.drawable.girl));
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) image.getLayoutParams();
+                //  earLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                image.setLayoutParams(lp);
+                Uri uri = getImageUri(context,photo);
 
-                        messageArea.setText("");
-                        reference1.updateChildren(messageUserMAp, new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                                if(databaseError!=null){
-                                    Log.d(TAG, " CHAT LOG " + databaseError.getMessage().toString());
-                                }
-                            }
-                        });
+                StorageReference storageReferen = storageReference.child("/images/message/" +  UserDetails.getPhoneNum() +  UserDetails.getChatWith() + ".jpg");
+                UploadTask uploadTask = storageReferen.putFile(uri);
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
 
-
+                        // Continue with the task to get the download URL
+                        return storageReferen.getDownloadUrl();
                     }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            downloadUri= task.getResult();
+                            Toast.makeText(Chats.this, "Sent" + downloadUri, Toast.LENGTH_SHORT).show();
+                            Log.w(TAG, "SENT IMAGE " +downloadUri.toString());
+                            parentReference.child("uri").setValue(downloadUri.toString());
+                            UserDetails.setUri(downloadUri.toString());
+                        } else {
+                            Log.w(TAG, "onComplete: " + "Incomplete upload");
+                        }
+                    }
+                });
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+//        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+//        editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
+//        editor.apply();
+
+        StorageReference storageReferen = storageReference.child("users/" + UserDetails.getPhoneNum() + ".jpg");
+        UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-            });
- **/
 
-//public Uri getImageUri(Context inContext, Bitmap inImage) {
-//    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//    inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//    String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-//    return Uri.parse(path);
-//}
+                // Continue with the task to get the download URL
+                return storageReferen.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    downloadUri = task.getResult();
+                    Toast.makeText(Chats.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
 
 
-
-//    private void displayFirebaseRegId()
-//    {
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
-//        String regId = pref.getString("regId", null);
-//
-//        Log.e(TAG, "Firebase Registration Id" + regId);
-///**
-//        if(!TextUtils.isEmpty(regId))
-//        {
-//            txtRegId.setText(regId);
-//        }
-//        else
-//        {
-//            txtRegId.setText("Firebase Reg id not recieved");
-//        }**/
+                    Log.w(TAG, "DOWNLOAD CHATS IMAGES" + downloadUri.toString());
+                    parentReference.child("uri").setValue(downloadUri.toString());
+                    UserDetails.setUri(downloadUri.toString());
+                } else {
+                    Log.w(TAG, "onComplete: " + "Incomplete upload");
+                }
+            }
+        });
 
     }
 
-//    public static void sendNotificationToUser(String user, final String message) {
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("parentReference");
-//        reference.child("username").setValue(user);
-//        reference.child("message").setValue(message);
 
 
+
+    /**
+     if(resultCode==RESCODE && resultCode==RESULT_OK){
+     Uri imageUi= data.getData();
+     final String current_user_ref="messages/" +UserDetails.getChatWith()+"/"+UserDetails.getUsername();
+     final String chat_user_ref="messages/" +UserDetails.getUsername()+"/"+UserDetails.getChatWith();
+     DatabaseReference user_message_push=reference1.child("image").child(UserDetails.getUsername()).child(UserDetails.getChatWith()).push();
+     final String push_id=user_message_push.getKey();
+     StorageReference file_path=image_storage.child("messages_images").child(push_id+".jpg");
+     file_path.putFile(imageUi).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+    @Override
+    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+    if(task.isSuccessful()){
+    String download_url=task.getResult().toString();
+    Map messageMap= new HashMap();
+    messageMap.put("url", download_url);
+    messageMap.put("seen", false);
+    messageMap.put("from", UserDetails.getUsername());
+    messageMap.put("type","image");
+    Map messageUserMAp= new HashMap();
+    messageUserMAp.put(current_user_ref +"/" + push_id,messageMap);
+    messageUserMAp.put(chat_user_ref +"/" + push_id,messageMap);
+    messageArea.setText("");
+    reference1.updateChildren(messageUserMAp, new DatabaseReference.CompletionListener() {
+    @Override
+    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+    if(databaseError!=null){
+    Log.d(TAG, " CHAT LOG " + databaseError.getMessage().toString());
+    }
+    }
+    });
+    }
+    }
+    });
+     **/
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+
+    private void displayFirebaseRegId()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e(TAG, "Firebase Registration Id" + regId);
+/**
+ if(!TextUtils.isEmpty(regId))
+ {
+ txtRegId.setText(regId);
+ }
+ else
+ {
+ txtRegId.setText("Firebase Reg id not recieved");
+ }**/
+
+    }
+
+    public static void sendNotificationToUser(String user, final String message) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("parentReference");
+        reference.child("username").setValue(user);
+        reference.child("message").setValue(message);
+    }
+}

@@ -77,7 +77,8 @@ public class Users extends Fragment {
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = al.get(position);
+                UserDetails.setChatWith(al.get(position));
+                UserDetails.setChatWithNumber(al.get(position));
                 startActivity(new Intent(getContext(), Chats.class));
             }
         });

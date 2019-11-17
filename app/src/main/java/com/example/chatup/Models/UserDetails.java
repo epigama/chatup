@@ -4,6 +4,7 @@ public class UserDetails {
     public static String username = "";
     public static String bio = "";
     public static String chatWith = "";
+    public static String chatWithNumber = "";
     public static String UID = "";
     public static String phoneNum = "";
     public static String uri = "";
@@ -64,6 +65,14 @@ public class UserDetails {
 
     public static void setUID(String UID) {
         UserDetails.UID = UID;
+    }
+
+    public static String getChatWithNumber() {
+        return chatWithNumber;
+    }
+
+    public static void setChatWithNumber(String chatWithNumber) {
+        UserDetails.chatWithNumber = chatWithNumber;
     }
 
 

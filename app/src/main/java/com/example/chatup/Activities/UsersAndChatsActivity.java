@@ -85,8 +85,6 @@ public class UsersAndChatsActivity extends AppCompatActivity {
 
         //}
 
-        Intent intent = new Intent(this, Chats.class);
-        startActivity(intent);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
