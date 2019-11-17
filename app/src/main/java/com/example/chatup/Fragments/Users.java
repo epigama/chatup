@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chatup.Activities.Chats;
+import com.example.chatup.Models.User;
 import com.example.chatup.R;
 import com.example.chatup.Models.UserDetails;
 
@@ -100,7 +101,6 @@ public class Users extends Fragment {
                     String contactName = getContactName(getContext(), key);
                     if(contactName != ""){
                         Log.d("", "onItemClick: " + "Contact exists");
-                        Toast.makeText(getContext(),  contactName + " Exists", Toast.LENGTH_SHORT).show();
                         usersAl.add(contactName);
                     }
                 }
