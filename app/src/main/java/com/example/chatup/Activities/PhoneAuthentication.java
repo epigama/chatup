@@ -2,6 +2,7 @@ package com.example.chatup.Activities;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chatup.Activities.OtpAuth;
 import com.example.chatup.Activities.UsersAndChatsActivity;
+import com.example.chatup.Constants.Constants;
 import com.example.chatup.Models.UserDetails;
 import com.example.chatup.R;
 import com.google.firebase.FirebaseException;
@@ -84,6 +86,10 @@ public class PhoneAuthentication extends AppCompatActivity {
         phoneNum = "+91" + editTextPhone.getText().toString();
         //DEFAULT +91 SO THAT USER SHOULD NOT ENTER EVERYTIME
 
+
+        //Write to sharedpreferences
+        SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        prefs.edit().putString("phone_number", phoneNum).apply();
 
         if (phoneNum.isEmpty()) {
             editTextPhone.setError("Phone number is required");

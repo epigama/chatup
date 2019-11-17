@@ -36,6 +36,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.chatup.Constants.Constants;
 import com.example.chatup.Models.Message;
 import com.example.chatup.Models.User;
 import com.example.chatup.Notifications.Config;
@@ -65,7 +66,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class Chats extends AppCompatActivity {
     Context context;
@@ -117,13 +117,16 @@ public class Chats extends AppCompatActivity {
         setContentView(R.layout.activity_chats);
         // imageView = new ImageView(Chats.this);
 
+        //Read phone number from sharedpreferences
+        SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE);
+        String phone =  prefs.getString("phone_number", "");
+
         input = findViewById(R.id.input);
         messagesList = findViewById(R.id.messagesList);
         adapter = new MessagesListAdapter<>(UserDetails.phoneNum, null);
         messagesList.setAdapter(adapter);
 
         parentReference = FirebaseDatabase.getInstance().getReference("users");
-
 
         mRegistrationBroadcastReciever = new BroadcastReceiver() {
             @Override
@@ -168,9 +171,8 @@ public class Chats extends AppCompatActivity {
         }
 
         image_storage=FirebaseStorage.getInstance().getReference();
-
-        reference1 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getPhoneNum(), UserDetails.getChatWith()));
-        reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), UserDetails.getPhoneNum()));
+        reference1 = mDatabase.getReference(String.format("messages/%s_%s", phone, UserDetails.getChatWith()));
+        reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), phone));
         try {
             input.setInputListener(new MessageInput.InputListener()  {
                 @Override
