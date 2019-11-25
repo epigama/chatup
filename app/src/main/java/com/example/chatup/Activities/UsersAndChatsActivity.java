@@ -34,6 +34,7 @@ import com.example.chatup.Models.ChatModel;
 import com.example.chatup.Models.UserDetails;
 import com.example.chatup.PrefManager;
 import com.example.chatup.R;
+import com.example.chatup.RecentChats;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -184,7 +185,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         //Bluetooth
                         break;
                     case R.id.activity:
-                        Fragment users_fragment = new Users();
+                        Fragment users_fragment = new RecentChats();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 users_fragment).commit();
                         break;
