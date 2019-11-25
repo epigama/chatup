@@ -6,9 +6,8 @@
     tools:context=".RecentChats">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.stfalcon.chatkit.dialogs.DialogsList
+        android:id="@+id/DialogLists"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="match_parent"/>
 </FrameLayout>
