@@ -56,14 +56,17 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
+import com.stfalcon.chatkit.utils.DateFormatter;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -203,7 +206,7 @@ public class Chats extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
                                 if(!message.equals("")){
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                     map.put("message", message);
                                     map.put("user", UserDetails.username);
 
@@ -461,5 +464,21 @@ public class Chats extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("parentReference");
         reference.child("username").setValue(user);
         reference.child("message").setValue(message);
+    }
+
+
+    public String format(Date date) {
+        if (DateFormatter.isToday(date)) {
+            return DateFormatter.format(date, DateFormatter.Template.TIME);
+        } else if (DateFormatter.isYesterday(date)) {
+            return getString(R.string.date_header_yesterday);
+        } else {
+            return DateFormatter.format(date, DateFormatter.Template.STRING_DAY_MONTH_YEAR);
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
