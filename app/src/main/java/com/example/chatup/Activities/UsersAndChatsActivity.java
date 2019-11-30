@@ -30,23 +30,16 @@ import com.example.chatup.Constants.Constants;
 import com.example.chatup.Fragments.Contacts;
 import com.example.chatup.Fragments.Settings;
 import com.example.chatup.Fragments.Users;
-import com.example.chatup.Models.ChatModel;
 import com.example.chatup.Models.UserDetails;
 import com.example.chatup.PrefManager;
 import com.example.chatup.R;
-import com.example.chatup.RecentChats;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
-import com.mikepenz.fastadapter.FastAdapter;
-import com.mikepenz.fastadapter.adapters.ItemAdapter;
 
-import java.util.List;
 
 public class UsersAndChatsActivity extends AppCompatActivity {
     private String TAG = this.getClass().getSimpleName();
@@ -185,7 +178,7 @@ public class UsersAndChatsActivity extends AppCompatActivity {
                         //Bluetooth
                         break;
                     case R.id.activity:
-                        Fragment users_fragment = new RecentChats();
+                        Fragment users_fragment = new Users();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_chats,
                                 users_fragment).commit();
                         break;
