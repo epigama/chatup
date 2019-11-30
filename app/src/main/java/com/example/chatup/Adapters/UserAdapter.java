@@ -1,3 +1,5 @@
+package com.example.chatup.Adapters;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.chatup.Activities.Chats;
+import com.example.chatup.Constants.Chat;
 import com.example.chatup.Models.User;
 import com.example.chatup.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +46,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.ischat = ischat;
 
         if(mContext!=null) {
-            MRR = Typeface.createFromAsset(mContext.getAssets(), "fonts/myriadregular.ttf");
-            MR = Typeface.createFromAsset(mContext.getAssets(), "fonts/myriad.ttf");
+//            MRR = Typeface.createFromAsset(mContext.getAssets(), "fonts/myriadregular.ttf");
+//            MR = Typeface.createFromAsset(mContext.getAssets(), "fonts/myriad.ttf");
         }
 
     }
