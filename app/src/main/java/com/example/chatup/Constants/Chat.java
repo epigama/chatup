@@ -1,3 +1,5 @@
+package com.example.chatup.Constants;
+
 public class Chat {
 
     private String sender;
