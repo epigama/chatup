@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
+import android.view.View;
 
-public class onItemClick {
+public interface OnItemClick {
+    public void onItemCLick(String uid, View view);
 }
