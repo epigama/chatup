@@ -19,9 +19,7 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/dark_theme">
-        <activity android:name=".Activities.Contact_detail"></activity>
         <activity android:name=".Activities.DescActivity"></activity>
-        <activity android:name=".Activities.DarkMode" />
         <activity android:name=".Activities.Feedback" />
         <activity android:name=".Activities.Chats" />
         <activity android:name=".Activities.Invite" />
