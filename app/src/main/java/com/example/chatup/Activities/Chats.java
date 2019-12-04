@@ -30,7 +30,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.chatup.Constants.Constants;
 import com.example.chatup.Models.Message;
 import com.example.chatup.Models.User;
 import com.example.chatup.Notifications.Config;
