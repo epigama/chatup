@@ -14,18 +14,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,16 +50,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 import com.stfalcon.chatkit.utils.DateFormatter;
 
 import java.io.ByteArrayOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -321,9 +311,7 @@ public class Chats extends AppCompatActivity {
             try {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(photo);
-                // image.setImageDrawable(getResources().getDrawable(R.drawable.girl));
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) image.getLayoutParams();
-                //  earLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 image.setLayoutParams(lp);
                 Uri uri = getImageUri(context,photo);
 
@@ -360,9 +348,6 @@ public class Chats extends AppCompatActivity {
             }
         }
 
-//        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
-//        editor.putString(getString(R.string.local_img_uri), pickedImgUri.toString());
-//        editor.apply();
 
         StorageReference storageReferen = storageReference.child("users/" + UserDetails.getPhoneNum() + ".jpg");
         UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
@@ -395,44 +380,6 @@ public class Chats extends AppCompatActivity {
 
     }
 
-
-
-
-    /**
-     if(resultCode==RESCODE && resultCode==RESULT_OK){
-     Uri imageUi= data.getData();
-     final String current_user_ref="messages/" +UserDetails.getChatWith()+"/"+UserDetails.getUsername();
-     final String chat_user_ref="messages/" +UserDetails.getUsername()+"/"+UserDetails.getChatWith();
-     DatabaseReference user_message_push=reference1.child("image").child(UserDetails.getUsername()).child(UserDetails.getChatWith()).push();
-     final String push_id=user_message_push.getKey();
-     StorageReference file_path=image_storage.child("messages_images").child(push_id+".jpg");
-     file_path.putFile(imageUi).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-    @Override
-    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-    if(task.isSuccessful()){
-    String download_url=task.getResult().toString();
-    Map messageMap= new HashMap();
-    messageMap.put("url", download_url);
-    messageMap.put("seen", false);
-    messageMap.put("from", UserDetails.getUsername());
-    messageMap.put("type","image");
-    Map messageUserMAp= new HashMap();
-    messageUserMAp.put(current_user_ref +"/" + push_id,messageMap);
-    messageUserMAp.put(chat_user_ref +"/" + push_id,messageMap);
-    messageArea.setText("");
-    reference1.updateChildren(messageUserMAp, new DatabaseReference.CompletionListener() {
-    @Override
-    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-    if(databaseError!=null){
-    Log.d(TAG, " CHAT LOG " + databaseError.getMessage().toString());
-    }
-    }
-    });
-    }
-    }
-    });
-     **/
-
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -448,16 +395,6 @@ public class Chats extends AppCompatActivity {
         String regId = pref.getString("regId", null);
 
         Log.e(TAG, "Firebase Registration Id" + regId);
-/**
- if(!TextUtils.isEmpty(regId))
- {
- txtRegId.setText(regId);
- }
- else
- {
- txtRegId.setText("Firebase Reg id not recieved");
- }**/
-
     }
 
     public static void sendNotificationToUser(String user, final String message) {
