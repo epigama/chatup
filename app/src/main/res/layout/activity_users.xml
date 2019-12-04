@@ -11,40 +11,32 @@
     android:orientation="vertical"
     android:background="?android:attr/colorBackground">
 
-    <TextView
+
+
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_users_found"
-        android:id="@+id/noUsersText"
-        android:textColor="?android:attr/textColorPrimary"
-        android:visibility="gone"/>
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:drawableLeft="@drawable/search_bg"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edittext_bg"
+        android:textSize="16sp"
+        android:textCursorDrawable="@null"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/grey"
+        android:hint="Search user by name..."
+        android:id="@+id/search_users"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Users"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="25dp"
-        android:fontFamily="@font/font_family"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/invite_folks"
-        android:text="It's quite empty. Common, invite your contacts!!"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:fontFamily="@font/font_family"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="20dp"
-        />
-
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/search_users"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/usersList"
-        />
-
+        android:layout_height="match_parent" />
+    <include
+        android:id="@+id/es_layout"
+        android:visibility="gone"
+        layout="@layout/empty_state"/>
 
 </LinearLayout>

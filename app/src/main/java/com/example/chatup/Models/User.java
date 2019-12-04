@@ -10,13 +10,18 @@ public class User implements IUser {
     private String id;
     private String name;
     private String avatar;
+    private String imageURL;
     private boolean online;
+    private String status;
+
 
     public User(String id, String name, String avatar, boolean online) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
+        this.imageURL=imageURL;
         this.online = online;
+        this.status=status;
     }
 
     @Override
@@ -37,4 +42,13 @@ public class User implements IUser {
     public boolean isOnline() {
         return online;
     }
+
+    public String getImageURL(){
+        return imageURL;
+    }
+    public String getStatus(){
+        return status;
+    }
+
+
 }

@@ -9,11 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.chatup.Activities.OtpAuth;
-import com.example.chatup.Activities.UsersAndChatsActivity;
 import com.example.chatup.Constants.Constants;
 import com.example.chatup.Models.UserDetails;
 import com.example.chatup.R;

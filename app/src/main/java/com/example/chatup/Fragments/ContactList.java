@@ -36,7 +36,7 @@ public class ContactList extends Fragment {
 
     ListView usersList;
     TextView noUsersText;
-    ArrayList<String> al = new ArrayList<>(); //this is users ka list
+    ArrayList<String> al = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
 
@@ -45,8 +45,6 @@ public class ContactList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.activity_users, container, false);
-        usersList = (ListView) view.findViewById(R.id.usersList);
-        noUsersText = (TextView) view.findViewById(R.id.noUsersText);
 
         pd = new ProgressDialog(getContext());
         pd.setMessage("Loading...");

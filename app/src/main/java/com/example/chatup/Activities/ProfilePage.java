@@ -22,7 +22,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.chatup.Constants.Constants;
 import com.example.chatup.R;
 import com.example.chatup.Models.UserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
