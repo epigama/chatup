@@ -4,7 +4,7 @@ Chatup is a chatting application built on the support of Firebase. It is current
 
 ## Project Setup
 In order to access this project in your remote system,</br>1. Clone the project.</br>
-2. Add the google-services.json file from any of your Firebase projects(if you don't know how to set up Firebase, then please refer this <a href="https://firebase.google.com/docs/android/setup">docs</a>.</br>
+2. Add the google-services.json file from any of your Firebase projects(if you don't know how to set up Firebase, then please refer this <a href="https://firebase.google.com/docs/android/setup">docs</a>).</br>
 3. Enable email and phone authentication under the Authentication column in your Firebase Console</br>
 4. Run the gradle.
 
