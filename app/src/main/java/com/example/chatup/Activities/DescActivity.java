@@ -18,8 +18,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import com.example.chatup.Adapters.User;
 import com.example.chatup.PrefManager;
 import com.example.chatup.R;
 

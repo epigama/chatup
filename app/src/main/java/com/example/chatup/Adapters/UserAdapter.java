@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.chatup.Activities.Chats;
-import com.example.chatup.Constants.Constants.Chat;
+import com.example.chatup.Constants.Chat;
 import com.example.chatup.Models.User;
 import com.example.chatup.R;
 import com.google.firebase.auth.FirebaseAuth;
