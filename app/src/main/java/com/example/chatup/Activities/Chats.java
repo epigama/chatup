@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,12 +31,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.chatup.Config;
+import com.example.chatup.Constants.Constants;
 import com.example.chatup.Models.Message;
 import com.example.chatup.Models.User;
-import com.example.chatup.Notifications.Config;
 import com.example.chatup.Fragments.Settings;
 import com.example.chatup.Models.UserDetails;
-import com.example.chatup.Notifications.NotificationUtils;
 import com.example.chatup.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -87,18 +88,7 @@ public class Chats extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        //Register gcm cloud messaging 'registration complete' reciever
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
-                new IntentFilter(Config.REGISTRATION_COMPLETE));
-
-        //register new push message reciever
-        //By this, the activity will be notified each time a push message is recieved
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReciever,
-                new IntentFilter(Config.PUSH_NOTIFICATION));
-
-        //Clear the notification area when app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());
+        //Register gcm cloud messaging 'registration complete' recieve
 
     }
 

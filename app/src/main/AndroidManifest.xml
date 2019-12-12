@@ -24,7 +24,6 @@
         <activity android:name=".Activities.Chats" />
         <activity android:name=".Activities.Invite" />
         <activity android:name=".Activities.OtpAuth" />
-        <activity android:name=".Activities.FAQ" />
         <activity android:name=".Activities.PhoneAuthentication" />
         <activity android:name=".Activities.ProfilePage" />
         <activity android:name=".Activities.IntroPage">
