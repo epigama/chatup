@@ -24,6 +24,9 @@ public class User implements IUser {
         this.status=status;
     }
 
+    public User() {
+    }
+
     @Override
     public String getId() {
         return id;
