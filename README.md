@@ -1,11 +1,11 @@
-# chatup
+# Chatup
 
 Chatup is a chatting application built on the support of Firebase. It is currently a one-to-one chatting application but the future goals are to support bluetooth feature and group chat. 
 
 ## Project Setup
-In order to access this project in your remote system,</br>1. Clone the project.</br>
+In order to access this project in your remote system:-</br>1. Clone the project.</br>
 2. Add the google-services.json file from any of your Firebase projects(if you don't know how to set up Firebase, then please refer this <a href="https://firebase.google.com/docs/android/setup">docs</a>).</br>
-3. Enable email and phone authentication under the Authentication column in your Firebase Console</br>
+3. Enable email and phone authentication under the Authentication column in your Firebase Console.</br>
 4. Run the gradle.
 
 ## Contribution Guidelines
@@ -13,7 +13,7 @@ Any kind of contribution to the project is highly welcomed, as this project is s
 1. Raise an issue before you make a pr.</br>
 2. No changes should be pushed in the development branch. Always make a new branch.</br>
 3. Squash all your commits in to a single commit before creating a pull request.</br>
-4. If the pr for the issue isnt raised within 2 weeks, the issue can be assigned to another person.</br>
+4. If the pr for the issue isn't raised within 2 weeks, the issue can be assigned to another person.</br>
 
 ## Screen shots of the Project
 <img src="https://user-images.githubusercontent.com/37215508/70019015-f4466100-15ad-11ea-91ba-801c508768f1.jpeg" width="300" height="450"/>
