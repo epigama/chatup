@@ -2,6 +2,21 @@
 
 Chatup is a chatting application built on the support of Firebase. It is currently a one-to-one chatting application but the future goals are to support bluetooth feature and group chat. 
 
+## Features
+  * [x] One to One Chat
+  * [x] Notifications
+  * [x] Dark Mode
+  * [x] Contacts
+  * [x] Bluetooth (Coming Soon)
+  * [x] Group Chat (Coming Soon)
+
+### Show some :heart: and star the repo to support the project
+## Screenshots of the Project
+
+
+
+<img src="https://user-images.githubusercontent.com/37215508/70019015-f4466100-15ad-11ea-91ba-801c508768f1.jpeg" width="300em" height="600em"/> <img src="https://user-images.githubusercontent.com/37215508/70019029-ff998c80-15ad-11ea-8092-e707ed110dcb.jpeg" width="300em" height="600em"/> <img src="https://user-images.githubusercontent.com/37215508/70019245-9f571a80-15ae-11ea-88fa-4c1a037a4d3c.jpeg" width="300em" height="600em"/> <img src="https://user-images.githubusercontent.com/37215508/70019273-bf86d980-15ae-11ea-97cf-5967bb7bdfe6.jpeg" width="300em" height="600em"/> <img src="https://user-images.githubusercontent.com/37215508/70019297-d2011300-15ae-11ea-8315-0d3316b802c3.jpeg" width="300em" height="600em"/> <img src="https://user-images.githubusercontent.com/37215508/70019337-ee9d4b00-15ae-11ea-92cf-50d4b0f4c3bc.jpeg" width="300em" height="600em"/>
+
 ## Project Setup
 In order to access this project in your remote system
 1. Clone the project.
