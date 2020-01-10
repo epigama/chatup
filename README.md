@@ -34,18 +34,19 @@ Any kind of contribution to the project is highly welcomed, as this project is s
 3. Squash all your commits in to a single commit before creating a pull request.</br>
 4. If the pr for the issue isnt raised within 2 weeks, the issue can be assigned to another person.</br>
 
-## Screenshots of the Project
-<img src="https://user-images.githubusercontent.com/37215508/70019015-f4466100-15ad-11ea-91ba-801c508768f1.jpeg" width="300" height="450"/>
+# Pull Requests
+We welcome and encourage all pull requests. It usually will take us within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+1.  Match coding style (braces, spacing, etc.) This is best achieved using `Reformat Code` feature of Android Studio `CMD`+`Option`+`L` on Mac and `CTRL` + `ALT` + `L` on Linux + Windows .
+2.  If its a feature, bugfix, or anything please only change code to what you specify.
+3.  Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
+4.  Pull requests _must_ be made against a new branch. Any other branch (unless specified by the maintainers) like `master` will get rejected.
+5.  Check for existing [issues](https://github.com/epigama/chatup/issues) first, before filing an issue.
+6.  Make sure you follow the set standard as all other projects in this repo do
+7.  Have fun!
 
-<img src="https://user-images.githubusercontent.com/37215508/70019029-ff998c80-15ad-11ea-8092-e707ed110dcb.jpeg" width="300" height="450"/>
 
-<img src="https://user-images.githubusercontent.com/37215508/70019245-9f571a80-15ae-11ea-88fa-4c1a037a4d3c.jpeg" width="300" height="450"/>
 
-<img src="https://user-images.githubusercontent.com/37215508/70019273-bf86d980-15ae-11ea-97cf-5967bb7bdfe6.jpeg" width="300" height="450"/>
 
-<img src="https://user-images.githubusercontent.com/37215508/70019297-d2011300-15ae-11ea-8315-0d3316b802c3.jpeg" width="300" height="450"/>
-
-<img src="https://user-images.githubusercontent.com/37215508/70019337-ee9d4b00-15ae-11ea-92cf-50d4b0f4c3bc.jpeg" width="300" height="450"/>
 
 
 
