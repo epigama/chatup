@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.chatup.Activities.Feedback;
-import com.example.chatup.Activities.Invite;
 import com.example.chatup.Activities.ProfilePage;
 import com.example.chatup.Constants.Constants;
 import com.example.chatup.R;
