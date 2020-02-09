@@ -239,17 +239,6 @@ public class Chats extends AppCompatActivity {
 //            }
 //        });    }
 
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.Settings:
-                startActivity(new Intent(getApplicationContext(), Settings.class));
-        }
-        return true;
-    }
-
     private void createNotification(Context context, String title, String text) {
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
         View view = LayoutInflater.from(Chats.this).inflate(R.layout.custom_notification, null, false);
