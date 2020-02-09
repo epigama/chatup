@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/es_descp"
-            android:layout_width="wrap_content"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/es_title"
             android:layout_centerHorizontal="true"
