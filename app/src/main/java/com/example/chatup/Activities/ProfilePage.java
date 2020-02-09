@@ -83,15 +83,12 @@ public class ProfilePage extends AppCompatActivity {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        Bitmap bmp = null;
         try {
-            //bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             Glide.with(this).load(url).into(user_image_view);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            //user_image_view.setImageBitmap(bmp);
         } catch (NullPointerException ne) {
             ne.printStackTrace();
 
@@ -101,7 +98,6 @@ public class ProfilePage extends AppCompatActivity {
         } catch (Exception e) {
             Log.d(TAG, " uid get intent" + e);
         }
-        //  Log.d(TAG, "uid "  +uid) ;
 
         parentReference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -160,18 +156,12 @@ public class ProfilePage extends AppCompatActivity {
               //  openGallery();
                 Log.d(TAG, "onClick: Uploading Image.");
                         //get the signed in user
-
-
-
-
-                        if(name.equals("")) {
+                if(name.equals("")) {
                             StorageReference storageRefer = storageReference.child("images/users/" +  "/" + name + ".jpg");
                             storageRefer.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     // Get a URL to the uploaded content
-                                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -209,7 +199,6 @@ public class ProfilePage extends AppCompatActivity {
 
     private void openGallery() {
         //TODO: open gallery intent and wait for user to pick an image !
-
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, REQUESCODE);
@@ -256,7 +245,7 @@ public class ProfilePage extends AppCompatActivity {
                                String message=task.getException().toString();
                                Toast.makeText(ProfilePage.this,"Error  ",Toast.LENGTH_SHORT).show();
                            }
-                           //this wil upload to firebase
+                           //this will upload to firebase
                         }
                     });
                 }
