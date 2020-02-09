@@ -21,13 +21,13 @@
         android:textColor="@color/blue"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/desc1_1"
-        android:textSize="20dp"
-        android:fontFamily="@font/font_family"
-        android:textColor="@color/black"
+        android:layout_width="344dp"
+        android:layout_height="64dp"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:fontFamily="@font/font_family"
+        android:gravity="center"
+        android:text="@string/desc1_1"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
 </LinearLayout>
