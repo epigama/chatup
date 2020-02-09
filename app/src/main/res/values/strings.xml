@@ -96,4 +96,5 @@
     <string name="hint_enter_a_message">Type here..</string>
     <string name="date_header_today">Today</string>
     <string name="date_header_yesterday">Yesterday</string>
+    <string name="empty_view_desc">Once people start joining Chat app, you can view the list of those users here.</string>
 </resources>
