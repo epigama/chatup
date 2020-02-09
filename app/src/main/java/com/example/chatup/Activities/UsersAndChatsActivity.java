@@ -25,7 +25,7 @@ import com.example.chatup.Fragments.Contacts;
 import com.example.chatup.Fragments.Settings;
 import com.example.chatup.Fragments.Users;
 import com.example.chatup.Models.UserDetails;
-import com.example.chatup.PrefManager;
+import com.example.chatup.PrefManager.PrefManager;
 import com.example.chatup.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
