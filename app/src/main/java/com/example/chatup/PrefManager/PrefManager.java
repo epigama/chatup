@@ -1,4 +1,4 @@
-package com.example.chatup;
+package com.example.chatup.PrefManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
