@@ -68,7 +68,6 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         if (AppCompatDelegate.getDefaultNightMode()
                 ==AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.dark_theme);
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
