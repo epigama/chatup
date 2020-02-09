@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_10_dp"
             android:gravity="center"
-            android:text="Once people start joining Chat app, you can view the list of those users here."
+            android:text="@string/empty_view_desc"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_14_sp" />
 
