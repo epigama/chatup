@@ -123,7 +123,6 @@ public class Chats extends AppCompatActivity {
         };
         displayFirebaseRegId();
         mDatabase = FirebaseDatabase.getInstance();
-        //getSupportActionBar().hide();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(UserDetails.getChatWith());
         toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
@@ -146,7 +145,6 @@ public class Chats extends AppCompatActivity {
                     if (!messageText.equals("")) {
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("message", messageText);
-//                map.put("image", downloadUri.toString());
                         map.put("user", UserDetails.username);
                         reference1.push().setValue(map);
                         reference2.push().setValue(map);
@@ -173,7 +171,7 @@ public class Chats extends AppCompatActivity {
                 }
                 else{
                     adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(""+System.currentTimeMillis() + 1, UserDetails.getUsername(), null, true), message), true);
-                    //createNotification(Chats.this, userName, message);
+
                 } }
 
             @Override
@@ -189,10 +187,6 @@ public class Chats extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
-
-
-
-
 
     private void createNotification(Context context, String title, String text) {
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
