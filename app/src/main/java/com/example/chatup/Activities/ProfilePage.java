@@ -255,47 +255,6 @@ public class ProfilePage extends AppCompatActivity {
             Log.d(TAG, " Code check");
            // pickedImgUri = data.getData();
             user_image_view.setImageURI(pickedImgUri);
-
-
-/**
-            StorageReference storageReferen = storageReference.child("/images/users/" +  UserDetails.getUsername() +  ".jpg");
-            UploadTask uploadTask = storageReferen.putFile(pickedImgUri);
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    // Continue with the task to get the download URL
-                    return storageReferen.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                     try{
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        Toast.makeText(ProfilePage.this, "" + downloadUri, Toast.LENGTH_SHORT).show();
-                        //Persist pickedImgUri so that it stays
-//                        SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_PREFS_NAME, MODE_PRIVATE).edit();
-//                        editor.putString(getString(R.string.local_img_uri), downloadUri.toString());
-//                        editor.apply();
-
-                        Log.w(TAG, "DOWNLOAD " + downloadUri.toString());
-                        parentReference.child(userName).child("uri").setValue(downloadUri.toString());
-                        UserDetails.setUri(downloadUri.toString());
-                    } else {
-                        Log.w(TAG, "onComplete: " + "Incomplete upload");
-                    }
-                }
-                     catch (Exception e){
-                         e.printStackTrace();
-                     }
-            }
-**/
-            //});
-
         }
 
     }

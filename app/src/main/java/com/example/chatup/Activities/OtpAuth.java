@@ -204,6 +204,4 @@ public class OtpAuth extends AppCompatActivity {
         }
         return code;
     }
-
-
 }

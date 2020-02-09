@@ -139,6 +139,4 @@ public class PhoneAuthentication extends AppCompatActivity {
             codeSent = s;
         }
     };
-
-
 }
