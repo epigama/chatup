@@ -201,43 +201,7 @@ public class Chats extends AppCompatActivity {
 
 
 
-//    public void addMessageBox(String message, int type){
-//        DateFormat df = new SimpleDateFormat("HH:mm");
-//        Calendar calobj = Calendar.getInstance();
-//        TextView textView = new TextView(Chats.this);
-//        TextView  text= new TextView(Chats.this);
-//        //ye bey
-//        textView.setText(message);
-//        //  text.setText();
-//        //  text.setText(df.format(calobj.getTime()));
-//        text.setGravity(Gravity.RIGHT);
-//        //  imageView.setForegroundGravity(Gravity.RIGHT);
-//        textView.setTextColor(getColor(R.color.white));
-//        layout.addView(text);
-//
-//        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//        lp2.weight = 7.0f;
-//
-//        if(type == 1) {
-//            lp2.gravity = Gravity.RIGHT;
-//            textView.setBackgroundResource(R.drawable.bubble_in);
-//            textView.setTextColor(getResources().getColor(R.color.white));
-//        }
-//        else{
-//            lp2.gravity = Gravity.LEFT;
-//            textView.setBackgroundResource(R.drawable.bubble_out);
-//            // textView.setTextColor(R.color.black);
-//        }
-//        textView.setLayoutParams(lp2);
-//        layout.addView(textView);
-//        scrollView.post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-//            }
-//        });    }
+g
 
     private void createNotification(Context context, String title, String text) {
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
