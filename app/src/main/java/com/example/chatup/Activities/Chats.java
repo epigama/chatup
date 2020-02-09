@@ -188,20 +188,11 @@ public class Chats extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-
-
-//        add_content.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View v) {
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent,RESCODE);
-//            }
-//        });
     }
 
 
 
-g
+
 
     private void createNotification(Context context, String title, String text) {
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.custom_notification);
