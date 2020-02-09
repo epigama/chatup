@@ -83,15 +83,11 @@ public class Chats extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReciever);
         super.onPause();
     }
-
-
     @Override
     protected void onResume(){
         super.onResume();
         //Register gcm cloud messaging 'registration complete' recieve
-
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,51 +103,38 @@ public class Chats extends AppCompatActivity {
         messagesList = findViewById(R.id.messagesList);
         adapter = new MessagesListAdapter<>(UserDetails.phoneNum, null);
         messagesList.setAdapter(adapter);
-
         parentReference = FirebaseDatabase.getInstance().getReference("users");
-
         mRegistrationBroadcastReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 //checking for type intent filter
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     //gcm successfully registered
                     //Now subscrive to 'global' topic to recieve app wide notifications
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-
                     displayFirebaseRegId();
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     //New push notification is recieved
-
                     String message = intent.getStringExtra("message");
-
                     Toast.makeText(getApplicationContext(), " Push Notification: " + message, Toast.LENGTH_LONG);
-
                     Log.d(TAG, "onReceieve: " + message);
                 }
             }
         };
         displayFirebaseRegId();
-
-
         mDatabase = FirebaseDatabase.getInstance();
         //getSupportActionBar().hide();
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(UserDetails.getChatWith());
         toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
-
         toolbar.setBackgroundColor(getResources().getColor(R.color.white));
         toolbar.setElevation(0);
         setSupportActionBar(toolbar);
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("channelOne", "channelOne", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
         image_storage=FirebaseStorage.getInstance().getReference();
         reference1 = mDatabase.getReference(String.format("messages/%s_%s", phone, UserDetails.getChatWith()));
         reference2 = mDatabase.getReference(String.format("messages/%s_%s", UserDetails.getChatWith(), phone));
@@ -160,7 +143,6 @@ public class Chats extends AppCompatActivity {
                 @Override
                 public boolean onSubmit(CharSequence input) {
                     messageText = input.toString();
-
                     if (!messageText.equals("")) {
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("message", messageText);
@@ -168,11 +150,9 @@ public class Chats extends AppCompatActivity {
                         map.put("user", UserDetails.username);
                         reference1.push().setValue(map);
                         reference2.push().setValue(map);
-
                     }
                     return false;
                 }
-
             });
         }
         catch (Exception e){
@@ -185,17 +165,10 @@ public class Chats extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
                                 if(!message.equals("")){
-                                  //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                     map.put("message", message);
                                     map.put("user", UserDetails.username);
-
-//                                    reference1.push().setValue(mapX);
-//                                    reference2.push().setValue(mapX);
-//                                    messageArea.setText("");
                                 }
-
-
-                if(userName.equals(UserDetails.username)){
+                                if(userName.equals(UserDetails.username)){
                     adapter.addToStart(new Message(""+System.currentTimeMillis(), new User(UserDetails.getPhoneNum(), UserDetails.getUsername(), null, true), message), true);
                 }
                 else{
