@@ -30,7 +30,7 @@ In order to access this project in your remote system
 
 ## Contribution Guidelines
 Any kind of contribution to the project is highly welcomed, as this project is selected for KWoC, we encourage all participants new to open source to give it a try. Any one willing to contribute to this particular project must follow the contribution for cleanliness, easy to read and smooth working of the project,</br>
-1. Raise an issue before you make a pr.</br>
+1. Raise an issue before you make a pull request.</br>
 2. No changes should be pushed in the development branch. Always make a new branch.</br>
 3. Squash all your commits into a single commit before creating a pull request.</br>
 4. If the pull request for the issue isnt raised within 2 weeks, the issue can be assigned to another person.</br>
