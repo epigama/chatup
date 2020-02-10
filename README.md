@@ -12,7 +12,7 @@ Chatup is a chat application built on the support of Firebase. It is currently a
 
 ### Show some :heart: and star the repo to support the project
 ## Screenshots of the Project
-These are the temporary screen shots
+These are the temporary screen shots,
 
 
 
