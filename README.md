@@ -33,7 +33,7 @@ Any kind of contribution to the project is highly welcomed, as this project is s
 1. Raise an issue before you make a pull request.</br>
 2. No changes should be pushed in the development branch. Always make a new branch.</br>
 3. Squash all your commits into a single commit before creating a pull request.</br>
-4. If the pull request for the issue isnt raised within 2 weeks, the issue will be considered as inactive can be assigned to another person.</br>
+4. If the pull request for the issue isnt raised within 2 weeks, the issue will be considered as inactive can be assigned to another contributor.</br>
 
 # Pull Requests
 We welcome and encourage all pull requests. It usually will take for the mentors to respond within 24-48 hours to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
