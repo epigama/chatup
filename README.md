@@ -36,7 +36,7 @@ Any kind of contribution to the project is highly welcomed, as this project is s
 4. If the pull request for the issue isnt raised within 2 weeks, the issue can be assigned to another person.</br>
 
 # Pull Requests
-We welcome and encourage all pull requests. It usually will take for the mentors within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+We welcome and encourage all pull requests. It usually will take for the mentors to respond within 24-48 hours to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
 1.  Match coding style (braces, spacing, etc.) This is best achieved using `Reformat Code` feature of Android Studio `CMD`+`Option`+`L` on Mac and `CTRL` + `ALT` + `L` on Linux + Windows .
 2.  If its a feature, bugfix, or anything please only change code to what you specify.
 3.  Please keep Pull Request titles easy to read and descriptive of changes, this will make them easier to merge :)
