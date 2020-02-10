@@ -1,6 +1,6 @@
 # Chatup
 
-Chatup is a chatting application built on the support of Firebase. It is currently a one-to-one chatting application but the future goals are to support bluetooth feature and group chat. 
+Chatup is a chat application built on the support of Firebase. It is currently a one-to-one chatting application but the future goals are to support bluetooth feature and group chat. 
 
 ## Features
   * [x] One to One Chat
