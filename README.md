@@ -25,7 +25,7 @@ In order to access this project in your remote system
 3. Once a project is created, open it on Firebase and add an android app by entering its package name and your SHA1 Debug Key (optional).
 4. Download the google-services.json file that is created after entering the details.
 2. Add the google-services.json file to your local clone of the project in the app folder.
-3. Enable email and phone authentication under Authentication column in your Firebase Console
+3. Enable email and phone authentication under `Authentication` column in your Firebase Console
 4. Run the gradle.
 
 ## Contribution Guidelines
